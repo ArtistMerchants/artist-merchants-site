@@ -1,0 +1,1 @@
+# Sanity 3 + Nextjs Starter Template

@@ -1,0 +1,46 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --global-ease: cubic-bezier(0.9, 0.1, 0.1, 0.9);
+  --global-transition: 350ms var(--global-ease);
+}
+
+html,
+body {
+  min-height: 100%;
+  height: auto;
+}
+
+a {
+  display: inline-block;
+  position: relative;
+}
+
+a:after {
+  content: '';
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  background: white;
+  height: 1px;
+  transform-origin: 100% 100%;
+  transform: scaleX(0);
+  transition: transform var(--global-transition);
+  mix-blend-mode: difference;
+}
+
+a:hover:after,
+a.active:after {
+  transform-origin: 0 0;
+  transform: scaleX(1);
+  transition: transform var(--global-transition);
+}
+
+/* Use true viewport height on mobile */
+.h-screen {
+  height: 100vh;
+  height: calc(var(--vh, 1vh) * 100);
+}
