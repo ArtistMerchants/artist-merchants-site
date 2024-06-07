@@ -20,7 +20,13 @@ module.exports = {
         'yellow-100': '#fef7da',
       },
       spacing: {
-        28: '7rem',
+        ...new Array(401)
+          .fill()
+          .map((_, i) => i)
+          .reduce((acc, val) => {
+            acc[val] = `${val / 10}rem`
+            return acc
+          }, {}),
       },
       letterSpacing: {
         tighter: '-.04em',
@@ -33,6 +39,9 @@ module.exports = {
         '6xl': '2.75rem',
         '7xl': '4.5rem',
         '8xl': '6.25rem',
+      },
+      fontFamily: {
+        constellation: ['var(--font-constellation)'],
       },
       boxShadow: {
         small: '0 5px 10px rgba(0, 0, 0, 0.12)',
