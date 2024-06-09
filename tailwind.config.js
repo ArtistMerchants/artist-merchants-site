@@ -24,7 +24,7 @@ module.exports = {
           .fill()
           .map((_, i) => i)
           .reduce((acc, val) => {
-            acc[val] = `${val / 10}rem`
+            acc[val] = `${val}px`
             return acc
           }, {}),
       },
@@ -42,6 +42,8 @@ module.exports = {
       },
       fontFamily: {
         constellation: ['var(--font-constellation)'],
+        serif: ['var(--font-self-modern)'],
+        sans: ['var(--font-gerstner)'],
       },
       boxShadow: {
         small: '0 5px 10px rgba(0, 0, 0, 0.12)',

@@ -6,12 +6,12 @@
 
 class AsciiEffect {
   constructor(renderer, charSet = ' .:-=+*#%@', options = {}) {
-    const fResolution = options['resolution'] || 0.15 // Higher for more details
+    const fResolution = options['resolution'] || 0.15
     const iScale = options['scale'] || 1
-    const bColor = options['color'] || false // nice but slows down rendering!
-    const bAlpha = options['alpha'] || false // Transparency
-    const bBlock = options['block'] || false // blocked characters. like good O dos
-    const bInvert = options['invert'] || false // black is white, white is black
+    const bColor = options['color'] || false
+    const bAlpha = options['alpha'] || false
+    const bBlock = options['block'] || false
+    const bInvert = options['invert'] || false
     const strResolution = options['strResolution'] || 'low'
 
     let width, height
@@ -107,7 +107,7 @@ class AsciiEffect {
     if (strResolution == 'low') {
       switch (iScale) {
         case 1:
-          fLetterSpacing = -0.5
+          fLetterSpacing = 0
           break
         case 2:
         case 3:
@@ -166,6 +166,10 @@ class AsciiEffect {
       let strChars = ''
 
       for (let y = 0; y < iHeight; y += 2) {
+        const isOdd = (y / 2) % 2 === 1
+        if (isOdd) {
+          strChars += '<span class="opacity-0">|</span>'
+        }
         for (let x = 0; x < iWidth; x++) {
           const iOffset = (y * iWidth + x) * 4
 
@@ -229,7 +233,7 @@ class AsciiEffect {
           }
         }
 
-        strChars += '<br/>'
+        strChars += '<br />'
       }
 
       oAscii.innerHTML = `<tr><td style="display:block;width:${width}px;height:${height}px;overflow:hidden">${strChars}</td></tr>`

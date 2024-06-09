@@ -63,9 +63,17 @@ export const WaveMaterial: any = shaderMaterial(
       float circleInfluence = circle(vUv, mousePositions, 0.5);
       vec3 brightenedColor = texColor.rgb + texColor.rgb * circleInfluence * uIntensity * 3.;
       
-      gl_FragColor = vec4(texColor.rgb, 1.);
+      gl_FragColor = vec4(texColor.rgb, 1.0);
     
       #include <colorspace_fragment>
     }
   `
 )
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      waveMaterial: any
+    }
+  }
+}

@@ -3,7 +3,7 @@ import type { Settings } from 'lib/sanity.queries'
 import { Layout } from './Layout'
 import { PortableText } from '@portabletext/react'
 import { Canvas, useThree, extend, useFrame } from '@react-three/fiber'
-import { useTexture } from '@react-three/drei'
+import { useAspect, useTexture } from '@react-three/drei'
 import { AsciiRenderer } from './Three/AsciiRenderer'
 import { Suspense } from 'react'
 import { WaveMaterial } from './HomePage.texture'
@@ -25,13 +25,18 @@ export default function HomePage(props: {
   return (
     <Layout>
       <Suspense fallback={null}>
-        <div className="grid h-screen w-full grid-cols-9 gap-20 bg-black p-24 text-white">
+        <div className="grid h-screen w-full grid-cols-9 gap-10 bg-black p-32 text-white">
           <div className="col-span-1">
-            <Logo className="h-auto w-40" />
+            <Logo className="h-auto w-52" />
           </div>
-          <div className="col-span-3 col-start-2">
-            <h1>{title}</h1>
-            <PortableText value={content} />
+          <div className="col-span-3 col-start-2 flex flex-col justify-between">
+            <div>
+              <h1>{title}</h1>
+              <PortableText value={content} />
+            </div>
+            <div className="font-serif text-[56px]">
+              Artist Merchants<sup className="text-[32px]">®</sup>
+            </div>
           </div>
           <div
             ref={ref}
@@ -107,6 +112,11 @@ function ImagePlane({ url }) {
     })
   }
 
+  const aspect = 5997 / 8247
+
+  const planeWidth = viewport.width
+  const planeHeight = viewport.width / aspect
+
   return (
     <group onPointerEnter={addIntensity} onPointerLeave={removeIntensity}>
       <mesh>
@@ -114,9 +124,7 @@ function ImagePlane({ url }) {
         <meshBasicMaterial color="#111" />
       </mesh>
       <mesh>
-        <planeGeometry
-          args={[viewport.width, viewport.height * 0.8, 128, 128]}
-        />
+        <planeGeometry args={[planeWidth, planeHeight, 128, 128]} />
         <waveMaterial
           attach="material"
           ref={ref}
