@@ -1,6 +1,9 @@
 /** @type {import('tailwindcss').Config} */
 
 module.exports = {
+  future: {
+    hoverOnlyWhenSupported: true,
+  },
   content: [
     './app/**/*.{js,ts,jsx,tsx}',
     './components/**/*.{js,ts,jsx,tsx}',
@@ -28,17 +31,32 @@ module.exports = {
             return acc
           }, {}),
       },
-      letterSpacing: {
-        tighter: '-.04em',
-      },
       lineHeight: {
-        tight: 1.2,
+        100: '100%',
+        110: '110%',
+        120: '120%',
+        130: '130%',
+        140: '140%',
+        150: '150%',
+        160: '160%',
       },
       fontSize: {
-        '5xl': '2.5rem',
-        '6xl': '2.75rem',
-        '7xl': '4.5rem',
-        '8xl': '6.25rem',
+        ...new Array(401)
+          .fill()
+          .map((_, i) => i)
+          .reduce((acc, val) => {
+            acc[val] = `${val}px`
+            return acc
+          }, {}),
+      },
+      letterSpacing: {
+        ...new Array(100)
+          .fill()
+          .map((_, i) => i / 100)
+          .reduce((acc, val) => {
+            acc[val * 100] = `${val}em`
+            return acc
+          }, {}),
       },
       fontFamily: {
         constellation: ['var(--font-constellation)'],

@@ -1,138 +1,45 @@
-import { useRef } from 'react'
 import type { Settings } from 'lib/sanity.queries'
 import { Layout } from './Layout'
-import { PortableText } from '@portabletext/react'
-import { Canvas, useThree, extend, useFrame } from '@react-three/fiber'
-import { useAspect, useTexture } from '@react-three/drei'
-import { AsciiRenderer } from './Three/AsciiRenderer'
 import { Suspense } from 'react'
-import { WaveMaterial } from './HomePage.texture'
-import { MathUtils } from 'three'
-import { EffectComposer } from '@react-three/postprocessing'
-import gsap from 'gsap'
 import { Logo } from './Global/Logo'
-
-extend({ WaveMaterial })
+import { HomeGallery } from './Home/HomeGallery'
+import ReactLenis from '@studio-freight/react-lenis'
 
 export default function HomePage(props: {
   title?: string
   content?: any
   settings: Settings
 }) {
-  const { title, content, settings } = props
-  const ref = useRef<HTMLDivElement>(null)
-
   return (
     <Layout>
-      <Suspense fallback={null}>
-        <div className="grid h-screen w-full grid-cols-9 gap-10 bg-black p-32 text-white">
-          <div className="col-span-1">
-            <Logo className="h-auto w-52" />
-          </div>
-          <div className="col-span-3 col-start-2 flex flex-col justify-between">
-            <div>
-              <h1>{title}</h1>
-              <PortableText value={content} />
-            </div>
-            <div className="font-serif text-[56px]">
-              Artist Merchants<sup className="text-[32px]">®</sup>
-            </div>
-          </div>
-          <div
-            ref={ref}
-            className="relative relative left-[10%] col-span-4 col-start-5 h-full w-[90%] self-end"
-          >
-            <Canvas
-              style={{
-                position: 'absolute',
-                inset: 0,
-                width: '100%',
-                height: '100%',
-                overflow: 'hidden',
-                zIndex: 10,
-                pointerEvents: 'none',
-                backgroundColor: 'transparent',
-              }}
-              // @ts-ignore
-              eventSource={ref}
-              dpr={2}
-            >
-              <ImagePlane url="/hoodie.jpg" />
-
-              <EffectComposer>
-                <AsciiRenderer
-                  characters="ABCDEFGHI"
-                  bgColor="transparent"
-                  resolution={0.1}
-                />
-              </EffectComposer>
-            </Canvas>
-          </div>
+      <div className="grid h-screen w-full grid-cols-9 gap-10 bg-black px-32 text-14 leading-130 text-white">
+        <div className="col-span-1 py-32">
+          <Logo className="h-auto w-52" />
         </div>
-      </Suspense>
+        <ReactLenis className="scrollbar-hidden relative col-span-3 col-start-2 h-full overflow-auto py-32">
+          <div className="flex flex-col gap-2 md:absolute md:left-0 md:top-32">
+            <div>Information</div>
+            <div>Archive</div>
+            <div>Client Tools</div>
+          </div>
+          <div className="relative h-[calc(calc(100vh-64px)-1.8ch)] text-[56px]"></div>
+          <div className="hyphens-auto font-serif text-[56px] leading-120">
+            Artist Merchants<sup className="text-[32px]">®</sup> develops,
+            manufactures, and distributes premium merchandise for artists and
+            select brands.
+          </div>
+        </ReactLenis>
+        <div className="relative left-[10%] col-span-4 col-start-5 h-full w-[90%] self-end py-32">
+          <Suspense fallback={null}>
+            <HomeGallery />
+          </Suspense>
+        </div>
+        <div className="py-32 text-right">
+          <button className="ease tracking-4 opacity-60 transition-opacity duration-300 hover:opacity-100 active:opacity-100">
+            Menu
+          </button>
+        </div>
+      </div>
     </Layout>
-  )
-}
-
-function ImagePlane({ url }) {
-  const ref = useRef<any>(null)
-  const texture: any = useTexture(url)
-  const mouseLerped = useRef({ x: 0, y: 0 })
-  const { viewport } = useThree()
-
-  useFrame(({ pointer }) => {
-    ref.current.uniforms.uTexture.value = texture
-    mouseLerped.current.x = MathUtils.lerp(
-      mouseLerped.current.x,
-      pointer.x,
-      0.04
-    )
-    mouseLerped.current.y = MathUtils.lerp(
-      mouseLerped.current.y,
-      pointer.y,
-      0.04
-    )
-    ref.current.uniforms.uMouse.value.x = mouseLerped.current.x
-    ref.current.uniforms.uMouse.value.y = mouseLerped.current.y
-  })
-
-  const addIntensity = () => {
-    gsap.to(ref.current.uniforms.uIntensity, {
-      value: 0.0,
-      duration: 1.8,
-      ease: 'power3.out',
-    })
-  }
-
-  const removeIntensity = () => {
-    gsap.to(ref.current.uniforms.uIntensity, {
-      value: 0.0,
-      duration: 1.8,
-      ease: 'power3.out',
-    })
-  }
-
-  const aspect = 5997 / 8247
-
-  const planeWidth = viewport.width
-  const planeHeight = viewport.width / aspect
-
-  return (
-    <group onPointerEnter={addIntensity} onPointerLeave={removeIntensity}>
-      <mesh>
-        <planeGeometry args={[viewport.width, viewport.height, 128, 128]} />
-        <meshBasicMaterial color="#111" />
-      </mesh>
-      <mesh>
-        <planeGeometry args={[planeWidth, planeHeight, 128, 128]} />
-        <waveMaterial
-          attach="material"
-          ref={ref}
-          key={WaveMaterial.key}
-          map={texture}
-          toneMapped={true}
-        ></waveMaterial>
-      </mesh>
-    </group>
   )
 }

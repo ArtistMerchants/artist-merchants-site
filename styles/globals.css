@@ -49,3 +49,13 @@ a.active:after {
   height: 100vh;
   height: calc(var(--vh, 1vh) * 100);
 }
+
+.scrollbar-hidden {
+  scrollbar-width: none;
+}
+
+.scrollbar-hidden::-webkit-scrollbar {
+  width: 0;
+  background: transparent;
+}
+

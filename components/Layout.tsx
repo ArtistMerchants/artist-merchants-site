@@ -8,9 +8,5 @@ interface LayoutProps {
 }
 
 export const Layout: FC<LayoutProps> = ({ children }) => {
-  return (
-    <ReactLenis root options={{ lerp: 0.15 }}>
-      <main className="min-h-screen">{children}</main>
-    </ReactLenis>
-  )
+  return <main className="min-h-screen">{children}</main>
 }
