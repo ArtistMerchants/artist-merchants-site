@@ -1,4 +1,5 @@
 import { create } from 'zustand'
+import { persist } from 'zustand/middleware'
 
 type SiteStoreProps = {
   menuOpen: boolean
@@ -9,11 +10,21 @@ type SiteStoreProps = {
   setHomeData: (homeData: any) => void
 }
 
-export const useSiteStore = create<SiteStoreProps>((set) => ({
-  menuOpen: false,
-  setMenuOpen: (menuOpen) => set({ menuOpen }),
-  unlocked: false,
-  setUnlocked: (unlocked) => set({ unlocked }),
-  homeData: {},
-  setHomeData: (homeData) => set({ homeData }),
-}))
+export const useSiteStore = create<SiteStoreProps>()(
+  persist(
+    (set) => ({
+      menuOpen: false,
+      setMenuOpen: (menuOpen) => set({ menuOpen }),
+      unlocked: false,
+      setUnlocked: (unlocked) => set({ unlocked }),
+      homeData: {},
+      setHomeData: (homeData) => set({ homeData }),
+    }),
+    {
+      name: 'site-store',
+      partialize: (state) => ({
+        unlocked: state.unlocked,
+      }),
+    }
+  )
+)

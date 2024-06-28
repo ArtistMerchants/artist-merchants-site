@@ -6,16 +6,17 @@ export default defineType({
   type: 'document',
   fields: [
     defineField({
-      name: 'title',
-      title: 'Title',
-      type: 'string',
+      name: 'client',
+      title: 'Client',
+      type: 'array',
+      of: [{ type: 'string' }],
     }),
     defineField({
       name: 'slug',
       title: 'Slug',
       type: 'slug',
       options: {
-        source: 'title',
+        source: 'client.0',
         maxLength: 96,
         isUnique: (value, context) => context.defaultIsUnique(value, context),
       },
@@ -28,8 +29,8 @@ export default defineType({
       of: [{ type: 'reference', to: [{ type: 'projectCategory' }] }],
     }),
     defineField({
-      name: 'client',
-      title: 'Client',
+      name: 'year',
+      title: 'Year',
       type: 'string',
     }),
     defineField({
@@ -52,4 +53,17 @@ export default defineType({
       ],
     }),
   ],
+  preview: {
+    select: {
+      title: 'client',
+      category: 'categories.0.title',
+      year: 'year',
+      media: 'media.0',
+    },
+    prepare: ({ title, category, year, media }) => ({
+      title: title.join(', '),
+      subtitle: `Year: ${year} — Category: ${category}`,
+      media,
+    }),
+  },
 })

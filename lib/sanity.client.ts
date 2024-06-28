@@ -4,6 +4,9 @@ import {
   type Home,
   homeQuery,
   settingsQuery,
+  categoryPathsQuery,
+  categoryAllPageQuery,
+  categoryPageQuery,
 } from 'lib/sanity.queries'
 import { createClient } from 'next-sanity'
 
@@ -22,4 +25,28 @@ export const getHomePage = async (): Promise<Home> => {
   }
 
   return {}
+}
+
+export const getCategoryPaths = async (): Promise<any> => {
+  if (client) {
+    return (await client.fetch(categoryPathsQuery)) || []
+  }
+
+  return []
+}
+
+export const getCategoryAllPage = async (): Promise<any> => {
+  if (client) {
+    return (await client.fetch(categoryAllPageQuery)) || []
+  }
+
+  return []
+}
+
+export const getCategoryPage = async (slug: string): Promise<any> => {
+  if (client) {
+    return (await client.fetch(categoryPageQuery, { slug })) || []
+  }
+
+  return []
 }

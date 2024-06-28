@@ -6,11 +6,9 @@ import { InformationFaqs } from './InformationFaqs'
 export const InformationTab = () => {
   const { homeData } = useSiteStore()
   const information = homeData?.information
-
   if (!information) return null
 
   const { faqs, contact } = information
-  console.log(information)
 
   return (
     <HeaderTab className="col-span-2 flex flex-col gap-24">

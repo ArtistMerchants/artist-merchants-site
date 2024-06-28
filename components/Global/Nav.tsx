@@ -5,18 +5,18 @@ import { usePathname } from 'next/navigation'
 import Link from 'next/link'
 
 export const Nav = () => {
-  const { menuOpen, setMenuOpen, unlocked } = useSiteStore()
+  const { unlocked } = useSiteStore()
   const pathName = usePathname()
 
   const activeClass = useCallback(
     (path: string) => {
-      if (path === pathName) return 'opacity-100'
+      if (path === pathName || pathName?.includes(path)) return 'opacity-100'
 
       if (pathName === '/') {
-        return 'group-hover:opacity-60 group-hover:hover:opacity-100'
+        return 'group-hover:opacity-50 group-hover:hover:opacity-100'
       }
 
-      return 'opacity-60 hover:opacity-100'
+      return 'opacity-50 hover:opacity-100'
     },
     [pathName]
   )
@@ -55,7 +55,13 @@ export const Nav = () => {
               Client Tools
             </Link>
           ) : (
-            <div className="cursor-not-allowed opacity-60">Client Tools</div>
+            <div
+              className={`cursor-not-allowed ${activeClass(
+                '/client-tools'
+              )} ease transition-opacity duration-300`}
+            >
+              Client Tools
+            </div>
           )}
         </li>
       </ul>

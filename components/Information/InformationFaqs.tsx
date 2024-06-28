@@ -34,10 +34,9 @@ export const InformationFaqs = ({ title, items }) => {
 const FaqItem = ({ question, answer, isActive, onClick }) => {
   const activeClass = useCallback(
     (isActive: boolean) => {
-      if (isActive)
-        return 'opacity-100 group-hover:opacity-60 group-hover:hover:opacity-100'
+      if (isActive) return 'opacity-100'
 
-      return 'group-hover:opacity-60 group-hover:hover:opacity-100'
+      return 'group-hover:opacity-50 group-hover:hover:opacity-100'
     },
     [isActive]
   )

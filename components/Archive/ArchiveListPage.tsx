@@ -1,0 +1,59 @@
+import { useSiteStore } from 'hooks/useSiteStore'
+
+import { AnimatePresence, motion } from 'framer-motion'
+import { MenuButton } from 'components/Global/MenuButton'
+import { ArchiveHeader } from './ArchiveHeader'
+import { ProjectList } from 'components/Projects/ProjectList'
+import ReactLenis from '@studio-freight/react-lenis'
+
+export const ArchiveListPage = ({ categories, projects }) => {
+  const { menuOpen } = useSiteStore()
+  return (
+    <AnimatePresence initial={false}>
+      {menuOpen ? (
+        <motion.div
+          key="archive-list-menu-open"
+          className="absolute inset-0 z-[1] h-full w-full text-14 leading-130"
+        >
+          <ReactLenis className="scrollbar-hidden relative h-screen overflow-auto">
+            <div className="grid w-full grid-cols-8 text-14 leading-130">
+              <motion.div
+                className="sticky top-0 col-span-3 flex h-screen flex-col items-start justify-between self-start overflow-auto py-32"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.5 }}
+              >
+                <ArchiveHeader categories={categories} />
+                <div></div>
+                <div className="relative hyphens-auto font-serif text-[56px] leading-120">
+                  Artist Merchants
+                  <span className="relative -top-20 text-[32px]">®</span>
+                </div>
+              </motion.div>
+              <div className="relative left-[5%] top-0 col-span-4 col-start-4 ml-auto w-[95%] self-start py-32">
+                <ProjectList projects={projects} />
+              </div>
+              <div className="sticky top-0 self-start py-32 text-right">
+                <MenuButton />
+              </div>
+            </div>
+          </ReactLenis>
+        </motion.div>
+      ) : (
+        <motion.div className="absolute inset-0 z-[2] col-span-8 h-full w-full text-14 leading-130">
+          <ReactLenis className="scrollbar-hidden relative h-screen overflow-auto text-14 leading-130">
+            <div className="grid w-full grid-cols-8 text-14 leading-130">
+              <div className="col-span-7 py-32">
+                <ProjectList projects={projects} />
+              </div>
+              <div className="sticky top-0 self-start py-32 text-right">
+                <MenuButton />
+              </div>
+            </div>
+          </ReactLenis>
+        </motion.div>
+      )}
+    </AnimatePresence>
+  )
+}

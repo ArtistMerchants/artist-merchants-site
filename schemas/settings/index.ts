@@ -3,7 +3,7 @@ import { defineField, defineType } from 'sanity'
 
 export default defineType({
   name: 'settings',
-  title: 'Settings',
+  title: 'General',
   type: 'document',
   icon: CogIcon,
   preview: { select: { title: 'title', subtitle: 'description' } },

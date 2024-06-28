@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import { useSiteStore } from 'hooks/useSiteStore'
 import { getHomePage, getSettings } from 'lib/sanity.client'
 
-import HomePage from 'components/HomePage'
+import HomePage from 'components/Home/HomePage'
 
 export default function Index({ home, settings }) {
   const { setHomeData } = useSiteStore()

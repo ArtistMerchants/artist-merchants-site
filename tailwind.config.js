@@ -19,6 +19,7 @@ module.exports = {
         transparent: 'transparent',
         white: '#F8F8F8',
         black: '#000000',
+        gray: '#E6E6E7',
       },
       spacing: {
         ...new Array(401)

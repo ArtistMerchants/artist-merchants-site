@@ -5,7 +5,7 @@ export const MenuButton = () => {
   return (
     <button
       className={`ease tracking-4 transition-opacity duration-300 hover:opacity-100 active:opacity-100 ${
-        menuOpen ? 'opacity-100' : 'opacity-60'
+        menuOpen ? 'opacity-100' : 'opacity-50'
       }`}
       onClick={() => setMenuOpen(!menuOpen)}
     >
