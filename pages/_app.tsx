@@ -1,7 +1,9 @@
-import { useEffect } from 'react'
 import localFont from 'next/font/local'
-import '../styles/globals.css'
+
 import { VH } from 'components/Global/VH'
+import { Layout } from 'components/Layout'
+
+import '../styles/globals.css'
 
 const constellation = localFont({
   src: [
@@ -45,7 +47,9 @@ function MyApp({ Component, pageProps, router }) {
       className={`${constellation.variable} ${selfModern.variable} ${gerstner.variable} ${gerstner.variable} font-sans`}
     >
       <VH />
-      <Component {...pageProps} />
+      <Layout>
+        <Component {...pageProps} />
+      </Layout>
     </div>
   )
 }

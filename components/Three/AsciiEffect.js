@@ -22,7 +22,8 @@ class AsciiEffect {
     const oAscii = document.createElement('table')
     domElement.appendChild(oAscii)
 
-    let iWidth, iHeight
+    let iWidth,
+      iHeight = 0
     let oImg
 
     this.setSize = function (w, h) {

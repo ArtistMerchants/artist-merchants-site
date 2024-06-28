@@ -1,6 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 
 module.exports = {
+  darkMode: 'class',
   future: {
     hoverOnlyWhenSupported: true,
   },
@@ -12,15 +13,12 @@ module.exports = {
     './plugins/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
+    darkMode: 'class',
     extend: {
       colors: {
-        'accent-1': '#FAFAFA',
-        'accent-2': '#EAEAEA',
-        'accent-7': '#333',
-        success: '#0070f3',
-        cyan: '#79FFE1',
-        'blue-500': '#2276FC',
-        'yellow-100': '#fef7da',
+        transparent: 'transparent',
+        white: '#F8F8F8',
+        black: '#000000',
       },
       spacing: {
         ...new Array(401)
@@ -66,6 +64,29 @@ module.exports = {
       boxShadow: {
         small: '0 5px 10px rgba(0, 0, 0, 0.12)',
         medium: '0 8px 30px rgba(0, 0, 0, 0.12)',
+      },
+      borderWidth: {
+        0: '0px',
+        1: '1px',
+      },
+      animation: {
+        shake: 'shake 0.82s cubic-bezier(.36,.07,.19,.97) both',
+      },
+      keyframes: {
+        shake: {
+          '10%, 90%': {
+            transform: 'translate3d(-1px, 0, 0)',
+          },
+          '20%, 80%': {
+            transform: 'translate3d(2px, 0, 0)',
+          },
+          '30%, 50%, 70%': {
+            transform: 'translate3d(-4px, 0, 0)',
+          },
+          '40%, 60%': {
+            transform: 'translate3d(4px, 0, 0)',
+          },
+        },
       },
     },
   },

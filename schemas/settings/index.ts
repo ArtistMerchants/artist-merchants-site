@@ -7,18 +7,24 @@ export default defineType({
   type: 'document',
   icon: CogIcon,
   preview: { select: { title: 'title', subtitle: 'description' } },
+  groups: [
+    { name: 'seo', title: 'SEO' },
+    { name: 'passwords', title: 'Passwords' },
+  ],
   fields: [
     defineField({
       name: 'title',
-      description: 'This field is the title of your blog.',
+      description: 'SEO Title',
       title: 'Title',
       type: 'string',
       validation: (rule) => rule.required(),
+      group: 'seo',
     }),
     defineField({
       name: 'description',
       title: 'Descriprion',
       type: 'text',
+      group: 'seo',
     }),
     defineField({
       name: 'ogImage',
@@ -26,11 +32,20 @@ export default defineType({
       description:
         'Used for social media previews when linking to the index page.',
       type: 'image',
+      group: 'seo',
     }),
     defineField({
       name: 'favicon',
       title: 'Favicon',
       type: 'image',
+      group: 'seo',
+    }),
+    defineField({
+      name: 'passwords',
+      title: 'Passwords',
+      group: 'passwords',
+      type: 'array',
+      of: [{ type: 'string' }],
     }),
   ],
 })

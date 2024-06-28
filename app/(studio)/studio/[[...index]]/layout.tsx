@@ -8,7 +8,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head />
-      <body className="h-full">{children}</body>
+      <body className="dark h-full">{children}</body>
     </html>
   )
 }

@@ -1,10 +1,8 @@
-import { HomeIcon } from '@sanity/icons'
 import { defineField, defineType } from 'sanity'
 
 export default defineType({
-  name: 'homePage',
-  title: 'Home Page',
-  icon: HomeIcon,
+  name: 'project',
+  title: 'Archive Project',
   type: 'document',
   fields: [
     defineField({
@@ -24,10 +22,15 @@ export default defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
-      name: 'content',
-      title: 'Content',
+      name: 'categories',
+      title: 'Categories',
       type: 'array',
-      of: [{ type: 'block' }],
+      of: [{ type: 'reference', to: [{ type: 'projectCategory' }] }],
+    }),
+    defineField({
+      name: 'client',
+      title: 'Client',
+      type: 'string',
     }),
     defineField({
       name: 'media',
