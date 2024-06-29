@@ -74,7 +74,7 @@ export function ImagePlane({
   }, [isActive])
 
   useEffect(() => {
-    if (isHovering && isActive) {
+    if (isHovering) {
       addIntensity()
     } else {
       removeIntensity(isActive ? 0.8 : 0.8)
@@ -83,13 +83,13 @@ export function ImagePlane({
 
   const aspect = aspectRatio
 
-  const planeWidth = viewport.width
-  const planeHeight = viewport.width / aspect
+  let planeWidth = viewport.width
+  let planeHeight = viewport.width / aspect
 
-  // if(aspectRatio < 1) {
-  //   planeWidth = viewport.height / aspect
-  //   planeHeight = viewport.height
-  // }
+  if (aspectRatio < 0.6) {
+    planeWidth = viewport.height * aspect
+    planeHeight = viewport.height
+  }
 
   return (
     <group>
@@ -97,7 +97,7 @@ export function ImagePlane({
         <planeGeometry args={[viewport.width, viewport.height, 64, 64]} />
         <meshBasicMaterial color="#000" />
       </mesh>
-      <mesh scale={0.9}>
+      <mesh>
         <planeGeometry args={[planeWidth, planeHeight, 64, 64]} />
         <waveMaterial
           attach="material"
