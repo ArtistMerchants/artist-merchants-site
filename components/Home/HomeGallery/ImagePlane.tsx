@@ -58,7 +58,6 @@ export function ImagePlane({
   }
 
   const hideImage = () => {
-    console.log(isActive)
     gsap.to(ref.current.uniforms.uOpacity, {
       value: 0.0,
       duration: 0.6,
