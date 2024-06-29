@@ -44,12 +44,6 @@ export default defineType({
           type: 'image',
           fields: [{ name: 'alt', title: 'Alt', type: 'string' }],
         },
-        {
-          name: 'video',
-          title: 'Video',
-          type: 'file',
-          options: { accept: 'video/*' },
-        },
       ],
     }),
   ],
@@ -58,12 +52,15 @@ export default defineType({
       title: 'client',
       category: 'categories.0.title',
       year: 'year',
-      media: 'media.0',
+      media: 'media',
     },
-    prepare: ({ title, category, year, media }) => ({
-      title: title.join(', '),
-      subtitle: `Year: ${year} — Category: ${category}`,
-      media,
-    }),
+    prepare: ({ title, category, year, media }) => {
+      const image = media?.length > 0 ? media[0] : null
+      return {
+        title: title.join(', '),
+        subtitle: `Year: ${year} — Category: ${category}`,
+        media: image,
+      }
+    },
   },
 })

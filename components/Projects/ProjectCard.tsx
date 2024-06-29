@@ -39,6 +39,7 @@ const MediaImage = ({ media }) => {
       style={{ objectFit: 'cover' }}
       alt={media.alt}
       sizes="800px"
+      className="mix-blend-darken"
     />
   )
 }

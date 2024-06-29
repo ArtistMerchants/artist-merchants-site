@@ -30,8 +30,8 @@ export default defineType({
       of: [{ type: 'block' }],
     }),
     defineField({
-      name: 'media',
-      title: 'Media',
+      name: 'images',
+      title: 'Images',
       type: 'array',
       of: [
         {
@@ -39,12 +39,17 @@ export default defineType({
           title: 'Image',
           type: 'image',
           fields: [{ name: 'alt', title: 'Alt', type: 'string' }],
-        },
-        {
-          name: 'video',
-          title: 'Video',
-          type: 'file',
-          options: { accept: 'video/*' },
+          preview: {
+            select: {
+              alt: 'alt',
+              asset: 'asset',
+            },
+            prepare: ({ alt, asset }) => ({
+              title: alt || 'Image',
+              subtitle: asset?.caption,
+              media: asset,
+            }),
+          },
         },
       ],
     }),

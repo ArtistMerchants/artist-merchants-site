@@ -4,11 +4,11 @@ import {
   getCategoryPage,
   getSettings,
 } from 'lib/sanity.client'
+import { cookies } from 'next/headers'
 
 import { ArchiveListPage } from 'components/Archive/ArchiveListPage'
 
-export default function Index({ page, settings }) {
-  console.log(page)
+export default function CategoryDetail({ page, settings }) {
   return <ArchiveListPage {...page} settings={settings} />
 }
 

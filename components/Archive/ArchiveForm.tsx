@@ -36,7 +36,7 @@ export const ArchiveForm = () => {
 
   return (
     <motion.div
-      className="flex flex-col gap-8"
+      className="col-span-2 flex flex-col gap-8"
       key="archive-locked"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
@@ -47,7 +47,7 @@ export const ArchiveForm = () => {
         className={`flex w-full flex-col gap-6 ${error ? 'animate-shake' : ''}`}
         onSubmit={handleSubmit}
       >
-        <div className="flex items-start items-center gap-6">
+        <div className="flex w-full items-start items-center gap-6">
           <label htmlFor="password">Password : </label>
           <input
             id="password"

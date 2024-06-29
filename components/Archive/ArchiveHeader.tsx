@@ -1,5 +1,5 @@
 import { useSiteStore } from 'hooks/useSiteStore'
-import { AnimatePresence, motion } from 'framer-motion'
+import { motion } from 'framer-motion'
 
 import { Nav } from 'components/Global/Nav'
 import { ArchiveMenu } from './ArchiveMenu'

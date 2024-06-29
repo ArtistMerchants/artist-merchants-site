@@ -1,12 +1,19 @@
 import { useArchiveStore } from 'hooks/useArchiveStore'
+import { useSiteStore } from 'hooks/useSiteStore'
+
 import { ProjectCard } from './ProjectCard'
 
 export const ProjectList = ({ projects = [] }) => {
   const { view } = useArchiveStore()
+  const { menuOpen } = useSiteStore()
   return (
     <section
       className={`grid ${
-        view === 'one' ? 'grid-cols-2' : 'grid-cols-1'
+        view === 'two'
+          ? 'grid-cols-1'
+          : menuOpen
+          ? 'grid-cols-2'
+          : 'grid-cols-4'
       } gap-10`}
     >
       {projects?.map((project: any) => {

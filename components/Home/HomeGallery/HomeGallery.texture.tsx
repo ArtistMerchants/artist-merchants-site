@@ -6,6 +6,7 @@ export const WaveMaterial: any = shaderMaterial(
     uMouse: [-0.5, -0.5],
     uAspect: 2 / 2.5,
     uIntensity: 0,
+    uOpacity: 0.0,
   },
   // vertex shader
   /*glsl*/ `
@@ -31,9 +32,29 @@ export const WaveMaterial: any = shaderMaterial(
     
       // Elevation
       vec2 mousePositions = uMouse * 0.5 + 0.5;
-      float circleShape = circle(uv, mousePositions, 0.58);
+      float circleShape = circle(uv, mousePositions, 0.8);
       float intensity = uIntensity;
-      newPosition.z += circleShape * intensity;
+      // newPosition.z += circleShape * intensity;
+
+      // Calculate spiral distortion
+      vec2 direction = uv - mousePositions;
+      float distanceFromCenter = length(direction);
+      float angle = atan(direction.y, direction.x) + distanceFromCenter * intensity * 10.; // Adjust the multiplier for spiral tightness
+
+      float s = sin(angle);
+      float c = cos(angle);
+
+      // Calculate spiral position
+      vec3 spiralPosition = newPosition;
+      spiralPosition.x = direction.x * c - direction.y * s;
+      spiralPosition.y = direction.x * s + direction.y * c;
+
+      // Translate back to original position
+      spiralPosition.x += mousePositions.x;
+      spiralPosition.y += mousePositions.y;
+
+      // Mix the normal position with the spiral position based on intensity
+      newPosition = mix(newPosition, spiralPosition, intensity);
     
       gl_Position = projectionMatrix * modelViewMatrix * vec4(newPosition, 1.0);
     }
@@ -45,6 +66,7 @@ export const WaveMaterial: any = shaderMaterial(
     uniform vec2 uMouse;
     uniform float uAspect;
     uniform float uIntensity;
+    uniform float uOpacity;
 
     float circle(vec2 uv, vec2 circlePosition, float radius) {
       vec2 adjustedUV = uv;
@@ -61,9 +83,14 @@ export const WaveMaterial: any = shaderMaterial(
       vec4 texColor = texture2D(uTexture, vUv);
       vec2 mousePositions = uMouse * 0.5 + 0.5;
       float circleInfluence = circle(vUv, mousePositions, 0.5);
-      vec3 brightenedColor = texColor.rgb + texColor.rgb * circleInfluence * uIntensity * 3.;
+
+      vec4 invertedColor = vec4(.8 - texColor.r, .8 - texColor.g, .8 - texColor.b, 0.0);
       
-      gl_FragColor = vec4(texColor.rgb, 1.0);
+      vec4 darkenedColor = vec4(0.0, 0.0, 0.0, 1.0);
+
+      vec4 finalColor = mix(darkenedColor, invertedColor, uOpacity);
+      
+      gl_FragColor = vec4(finalColor.rgb, uOpacity);
     
       #include <colorspace_fragment>
     }

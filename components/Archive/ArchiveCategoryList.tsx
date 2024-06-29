@@ -4,6 +4,7 @@ import { useSiteStore } from 'hooks/useSiteStore'
 
 export const ArchiveCategoryList = ({
   categories = [],
+  activeCategories = [],
   closeOnClick = true,
 }) => {
   const path = usePathname()
@@ -34,11 +35,13 @@ export const ArchiveCategoryList = ({
         const isActive = path
           ?.replaceAll('archive/categories', '')
           .includes(category.slug)
-        const activeClass = isActive
-          ? 'opacity-100'
-          : path !== '/archive'
-          ? 'opacity-60 hover:opacity-100'
-          : 'group-hover:opacity-50 group-hover:hover:opacity-100'
+        const activeClass =
+          isActive ||
+          activeCategories.find((c: any) => c.slug === category.slug)
+            ? 'opacity-100'
+            : path !== '/archive'
+            ? 'opacity-60 hover:opacity-100'
+            : 'group-hover:opacity-50 group-hover:hover:opacity-100'
         return (
           <li
             key={category._id}

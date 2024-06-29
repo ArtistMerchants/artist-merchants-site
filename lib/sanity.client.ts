@@ -7,6 +7,8 @@ import {
   categoryPathsQuery,
   categoryAllPageQuery,
   categoryPageQuery,
+  projectQuery,
+  projectPathsQuery,
 } from 'lib/sanity.queries'
 import { createClient } from 'next-sanity'
 
@@ -46,6 +48,22 @@ export const getCategoryAllPage = async (): Promise<any> => {
 export const getCategoryPage = async (slug: string): Promise<any> => {
   if (client) {
     return (await client.fetch(categoryPageQuery, { slug })) || []
+  }
+
+  return []
+}
+
+export const getProjectPaths = async (): Promise<any> => {
+  if (client) {
+    return (await client.fetch(projectPathsQuery)) || []
+  }
+
+  return []
+}
+
+export const getProjectPage = async (slug: string): Promise<any> => {
+  if (client) {
+    return (await client.fetch(projectQuery, { slug })) || []
   }
 
   return []

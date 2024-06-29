@@ -2,12 +2,10 @@ import { groq } from 'next-sanity'
 
 const imageFields = `
 ...,
-"palette":  asset->metadata.palette,
-"metadata": asset->metadata,
 "lqip": asset->metadata.lqip,
 "width": asset->metadata.dimensions.width,
 "height": asset->metadata.dimensions.height,
-"aspect": asset->metadata.dimensions.aspectRatio,
+"aspectRatio": asset->metadata.dimensions.aspectRatio,
 `
 
 const projectFields = `
@@ -48,15 +46,9 @@ export const homeQuery = groq`
     ...,
     title,
     content,
-    media[] {
+    images[] {
       _key,
-      _type,
-      _type == 'image' => {
-        ${imageFields}
-      },
-      _type == 'video' => {
-        "url": asset->url
-      }
+      ${imageFields}
     },
     "categories": *[_type == "projectCategory"] {
       _id,
@@ -116,6 +108,23 @@ export const categoryPageQuery = groq`
 
 export const categoryPathsQuery = groq`
 *[_type == "projectCategory"] {
+  "slug": slug.current
+}
+`
+
+export const projectQuery = groq`
+*[_type == "project" && slug.current == $slug][0] {
+  ${projectFields},
+  "allCategories": *[_type == "projectCategory"] {
+    _id,
+    title,
+    "slug": slug.current
+  }
+}
+`
+
+export const projectPathsQuery = groq`
+*[_type == "project" && defined(slug.current)] {
   "slug": slug.current
 }
 `

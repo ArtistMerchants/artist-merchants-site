@@ -2,11 +2,12 @@ import { useSiteStore } from 'hooks/useSiteStore'
 
 import { AnimatePresence, motion } from 'framer-motion'
 import { MenuButton } from 'components/Global/MenuButton'
-import { ArchiveHeader } from './ArchiveHeader'
-import { ProjectList } from 'components/Projects/ProjectList'
 import ReactLenis from '@studio-freight/react-lenis'
+import { ProjectHeader } from './ProjectHeader'
+import { ProjectMediaList } from './ProjectMediaList'
 
-export const ArchiveListPage = ({ categories, projects }) => {
+export const ProjectPage = (props) => {
+  const { media } = props
   const { menuOpen } = useSiteStore()
   return (
     <AnimatePresence initial={false}>
@@ -27,15 +28,15 @@ export const ArchiveListPage = ({ categories, projects }) => {
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.5 }}
               >
-                <ArchiveHeader categories={categories} />
+                <ProjectHeader {...props} />
                 <div></div>
-                <div className="relative hyphens-auto font-serif text-[56px] leading-120">
+                <div className="relative hyphens-auto font-serif text-[56px] leading-[90%]">
                   Artist Merchants
                   <span className="relative -top-20 text-[32px]">®</span>
                 </div>
               </motion.div>
               <div className="relative left-[5%] top-0 col-span-4 col-start-4 ml-auto w-[95%] self-start py-32">
-                <ProjectList projects={projects} />
+                <ProjectMediaList media={media} />
               </div>
               <div className="sticky top-0 self-start py-32 text-right">
                 <MenuButton />
@@ -51,7 +52,7 @@ export const ArchiveListPage = ({ categories, projects }) => {
           >
             <div className="grid w-full grid-cols-8 text-14 leading-130">
               <div className="col-span-7 py-32">
-                <ProjectList projects={projects} />
+                <ProjectMediaList media={media} />
               </div>
               <div className="sticky top-0 self-start py-32 text-right">
                 <MenuButton />
