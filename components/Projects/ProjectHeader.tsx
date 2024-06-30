@@ -14,9 +14,9 @@ export const ProjectHeader = (props) => {
     <HeaderWrapper>
       <motion.div
         className="left-0 z-[2] flex w-full flex-col gap-10 md:absolute md:top-32 md:grid md:grid-cols-3"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: menuOpen ? 1 : 0 }}
-        transition={{ duration: 0.35 }}
+        initial={{ opacity: 0, y: -50 }}
+        animate={{ opacity: menuOpen ? 1 : 0, y: menuOpen ? 0 : -50 }}
+        transition={{ duration: 0.6, ease: [0.22, 0.81, 0.13, 0.98] }}
       >
         <Nav />
         <div className="col-span-2 grid grid-cols-2">

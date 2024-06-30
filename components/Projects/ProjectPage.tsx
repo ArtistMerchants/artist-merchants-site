@@ -42,12 +42,18 @@ export const ProjectPage = (props) => {
               >
                 <ProjectHeader {...props} />
                 <div></div>
-                <div className="relative hyphens-auto font-serif text-[clamp(40px,5vw,56px)] leading-[90%]">
+                <motion.div
+                  className="relative hyphens-auto font-serif text-[clamp(40px,5vw,56px)] leading-[90%]"
+                  initial={{ y: 100 }}
+                  animate={{ y: 0 }}
+                  exit={{ y: 100 }}
+                  transition={{ duration: 0.6, ease: [0.22, 0.81, 0.13, 0.98] }}
+                >
                   Artist Merchants
                   <span className="relative -top-20 text-[clamp(20px,3vw,32px)]">
                     ®
                   </span>
-                </div>
+                </motion.div>
               </motion.div>
               <div className="mb:pb-32 relative top-0 ml-auto w-full self-start pb-20 pt-350 md:left-[5%] md:col-span-4 md:col-start-4 md:w-[95%] md:pt-32">
                 <ProjectMediaList media={media} />
