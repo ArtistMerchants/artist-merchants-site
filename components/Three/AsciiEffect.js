@@ -44,7 +44,7 @@ class AsciiEffect {
 
     function initAsciiSize() {
       iWidth = Math.floor(width * fResolution)
-      iHeight = Math.floor(height * fResolution) * 1.5
+      iHeight = Math.floor(height * fResolution) * 1.4
 
       oCanvas.width = iWidth
       oCanvas.height = iHeight

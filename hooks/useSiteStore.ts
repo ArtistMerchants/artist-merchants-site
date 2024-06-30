@@ -4,6 +4,10 @@ import { persist } from 'zustand/middleware'
 type SiteStoreProps = {
   menuOpen: boolean
   setMenuOpen: (menuOpen: boolean) => void
+  loading: boolean
+  setLoading: (loading: boolean) => void
+  hasLoaded: boolean
+  setHasLoaded: (hasLoaded: boolean) => void
   unlocked: boolean
   setUnlocked: (unlocked: boolean) => void
   homeData: any
@@ -17,6 +21,10 @@ export const useSiteStore = create<SiteStoreProps>()(
     (set) => ({
       menuOpen: false,
       setMenuOpen: (menuOpen) => set({ menuOpen }),
+      loading: true,
+      setLoading: (loading) => set({ loading }),
+      hasLoaded: false,
+      setHasLoaded: (hasLoaded) => set({ hasLoaded }),
       unlocked: false,
       setUnlocked: (unlocked) => set({ unlocked }),
       homeData: {},
@@ -27,6 +35,8 @@ export const useSiteStore = create<SiteStoreProps>()(
     {
       name: 'site-store',
       partialize: (state) => ({
+        loading: state.loading,
+        hasLoaded: state.hasLoaded,
         settings: state.settings,
         unlocked: state.unlocked,
       }),

@@ -19,7 +19,7 @@ export default async function handler(req, res) {
   if (settings.passwords.includes(password)) {
     res.setHeader(
       'Set-Cookie',
-      serialize('auth', 'true', { path: '/', httpOnly: true })
+      serialize('auth', password, { path: '/', httpOnly: true })
     )
     res.status(200).json({ message: 'Password is correct' })
   } else {
