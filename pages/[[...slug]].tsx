@@ -13,9 +13,11 @@ export default function Index({ home, settings, redirect }) {
   const { setHomeData } = useSiteStore()
   const router = useRouter()
 
-  if (redirect) {
-    router.push(`/client-tools/${redirect}`)
-  }
+  useEffect(() => {
+    if (redirect) {
+      router.push(`/client-tools/${redirect}`)
+    }
+  }, [])
 
   useEffect(() => {
     setHomeData(home)

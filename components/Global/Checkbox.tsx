@@ -4,7 +4,10 @@ export const Checkbox = ({ label, value, checked, onChange }) => {
   }
 
   return (
-    <label htmlFor={value} className="flex cursor-pointer items-center gap-12">
+    <label
+      htmlFor={value}
+      className="flex cursor-pointer items-center gap-12 text-13 leading-110 md:text-14"
+    >
       <input
         className="peer hidden"
         id={value}

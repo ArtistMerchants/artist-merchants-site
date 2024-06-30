@@ -22,19 +22,31 @@ export const ArchiveListPage = ({ categories, projects }) => {
 
   return (
     <AnimatePresence initial={false}>
+      <div className="absolute z-[3] w-full text-14 leading-130 md:hidden">
+        <ArchiveHeader categories={categories} />
+      </div>
+      <motion.div
+        className="fixed bottom-20 left-0 z-[4] w-full text-center font-serif text-[10.3vw] leading-110 md:hidden"
+        initial={{ y: 100, opacity: 0 }}
+        animate={{ y: menuOpen ? 0 : 100, opacity: menuOpen ? 1 : 0 }}
+        transition={{ duration: 0.6, ease: [0.22, 0.81, 0.13, 0.98] }}
+      >
+        Artist Merchants
+        <span className="relative -top-20 text-[clamp(20px,3vw,32px)]">®</span>
+      </motion.div>
       {menuOpen ? (
         <motion.div
           key="archive-list-menu-open"
-          className="absolute inset-0 z-[1] h-full w-full text-14 leading-130"
+          className="absolute inset-0 z-[1] h-full min-h-screen w-full text-14 leading-130"
         >
           <ReactLenis
             ref={lenisRef}
             options={{ lerp: 0.15 }}
-            className="scrollbar-hidden relative h-screen overflow-auto"
+            className="scrollbar-hidden relative min-h-screen overflow-auto md:h-screen"
           >
-            <div className="grid w-full grid-cols-8 text-14 leading-130">
+            <div className="w-full text-14 leading-130 md:grid md:grid-cols-8">
               <motion.div
-                className="sticky top-0 col-span-3 flex h-screen flex-col items-start justify-between self-start overflow-auto py-20 md:py-32"
+                className="sticky top-0 col-span-3 hidden h-screen flex-col items-start justify-between self-start overflow-auto py-20 md:flex md:py-32"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
@@ -55,26 +67,32 @@ export const ArchiveListPage = ({ categories, projects }) => {
                   </span>
                 </motion.div>
               </motion.div>
-              <div className="relative left-[5%] top-0 col-span-4 col-start-4 ml-auto w-[95%] self-start py-20 md:py-32">
+              <div className="mb:pb-32 relative top-0 ml-auto w-full self-start pb-20 pt-350 md:left-[5%] md:col-span-4 md:col-start-4 md:w-[95%] md:pt-0">
                 <ProjectList projects={projects} />
               </div>
-              <div className="sticky top-0 self-start py-20 text-right md:py-32">
+              <div className="sticky top-0 hidden self-start py-32 text-right md:block">
                 <MenuButton />
               </div>
             </div>
           </ReactLenis>
         </motion.div>
       ) : (
-        <motion.div className="absolute inset-0 z-[2] col-span-8 h-full w-full text-14 leading-130">
+        <motion.div className="absolute inset-0 z-[2] h-full min-h-screen w-full text-14 leading-130 md:col-span-8  md:pt-0">
           <ReactLenis
             options={{ lerp: 0.15 }}
-            className="scrollbar-hidden relative h-screen overflow-auto text-14 leading-130"
+            className="scrollbar-hidden relative min-h-screen overflow-auto text-14 leading-130 md:h-screen"
           >
-            <div className="grid w-full grid-cols-8 text-14 leading-130">
-              <div className="col-span-7 py-20 md:py-32">
+            <div className="w-full text-14 leading-130 md:grid md:grid-cols-8">
+              <div className="col-span-7 pb-20 pt-200 md:pb-32 md:pt-32">
                 <ProjectList projects={projects} />
               </div>
-              <div className="sticky top-0 self-start py-20 text-right md:py-32">
+              <div className="relative hyphens-auto py-20 text-center font-serif text-[clamp(36px,5vw,56px)] leading-100 md:hidden">
+                Artist Merchants
+                <span className="relative -top-20 text-[clamp(20px,3vw,32px)]">
+                  ®
+                </span>
+              </div>
+              <div className="sticky top-0 hidden self-start py-32 text-right md:block">
                 <MenuButton />
               </div>
             </div>
