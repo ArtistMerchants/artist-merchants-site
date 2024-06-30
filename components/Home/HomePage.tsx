@@ -56,7 +56,7 @@ export default function HomePage(props) {
           <Header />
           <div className="relative z-[0] flex h-[calc(calc(calc(var(--vh,1vh)*100)-64px)-0.5ch)] items-center justify-center text-large-heading md:h-[calc(calc(calc(var(--vh,1vh)*100)-64px)-1.4ch)]">
             <motion.div
-              className="relative top-[5vw] h-[80%] w-full md:hidden"
+              className="relative top-[5vw] h-[80%] w-full transform-gpu will-change-auto md:hidden"
               initial={{ opacity: 0 }}
               animate={{
                 opacity: isInfoActive ? 0 : 1,
