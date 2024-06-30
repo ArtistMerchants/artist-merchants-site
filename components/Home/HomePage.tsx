@@ -54,7 +54,7 @@ export default function HomePage(props) {
       <div className="col-span-8 w-full text-14 leading-130 md:grid md:grid-cols-8">
         <div className="relative col-span-3 h-full overflow-auto py-20 md:py-32">
           <Header />
-          <div className="relative z-[0] flex h-[calc(calc(100vh-64px)-0.5ch)] items-center justify-center text-[clamp(36px,5vw,56px)] md:h-[calc(calc(100vh-64px)-1.8ch)]">
+          <div className="relative z-[0] flex h-[calc(calc(calc(var(--vh,1vh)*100)-64px)-0.5ch)] items-center justify-center text-[clamp(36px,5vw,56px)] md:h-[calc(calc(calc(var(--vh,1vh)*100)-64px)-1.8ch)]">
             <motion.div
               className="h-[80%] w-full md:hidden"
               initial={{ opacity: 0 }}
