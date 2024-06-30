@@ -8,7 +8,7 @@ export const ArchiveTab = () => {
   const { unlocked, homeData } = useSiteStore()
 
   return (
-    <HeaderTab className="col-span-2 md:grid md:grid-cols-2">
+    <HeaderTab className="col-span-2 w-full md:grid md:grid-cols-2">
       <AnimatePresence initial={false} mode="wait">
         {unlocked ? (
           <motion.div

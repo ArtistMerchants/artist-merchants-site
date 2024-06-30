@@ -8,9 +8,10 @@ import { MenuButton } from 'components/Global/MenuButton'
 import { useArchiveStore } from 'hooks/useArchiveStore'
 import { ClientToolsHeader } from './ClientToolsHeader'
 import { ClientToolsProjectList } from './ClientToolsProjectList'
+import { SiteMeta } from 'components/SiteMeta'
 
 export const ClientToolsListPage = (props) => {
-  const { materials, activeMaterial, projects } = props
+  const { materials, activeMaterial, projects, settings } = props
   const lenisRef = useRef<any>(null)
   const { menuOpen } = useSiteStore()
   const { view } = useArchiveStore()
@@ -26,6 +27,7 @@ export const ClientToolsListPage = (props) => {
 
   return (
     <AnimatePresence initial={false}>
+      <SiteMeta {...settings} />
       <motion.div
         className="fixed bottom-20 left-0 z-[4] w-full text-center font-serif text-[10.3vw] leading-100 md:hidden"
         initial={{ y: 100, opacity: 0 }}

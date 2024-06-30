@@ -5,12 +5,14 @@ import { MenuButton } from 'components/Global/MenuButton'
 import ReactLenis from '@studio-freight/react-lenis'
 import { ProjectHeader } from './ProjectHeader'
 import { ProjectMediaList } from './ProjectMediaList'
+import { SiteMeta } from 'components/SiteMeta'
 
 export const ProjectPage = (props) => {
-  const { media } = props
+  const { media, settings } = props
   const { menuOpen } = useSiteStore()
   return (
     <AnimatePresence initial={false}>
+      <SiteMeta {...settings} />
       <div className="absolute z-[3] w-full text-14 leading-130 md:hidden">
         <ProjectHeader {...props} />
       </div>

@@ -15,9 +15,9 @@ export const Header = () => {
     <HeaderWrapper>
       <motion.div
         className="flex w-full flex-col gap-10 md:grid md:grid-cols-3"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: menuOpen ? 1 : 0 }}
-        transition={{ duration: 0.35 }}
+        initial={{ opacity: 0, y: -50 }}
+        animate={{ opacity: menuOpen ? 1 : 0, y: menuOpen ? 0 : -50 }}
+        transition={{ duration: 0.65, ease: [0.82, 0.01, 0.22, 0.98] }}
       >
         <Nav />
         <AnimatePresence initial={false} mode="wait">

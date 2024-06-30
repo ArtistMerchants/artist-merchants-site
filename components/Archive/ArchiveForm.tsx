@@ -36,7 +36,7 @@ export const ArchiveForm = () => {
 
   return (
     <motion.div
-      className="col-span-2 flex flex-col gap-8"
+      className="flex w-full flex-col gap-8 md:col-span-2"
       key="archive-locked"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
@@ -52,7 +52,7 @@ export const ArchiveForm = () => {
           <input
             id="password"
             type="password"
-            className="w-full max-w-[240px] border-b-1 border-solid border-white bg-transparent focus:outline-none"
+            className="w-full max-w-[240px] flex-1 appearance-none rounded-[0px] border-b-1 border-solid border-white bg-transparent focus:outline-none"
             ref={passwordRef}
           />
         </div>

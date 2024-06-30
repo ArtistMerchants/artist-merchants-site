@@ -7,8 +7,9 @@ import { ArchiveHeader } from './ArchiveHeader'
 import { ProjectList } from 'components/Projects/ProjectList'
 import ReactLenis from '@studio-freight/react-lenis'
 import { useArchiveStore } from 'hooks/useArchiveStore'
+import { SiteMeta } from 'components/SiteMeta'
 
-export const ArchiveListPage = ({ categories, projects }) => {
+export const ArchiveListPage = ({ categories, projects, settings }) => {
   const lenisRef = useRef<any>(null)
   const { menuOpen } = useSiteStore()
   const { view } = useArchiveStore()
@@ -22,6 +23,7 @@ export const ArchiveListPage = ({ categories, projects }) => {
 
   return (
     <AnimatePresence initial={false}>
+      <SiteMeta {...settings} />
       <div className="absolute z-[3] w-full text-14 leading-130 md:hidden">
         <ArchiveHeader categories={categories} />
       </div>

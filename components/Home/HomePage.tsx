@@ -8,9 +8,10 @@ import { MenuButton } from '../Global/MenuButton'
 import { Header } from '../Global/Header'
 import { HomeDescription } from './HomeDescription'
 import ReactLenis from '@studio-freight/react-lenis'
+import { SiteMeta } from 'components/SiteMeta'
 
 export default function HomePage(props) {
-  const { content, images } = props
+  const { content, images, settings } = props
   const lenisRef = useRef<any>(null)
   const { menuOpen } = useSiteStore()
   const path = usePathname()
@@ -53,6 +54,7 @@ export default function HomePage(props) {
       ref={initializeLenisRef}
       className={`scrollbar-hidden relative h-screen overflow-auto text-14 leading-130`}
     >
+      <SiteMeta {...settings} />
       <div className="col-span-8 w-full text-14 leading-130 md:grid md:grid-cols-8">
         <div className="relative col-span-3 h-full overflow-auto py-20 md:py-32">
           <Header />
@@ -63,7 +65,7 @@ export default function HomePage(props) {
               animate={{
                 opacity: isInfoActive ? 0 : 1,
                 y: menuOpen && !isInfoActive ? '30vh' : 0,
-                scale: menuOpen && !isHome ? 0.6 : 1,
+                scale: menuOpen && isInfoActive ? 0.6 : 1,
               }}
               transition={{ duration: 0.65, ease: [0.82, 0.01, 0.22, 0.98] }}
             >
