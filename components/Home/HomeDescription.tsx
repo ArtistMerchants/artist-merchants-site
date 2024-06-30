@@ -5,7 +5,7 @@ import { PortableText } from '@portabletext/react'
 export const HomeDescription = ({ content, isActive = false }) => {
   return (
     <motion.div
-      className="relative hyphens-auto font-serif text-large-heading leading-100 [--y-to:-30vh] md:leading-[70%] md:[--y-to:-40vh]"
+      className="relative hyphens-auto font-serif text-large-heading leading-[70%] [--y-to:-30vh] md:[--y-to:-40vh]"
       initial={{ y: 0 }}
       animate={{ y: isActive ? 'var(--y-to)' : 0 }}
       transition={{ duration: 0.65, ease: [0.82, 0.01, 0.22, 0.98] }}
