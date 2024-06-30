@@ -16,7 +16,7 @@ export default function HomePage(props) {
   const path = usePathname()
 
   const isInfoActive = useMemo(
-    () => path === '/information' && menuOpen,
+    () => path?.includes('information') && menuOpen,
     [path, menuOpen]
   )
 
