@@ -30,9 +30,9 @@ export const ClientToolsProjectList = ({ projects = [] }) => {
           view === 'two'
             ? 'grid-cols-1'
             : menuOpen
-            ? 'grid-cols-2'
+            ? 'grid-cols-4 md:grid-cols-2'
             : 'grid-cols-4'
-        } gap-10`}
+        } gap-4 md:gap-10`}
       >
         {filteredProjects?.map((project: any) => {
           return (
