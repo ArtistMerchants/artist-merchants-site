@@ -55,7 +55,7 @@ export const ArchiveListPage = ({ categories, projects }) => {
                 <ArchiveHeader categories={categories} />
                 <div></div>
                 <motion.div
-                  className="relative hyphens-auto font-serif text-[clamp(40px,5vw,56px)] leading-110"
+                  className="relative hyphens-auto font-serif text-large-heading leading-110"
                   initial={{ y: 100 }}
                   animate={{ y: 0 }}
                   exit={{ y: 100 }}

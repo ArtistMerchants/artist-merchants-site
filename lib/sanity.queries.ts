@@ -115,6 +115,8 @@ export const categoryPathsQuery = groq`
 export const projectQuery = groq`
 *[_type == "project" && slug.current == $slug][0] {
   ${projectFields},
+  taggedMaterials,
+  taggedTechniques,
   "allCategories": *[_type == "projectCategory"] | order(orderRank) {
     _id,
     title,

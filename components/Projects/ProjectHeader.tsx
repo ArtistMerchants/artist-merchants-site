@@ -1,3 +1,4 @@
+import { useMemo } from 'react'
 import { useSiteStore } from 'hooks/useSiteStore'
 import { motion } from 'framer-motion'
 
@@ -7,8 +8,31 @@ import { LabeledList } from 'components/Global/LabeledList'
 import { HeaderWrapper } from 'components/Global/HeaderWrapper'
 
 export const ProjectHeader = (props) => {
-  const { allCategories = [], categories, client, year } = props
+  const {
+    allCategories = [],
+    categories,
+    client,
+    year,
+    taggedMaterials,
+    taggedTechniques,
+  } = props
   const { menuOpen } = useSiteStore()
+
+  const materialList: string[] = useMemo(() => {
+    const materialSet = taggedMaterials?.reduce((acc, material) => {
+      material?.items?.forEach((item) => acc.add(item))
+      return acc
+    }, new Set())
+    return Array.from(materialSet)
+  }, [taggedMaterials])
+
+  const techniqueList: string[] = useMemo(() => {
+    const techniqueSet = taggedTechniques?.reduce((acc, technique) => {
+      technique?.items?.forEach((item) => acc.add(item))
+      return acc
+    }, new Set())
+    return Array.from(techniqueSet)
+  }, [taggedTechniques])
 
   return (
     <HeaderWrapper>
@@ -25,9 +49,11 @@ export const ProjectHeader = (props) => {
             categories={allCategories}
             activeCategories={categories}
           />
-          <div className="flex flex-col gap-14">
+          <div className="flex flex-col gap-14 md:gap-20">
             <LabeledList label="Client" items={client} />
             <LabeledList label="Project" items={[year]} />
+            <LabeledList label="Material" items={materialList} />
+            <LabeledList label="Technique" items={techniqueList} />
           </div>
         </div>
       </motion.div>

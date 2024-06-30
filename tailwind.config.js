@@ -47,6 +47,7 @@ module.exports = {
             acc[val] = `${val}px`
             return acc
           }, {}),
+        'large-heading': 'var(--text-large-heading)',
       },
       letterSpacing: {
         ...new Array(100)
@@ -88,6 +89,10 @@ module.exports = {
             transform: 'translate3d(4px, 0, 0)',
           },
         },
+      },
+      // responsive sizes
+      screens: {
+        md: '960px',
       },
     },
   },
