@@ -26,7 +26,7 @@ export const ArchiveListPage = ({ categories, projects }) => {
         <ArchiveHeader categories={categories} />
       </div>
       <motion.div
-        className="fixed bottom-20 left-0 z-[4] w-full text-center font-serif text-[10.3vw] leading-110 md:hidden"
+        className="fixed bottom-20 left-0 z-[4] w-full text-center font-serif text-[10.3vw] leading-100 md:hidden"
         initial={{ y: 100, opacity: 0 }}
         animate={{ y: menuOpen ? 0 : 100, opacity: menuOpen ? 1 : 0 }}
         transition={{ duration: 0.6, ease: [0.22, 0.81, 0.13, 0.98] }}
