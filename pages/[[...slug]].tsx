@@ -60,15 +60,6 @@ export async function getStaticProps(context) {
 
   const slug = context.params.slug?.join('/')
 
-  if (slug === 'client-tools') {
-    return {
-      redirect: {
-        destination: `/client-tools/${materialPaths[0].slug}`,
-        permanent: false,
-      },
-    }
-  }
-
   return {
     props: {
       settings,

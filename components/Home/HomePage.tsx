@@ -2,6 +2,7 @@ import { useEffect, useMemo, useCallback, useRef } from 'react'
 import { useSiteStore } from 'hooks/useSiteStore'
 import { usePathname } from 'next/navigation'
 
+import { motion } from 'framer-motion'
 import { HomeGallery } from './HomeGallery'
 import { MenuButton } from '../Global/MenuButton'
 import { Header } from '../Global/Header'
@@ -50,16 +51,28 @@ export default function HomePage(props) {
       ref={initializeLenisRef}
       className={`scrollbar-hidden relative h-screen overflow-auto text-14 leading-130`}
     >
-      <div className="col-span-8 grid w-full grid-cols-8 text-14 leading-130">
-        <div className="relative col-span-3 h-full overflow-auto py-32">
+      <div className="col-span-8 w-full text-14 leading-130 md:grid md:grid-cols-8">
+        <div className="relative col-span-3 h-full overflow-auto py-20 md:py-32">
           <Header />
-          <div className="relative h-[calc(calc(100vh-64px)-1.8ch)] text-[56px]"></div>
+          <div className="relative z-[0] flex h-[calc(calc(100vh-64px)-0.5ch)] items-end justify-center text-[clamp(36px,5vw,56px)] md:h-[calc(calc(100vh-64px)-1.8ch)]">
+            <motion.div
+              className="h-[80%] w-full md:hidden"
+              initial={{ opacity: 0 }}
+              animate={{
+                opacity: isInfoActive ? 0 : 1,
+                y: menuOpen ? '30vh' : 0,
+              }}
+              transition={{ duration: 0.65, ease: [0.82, 0.01, 0.22, 0.98] }}
+            >
+              <HomeGallery images={images} />
+            </motion.div>
+          </div>
           <HomeDescription content={content} isActive={isInfoActive} />
         </div>
-        <div className="sticky left-[5%] top-0 col-span-4 col-start-4 ml-auto h-screen w-[95%] self-start py-32">
+        <div className="sticky left-[5%] top-0 col-span-4 col-start-4 ml-auto hidden h-screen w-[95%] self-start py-20 md:block md:py-32">
           <HomeGallery images={images} />
         </div>
-        <div className="sticky top-0 self-start py-32 text-right">
+        <div className="top-0 hidden self-start py-20 text-right md:sticky md:block md:py-32">
           <MenuButton />
         </div>
       </div>

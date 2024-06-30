@@ -22,7 +22,7 @@ export const ProjectPage = (props) => {
           >
             <div className="grid w-full grid-cols-8 text-14 leading-130">
               <motion.div
-                className="sticky top-0 col-span-3 flex h-screen flex-col items-start justify-between self-start overflow-auto py-32"
+                className="sticky top-0 col-span-3 flex h-screen flex-col items-start justify-between self-start overflow-auto py-20 md:py-32"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
@@ -30,15 +30,17 @@ export const ProjectPage = (props) => {
               >
                 <ProjectHeader {...props} />
                 <div></div>
-                <div className="relative hyphens-auto font-serif text-[56px] leading-[90%]">
+                <div className="relative hyphens-auto font-serif text-[clamp(36px,5vw,56px)] leading-[90%]">
                   Artist Merchants
-                  <span className="relative -top-20 text-[32px]">®</span>
+                  <span className="relative -top-20 text-[clamp(20px,3vw,32px)]">
+                    ®
+                  </span>
                 </div>
               </motion.div>
-              <div className="relative left-[5%] top-0 col-span-4 col-start-4 ml-auto w-[95%] self-start py-32">
+              <div className="relative left-[5%] top-0 col-span-4 col-start-4 ml-auto w-[95%] self-start py-20 md:py-32">
                 <ProjectMediaList media={media} />
               </div>
-              <div className="sticky top-0 self-start py-32 text-right">
+              <div className="sticky top-0 self-start py-20 text-right md:py-32">
                 <MenuButton />
               </div>
             </div>
@@ -51,10 +53,10 @@ export const ProjectPage = (props) => {
             className="scrollbar-hidden relative h-screen overflow-auto text-14 leading-130"
           >
             <div className="grid w-full grid-cols-8 text-14 leading-130">
-              <div className="col-span-7 py-32">
+              <div className="col-span-7 py-20 md:py-32">
                 <ProjectMediaList media={media} />
               </div>
-              <div className="sticky top-0 self-start py-32 text-right">
+              <div className="sticky top-0 self-start py-20 text-right md:py-32">
                 <MenuButton />
               </div>
             </div>

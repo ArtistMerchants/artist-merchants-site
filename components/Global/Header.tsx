@@ -5,23 +5,26 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { Nav } from './Nav'
 import { InformationTab } from 'components/Information/InformationTab'
 import { ArchiveTab } from 'components/Archive/ArchiveTab'
+import { HeaderWrapper } from './HeaderWrapper'
 
 export const Header = () => {
   const { menuOpen } = useSiteStore()
   const path = usePathname()
 
   return (
-    <motion.div
-      className="absolute left-0 top-32 z-[2] grid w-full grid-cols-3 gap-10"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: menuOpen ? 1 : 0 }}
-      transition={{ duration: 0.35 }}
-    >
-      <Nav />
-      <AnimatePresence initial={false} mode="wait">
-        {path === '/information' ? <InformationTab key="info" /> : null}
-        {path === '/archive' ? <ArchiveTab key="archive" /> : null}
-      </AnimatePresence>
-    </motion.div>
+    <HeaderWrapper>
+      <motion.div
+        className="flex w-full flex-col gap-10 md:grid md:grid-cols-3"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: menuOpen ? 1 : 0 }}
+        transition={{ duration: 0.35 }}
+      >
+        <Nav />
+        <AnimatePresence initial={false} mode="wait">
+          {path === '/information' ? <InformationTab key="info" /> : null}
+          {path === '/archive' ? <ArchiveTab key="archive" /> : null}
+        </AnimatePresence>
+      </motion.div>
+    </HeaderWrapper>
   )
 }

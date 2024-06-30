@@ -28,7 +28,7 @@ const GalleryImage = ({ image, isActive }) => {
   const imageProps = useImage(image)
   return (
     <div
-      className={`ease absolute inset-0 h-full w-full mix-blend-darken transition-opacity duration-500 ${
+      className={`ease ease absolute inset-0 h-full w-full mix-blend-darken transition-opacity duration-700 ${
         isActive ? 'z-[2] opacity-100' : 'z-[1] opacity-0'
       }`}
       key={`unmasked-image-${image._key}`}

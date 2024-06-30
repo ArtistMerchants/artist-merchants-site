@@ -1,7 +1,8 @@
 import { useClientToolsStore } from 'hooks/useClientToolsStore'
 import { Checkbox } from 'components/Global/Checkbox'
 import { ClientToolsPDF } from './ClientToolsPDF'
-import { PDFDownloadLink } from '@react-pdf/renderer'
+import { usePDF } from '@react-pdf/renderer'
+import { useEffect } from 'react'
 
 export const ClientToolsFilters = ({
   materials,
@@ -17,15 +18,37 @@ export const ClientToolsFilters = ({
   } = useClientToolsStore()
   const handleMaterialChange = (material) => toggleMaterial(material)
   const handleTechniqueChange = (technique) => toggleTechnique(technique)
+  const [instance, updateInstance] = usePDF()
+
+  const handleDownloadClick = () => {
+    // @ts-ignore
+    if (typeof window !== 'undefined' && window.navigator.msSaveBlob) {
+      // @ts-ignore
+      window.navigator.msSaveBlob(instance.blob, fileName)
+    }
+  }
+
+  useEffect(() => {
+    setTimeout(() => {
+      updateInstance(
+        <ClientToolsPDF
+          projects={projects}
+          materials={activeMaterials}
+          techniques={activeTechniques}
+          title={activeMaterial?.title}
+        />
+      )
+    }, 750)
+  }, [])
 
   return (
-    <div className="md:col-span-3 md:grid md:grid-cols-3 md:pt-[100px]">
+    <div className="transform-gpu will-change-auto md:col-span-3 md:grid md:grid-cols-3 md:pt-[100px]">
       <div className="flex flex-col items-start gap-10">
         <h3 className="text-10 uppercase tracking-[0.06em]">Materials</h3>
         <ul className="flex flex-col">
-          {materials.map((material) => (
+          {materials.map((material, index) => (
             <Checkbox
-              key={material}
+              key={`${material}-${index}`}
               label={material}
               value={material}
               onChange={handleMaterialChange}
@@ -37,9 +60,9 @@ export const ClientToolsFilters = ({
       <div className="flex flex-col items-start gap-10">
         <h3 className="text-10 uppercase tracking-[0.06em]">Techniques</h3>
         <ul className="flex flex-col">
-          {techniques.map((technique) => (
+          {techniques.map((technique, index) => (
             <Checkbox
-              key={technique}
+              key={`${technique}-${index}`}
               label={technique}
               value={technique}
               onChange={handleTechniqueChange}
@@ -49,7 +72,15 @@ export const ClientToolsFilters = ({
         </ul>
       </div>
       <div>
-        <PDFDownloadLink
+        <a
+          href={instance.url ?? '#'}
+          download="am-mood-board.pdf"
+          onClick={handleDownloadClick}
+          className="underline-offset-3 underline"
+        >
+          Download PDF
+        </a>
+        {/* <PDFDownloadLink
           document={
             <ClientToolsPDF
               projects={projects}
@@ -59,10 +90,10 @@ export const ClientToolsFilters = ({
             />
           }
           fileName="am-mood-board.pdf"
-          className="underline-offset-3 underline"
+          className="underline-offset-3 underline will-change-auto transform-gpu"
         >
           Download PDF
-        </PDFDownloadLink>
+        </PDFDownloadLink> */}
       </div>
     </div>
   )
