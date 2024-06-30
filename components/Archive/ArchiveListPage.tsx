@@ -86,12 +86,6 @@ export const ArchiveListPage = ({ categories, projects }) => {
               <div className="col-span-7 pb-20 pt-200 md:pb-32 md:pt-32">
                 <ProjectList projects={projects} />
               </div>
-              <div className="relative hyphens-auto py-20 text-center font-serif text-[clamp(40px,5vw,56px)] leading-100 md:hidden">
-                Artist Merchants
-                <span className="relative -top-20 text-[clamp(20px,3vw,32px)]">
-                  ®
-                </span>
-              </div>
               <div className="sticky top-0 hidden self-start py-32 text-right md:block">
                 <MenuButton />
               </div>
