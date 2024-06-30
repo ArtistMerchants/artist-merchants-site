@@ -27,7 +27,7 @@ export const Nav = () => {
         <li>
           <Link
             href="/information"
-            className={`ease transition-opacity duration-500 ${activeClass(
+            className={`ease inline-block py-1 transition-opacity duration-500 ${activeClass(
               '/information'
             )}`}
           >
@@ -37,7 +37,7 @@ export const Nav = () => {
         <li>
           <Link
             href="/archive"
-            className={`ease transition-opacity duration-500 ${activeClass(
+            className={`ease inline-block py-1 transition-opacity duration-500 ${activeClass(
               '/archive'
             )}`}
           >
@@ -48,7 +48,7 @@ export const Nav = () => {
           {unlocked ? (
             <Link
               href="/client-tools"
-              className={`ease transition-opacity duration-500 ${activeClass(
+              className={`ease inline-block py-1 transition-opacity duration-500 ${activeClass(
                 '/client-tools'
               )}`}
             >
