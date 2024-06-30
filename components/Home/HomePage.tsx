@@ -20,6 +20,8 @@ export default function HomePage(props) {
     [path, menuOpen]
   )
 
+  const isHome = useMemo(() => path === '/', [path])
+
   useEffect(() => {
     if (isInfoActive) {
       return lenisRef.current?.start()
@@ -61,6 +63,7 @@ export default function HomePage(props) {
               animate={{
                 opacity: isInfoActive ? 0 : 1,
                 y: menuOpen && !isInfoActive ? '30vh' : 0,
+                scale: menuOpen && !isHome ? 0.6 : 1,
               }}
               transition={{ duration: 0.65, ease: [0.82, 0.01, 0.22, 0.98] }}
             >
