@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react'
+import { useState, useMemo } from 'react'
 import { handleize } from 'lib/helpers'
 
 import { AnimatePresence, motion } from 'framer-motion'
@@ -22,7 +22,8 @@ export const InformationFaqs = ({ title, items }) => {
             key={item._key}
             question={item.question}
             answer={item.answer}
-            isActive={index === activeIndex}
+            activeIndex={activeIndex}
+            index={index}
             onClick={() => handleItemClick(index)}
           />
         ))}
@@ -31,30 +32,28 @@ export const InformationFaqs = ({ title, items }) => {
   )
 }
 
-const FaqItem = ({ question, answer, isActive, onClick }) => {
-  const activeClass = useCallback(
-    (isActive: boolean) => {
-      if (isActive) return 'opacity-100'
+const FaqItem = ({ question, answer, activeIndex, index, onClick }) => {
+  const activeClass = useMemo(() => {
+    if (activeIndex === index) return 'opacity-100'
 
-      return 'group-hover:opacity-50 group-hover:hover:opacity-100'
-    },
-    [isActive]
-  )
+    if (activeIndex !== null && activeIndex !== index)
+      return `opacity-50 group-hover:opacity-50 group-hover:hover:opacity-100`
+
+    return 'group-hover:opacity-50 group-hover:hover:opacity-100'
+  }, [activeIndex, index])
 
   return (
     <li className="relative w-full">
       <button
-        className={`ease text-left transition-opacity duration-300 ${activeClass(
-          isActive
-        )}`}
-        aria-expanded={isActive}
+        className={`ease text-left transition-opacity duration-300 ${activeClass}`}
+        aria-expanded={activeIndex === index}
         aria-controls={`faq-${handleize(question)}`}
         onClick={onClick}
       >
         {question}
       </button>
       <AnimatePresence>
-        {isActive && (
+        {activeIndex === index && (
           <motion.div
             id={`faq-${handleize(question)}`}
             initial={{ opacity: 0, height: 0 }}
