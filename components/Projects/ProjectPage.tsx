@@ -42,7 +42,7 @@ export const ProjectPage = (props) => {
               >
                 <ProjectHeader {...props} />
                 <div></div>
-                <div className="relative hyphens-auto font-serif text-[clamp(36px,5vw,56px)] leading-[90%]">
+                <div className="relative hyphens-auto font-serif text-[clamp(40px,5vw,56px)] leading-[90%]">
                   Artist Merchants
                   <span className="relative -top-20 text-[clamp(20px,3vw,32px)]">
                     ®
@@ -71,7 +71,7 @@ export const ProjectPage = (props) => {
               <div className="sticky top-0 hidden self-start py-20 text-right md:block md:py-32">
                 <MenuButton />
               </div>
-              <div className="relative hyphens-auto py-20 text-center font-serif text-[clamp(36px,5vw,56px)] leading-100 md:hidden">
+              <div className="relative hyphens-auto py-20 text-center font-serif text-[clamp(40px,5vw,56px)] leading-100 md:hidden">
                 Artist Merchants
                 <span className="relative -top-20 text-[clamp(20px,3vw,32px)]">
                   ®

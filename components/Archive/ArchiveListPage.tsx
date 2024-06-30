@@ -55,7 +55,7 @@ export const ArchiveListPage = ({ categories, projects }) => {
                 <ArchiveHeader categories={categories} />
                 <div></div>
                 <motion.div
-                  className="relative hyphens-auto font-serif text-[clamp(36px,5vw,56px)] leading-110"
+                  className="relative hyphens-auto font-serif text-[clamp(40px,5vw,56px)] leading-110"
                   initial={{ y: 100 }}
                   animate={{ y: 0 }}
                   exit={{ y: 100 }}
@@ -86,7 +86,7 @@ export const ArchiveListPage = ({ categories, projects }) => {
               <div className="col-span-7 pb-20 pt-200 md:pb-32 md:pt-32">
                 <ProjectList projects={projects} />
               </div>
-              <div className="relative hyphens-auto py-20 text-center font-serif text-[clamp(36px,5vw,56px)] leading-100 md:hidden">
+              <div className="relative hyphens-auto py-20 text-center font-serif text-[clamp(40px,5vw,56px)] leading-100 md:hidden">
                 Artist Merchants
                 <span className="relative -top-20 text-[clamp(20px,3vw,32px)]">
                   ®
