@@ -38,7 +38,8 @@ export const settingsQuery = groq`*[_type == "settings"][0] {
   },
   favicon {
     ${imageFields}
-  }
+  },
+  "clientToolsSlug": *[_type == "materialCategory"][0].slug.current
 }`
 
 export const homeQuery = groq`

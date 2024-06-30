@@ -7,6 +7,8 @@ type ClientToolsStoreProps = {
   toggleTechnique: (technique: string) => void
   projects: any[]
   setProjects: (projects: any[]) => void
+  materialLabel: string
+  setMaterialLabel: (label: string) => void
 }
 
 export const useClientToolsStore = create<ClientToolsStoreProps>((set) => ({
@@ -26,4 +28,6 @@ export const useClientToolsStore = create<ClientToolsStoreProps>((set) => ({
     ),
   projects: [],
   setProjects: (projects) => set({ projects }),
+  materialLabel: '',
+  setMaterialLabel: (label) => set({ materialLabel: label }),
 }))

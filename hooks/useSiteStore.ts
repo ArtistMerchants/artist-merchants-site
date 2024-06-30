@@ -8,6 +8,8 @@ type SiteStoreProps = {
   setUnlocked: (unlocked: boolean) => void
   homeData: any
   setHomeData: (homeData: any) => void
+  settings?: any
+  setSettings: (settings: any) => void
 }
 
 export const useSiteStore = create<SiteStoreProps>()(
@@ -19,10 +21,13 @@ export const useSiteStore = create<SiteStoreProps>()(
       setUnlocked: (unlocked) => set({ unlocked }),
       homeData: {},
       setHomeData: (homeData) => set({ homeData }),
+      settings: {},
+      setSettings: (settings) => set({ settings }),
     }),
     {
       name: 'site-store',
       partialize: (state) => ({
+        settings: state.settings,
         unlocked: state.unlocked,
       }),
     }

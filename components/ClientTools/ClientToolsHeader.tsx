@@ -12,17 +12,14 @@ export const ClientToolsHeader = ({ materials = [], activeMaterial }) => {
   return (
     <HeaderWrapper relative>
       <motion.div
-        className="z-[2] flex w-full flex-col gap-10 md:grid md:grid-cols-3"
+        className="z-[2] flex grid w-full grid-cols-2 flex-col gap-10 md:grid-cols-3"
         initial={{ opacity: 0, y: -50 }}
         animate={{ opacity: menuOpen ? 1 : 0, y: menuOpen ? 0 : -50 }}
         transition={{ duration: 0.6, ease: [0.22, 0.81, 0.13, 0.98] }}
       >
         <Nav />
         <ClientToolsMenu materials={materials} />
-        <ClientToolsFilters
-          activeMaterial={activeMaterial}
-          {...activeMaterial}
-        />
+        <ClientToolsFilters {...activeMaterial} />
       </motion.div>
     </HeaderWrapper>
   )

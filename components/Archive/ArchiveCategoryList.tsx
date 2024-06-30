@@ -5,7 +5,7 @@ import { useSiteStore } from 'hooks/useSiteStore'
 export const ArchiveCategoryList = ({
   categories = [],
   activeCategories = [],
-  closeOnClick = true,
+  closeOnClick = false,
 }) => {
   const path = usePathname()
   const { setMenuOpen } = useSiteStore()
@@ -17,7 +17,7 @@ export const ArchiveCategoryList = ({
   }
 
   return (
-    <ul className="group flex flex-col items-start">
+    <ul className="group order-2 flex flex-col items-start md:order-none">
       <li
         className={`ease transition-opacity duration-300 ${
           path?.includes('all')

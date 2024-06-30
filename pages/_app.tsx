@@ -1,3 +1,5 @@
+import { useEffect } from 'react'
+import { useSiteStore } from 'hooks/useSiteStore'
 import localFont from 'next/font/local'
 
 import { VH } from 'components/Global/VH'
@@ -42,6 +44,12 @@ export const gerstner = localFont({
 })
 
 function MyApp({ Component, pageProps }) {
+  const { setSettings } = useSiteStore()
+
+  useEffect(() => {
+    setSettings(pageProps.settings)
+  }, [pageProps.settings])
+
   return (
     <div
       className={`${constellation.variable} ${selfModern.variable} ${gerstner.variable} ${gerstner.variable} font-sans`}

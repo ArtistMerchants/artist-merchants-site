@@ -1,7 +1,9 @@
 import { useCallback } from 'react'
 import { useArchiveStore } from 'hooks/useArchiveStore'
 
-export const ArchiveViewSelector = () => {
+import { DownloadLink } from 'components/ClientTools/DownloadLink'
+
+export const ClientToolsViewSelector = () => {
   const { view: currentView, setView } = useArchiveStore()
 
   const activeClass = useCallback(
@@ -37,6 +39,7 @@ export const ArchiveViewSelector = () => {
           View 2
         </button>
       </li>
+      <DownloadLink className="pt-10 md:hidden" />
     </ul>
   )
 }

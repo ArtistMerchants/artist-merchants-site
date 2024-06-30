@@ -15,8 +15,11 @@ export const ClientToolsListPage = (props) => {
   const lenisRef = useRef<any>(null)
   const { menuOpen } = useSiteStore()
   const { view } = useArchiveStore()
-  const { materials: activeMaterials, techniques: activeTechniques } =
-    useClientToolsStore()
+  const {
+    materials: activeMaterials,
+    techniques: activeTechniques,
+    setMaterialLabel,
+  } = useClientToolsStore()
 
   useEffect(() => {
     if (!lenisRef.current) return
@@ -24,6 +27,10 @@ export const ClientToolsListPage = (props) => {
       lenisRef.current?.lenis?.resize()
     }, 200)
   }, [view, menuOpen, activeMaterials, activeTechniques])
+
+  useEffect(() => {
+    setMaterialLabel(activeMaterial?.title)
+  }, [activeMaterial])
 
   return (
     <AnimatePresence initial={false}>
