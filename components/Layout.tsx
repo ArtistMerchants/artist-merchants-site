@@ -3,6 +3,7 @@ import { useSiteStore } from 'hooks/useSiteStore'
 import { usePathname } from 'next/navigation'
 import { AnimatePresence, motion } from 'framer-motion'
 import { Logo } from './Global/Logo'
+import { MenuButton } from './Global/MenuButton'
 import { FC } from 'react'
 import Link from 'next/link'
 
@@ -37,6 +38,16 @@ export const Layout: FC<LayoutProps> = ({ children }) => {
         key={pageKey}
         className="ease relative z-[1] min-h-screen bg-white px-20 text-black transition-colors duration-1000 dark:bg-black dark:text-white md:grid md:grid-cols-9 md:px-32"
       >
+        <Link
+          href="/"
+          className="fixed left-20 top-20 z-[100] inline-block md:hidden"
+          onClick={() => setMenuOpen(false)}
+        >
+          <Logo className="h-auto w-40 md:w-52" />
+        </Link>
+        <div className="fixed right-20 top-0 z-[100] py-20 text-14 leading-100 md:hidden">
+          <MenuButton />
+        </div>
         <Link
           href="/"
           className="hidden py-20 md:col-span-1 md:inline-block md:py-32"
