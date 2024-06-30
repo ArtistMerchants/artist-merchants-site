@@ -130,7 +130,7 @@ export const projectPathsQuery = groq`
 `
 
 export const materialCategoryPathsQuery = groq`
-*[_type == "materialCategory"] {
+*[_type == "materialCategory"] | order(orderRank) {
   "slug": slug.current
 }
 `
