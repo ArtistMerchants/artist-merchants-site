@@ -67,7 +67,7 @@ export const ArchiveListPage = ({ categories, projects }) => {
                   </span>
                 </motion.div>
               </motion.div>
-              <div className="mb:pb-32 relative top-0 ml-auto w-full self-start pb-20 pt-350 md:left-[5%] md:col-span-4 md:col-start-4 md:w-[95%] md:pt-0">
+              <div className="mb:pb-32 relative top-0 ml-auto w-full self-start pb-20 pt-350 md:left-[5%] md:col-span-4 md:col-start-4 md:w-[95%] md:pt-32">
                 <ProjectList projects={projects} />
               </div>
               <div className="sticky top-0 hidden self-start py-32 text-right md:block">

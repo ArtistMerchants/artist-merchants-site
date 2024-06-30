@@ -1,12 +1,10 @@
 import { motion } from 'framer-motion'
-import { useImage } from 'hooks/useImage'
 import { usePathname } from 'next/navigation'
 
-import Image from 'next/image'
+import { SiteImage } from 'components/Global/SiteImage'
 
-export const ClientToolsProjectCard = ({ client, year, media, id, slug }) => {
+export const ClientToolsProjectCard = ({ media, id }) => {
   const firstMedia = media[0]
-  const firstMediaType = media[0]._type
   const path = usePathname()
 
   return (
@@ -19,21 +17,7 @@ export const ClientToolsProjectCard = ({ client, year, media, id, slug }) => {
       }}
       className="relative aspect-[2/1.7] w-full overflow-hidden bg-gray will-change-auto"
     >
-      {firstMediaType === 'image' ? <MediaImage media={firstMedia} /> : null}
+      {firstMedia ? <SiteImage image={firstMedia} sizes="800px" /> : null}
     </motion.div>
-  )
-}
-
-const MediaImage = ({ media }) => {
-  const imageProps = useImage(media)
-  return (
-    <Image
-      src={imageProps.src}
-      fill
-      style={{ objectFit: 'cover' }}
-      alt={media.alt}
-      sizes="800px"
-      className="mix-blend-darken"
-    />
   )
 }
