@@ -1,6 +1,10 @@
 import { useEffect } from 'react'
 import { useSiteStore } from 'hooks/useSiteStore'
-import { getHomePage, getSettings } from 'lib/sanity.client'
+import {
+  getHomePage,
+  getMaterialCategoryPaths,
+  getSettings,
+} from 'lib/sanity.client'
 
 import HomePage from 'components/Home/HomePage'
 
@@ -46,6 +50,18 @@ export async function getStaticPaths() {
 export async function getStaticProps(context) {
   const preview = context.draftMode
   const [settings, home] = await Promise.all([getSettings(), getHomePage()])
+  const materialPaths = await getMaterialCategoryPaths()
+
+  const slug = context.params.slug?.join('/')
+
+  if (slug === 'client-tools') {
+    return {
+      redirect: {
+        destination: `/client-tools/${materialPaths[0].slug}`,
+        permanent: false,
+      },
+    }
+  }
 
   return {
     props: {

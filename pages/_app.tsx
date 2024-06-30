@@ -29,7 +29,7 @@ const selfModern = localFont({
   variable: '--font-self-modern',
 })
 
-const gerstner = localFont({
+export const gerstner = localFont({
   src: [
     {
       path: '../fonts/Gerstner-Programm-Regular.woff',
@@ -41,7 +41,7 @@ const gerstner = localFont({
   variable: '--font-gerstner',
 })
 
-function MyApp({ Component, pageProps, router }) {
+function MyApp({ Component, pageProps }) {
   return (
     <div
       className={`${constellation.variable} ${selfModern.variable} ${gerstner.variable} ${gerstner.variable} font-sans`}

@@ -1,24 +1,28 @@
 import { useRef, useEffect } from 'react'
 import { useSiteStore } from 'hooks/useSiteStore'
+import { useClientToolsStore } from 'hooks/useClientToolsStore'
 
+import ReactLenis from '@studio-freight/react-lenis'
 import { AnimatePresence, motion } from 'framer-motion'
 import { MenuButton } from 'components/Global/MenuButton'
-import { ArchiveHeader } from './ArchiveHeader'
-import { ProjectList } from 'components/Projects/ProjectList'
-import ReactLenis from '@studio-freight/react-lenis'
 import { useArchiveStore } from 'hooks/useArchiveStore'
+import { ClientToolsHeader } from './ClientToolsHeader'
+import { ClientToolsProjectList } from './ClientToolsProjectList'
 
-export const ArchiveListPage = ({ categories, projects }) => {
+export const ClientToolsListPage = (props) => {
+  const { materials, activeMaterial, projects } = props
   const lenisRef = useRef<any>(null)
   const { menuOpen } = useSiteStore()
   const { view } = useArchiveStore()
+  const { materials: activeMaterials, techniques: activeTechniques } =
+    useClientToolsStore()
 
   useEffect(() => {
     if (!lenisRef.current) return
     setTimeout(() => {
       lenisRef.current?.lenis?.resize()
-    }, 100)
-  }, [view, menuOpen])
+    }, 200)
+  }, [view, menuOpen, activeMaterials, activeTechniques])
 
   return (
     <AnimatePresence initial={false}>
@@ -40,7 +44,10 @@ export const ArchiveListPage = ({ categories, projects }) => {
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.5 }}
               >
-                <ArchiveHeader categories={categories} />
+                <ClientToolsHeader
+                  materials={materials}
+                  activeMaterial={activeMaterial}
+                />
                 <div></div>
                 <div className="relative hyphens-auto font-serif text-[56px] leading-120">
                   Artist Merchants
@@ -48,7 +55,7 @@ export const ArchiveListPage = ({ categories, projects }) => {
                 </div>
               </motion.div>
               <div className="relative left-[5%] top-0 col-span-4 col-start-4 ml-auto w-[95%] self-start py-32">
-                <ProjectList projects={projects} />
+                <ClientToolsProjectList projects={projects} />
               </div>
               <div className="sticky top-0 self-start py-32 text-right">
                 <MenuButton />
@@ -64,7 +71,7 @@ export const ArchiveListPage = ({ categories, projects }) => {
           >
             <div className="grid w-full grid-cols-8 text-14 leading-130">
               <div className="col-span-7 py-32">
-                <ProjectList projects={projects} />
+                <ClientToolsProjectList projects={projects} />
               </div>
               <div className="sticky top-0 self-start py-32 text-right">
                 <MenuButton />

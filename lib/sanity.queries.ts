@@ -50,7 +50,7 @@ export const homeQuery = groq`
       _key,
       ${imageFields}
     },
-    "categories": *[_type == "projectCategory"] {
+    "categories": *[_type == "projectCategory"] | order(orderRank) {
       _id,
       title,
       "slug": slug.current
@@ -84,7 +84,7 @@ export const categoryAllPageQuery = groq`
     title,
     "slug": slug.current
   },
-  "projects": *[_type == "project"] {
+  "projects": *[_type == "project"] | order(orderRank) {
     ${projectFields}
   }
 }
@@ -100,7 +100,7 @@ export const categoryPageQuery = groq`
     title,
     "slug": slug.current
   },
-  "projects": *[_type == "project" && references(^._id)] {
+  "projects": *[_type == "project" && references(^._id)] | order(orderRank) {
     ${projectFields}
   }
 }
@@ -115,7 +115,7 @@ export const categoryPathsQuery = groq`
 export const projectQuery = groq`
 *[_type == "project" && slug.current == $slug][0] {
   ${projectFields},
-  "allCategories": *[_type == "projectCategory"] {
+  "allCategories": *[_type == "projectCategory"] | order(orderRank) {
     _id,
     title,
     "slug": slug.current
@@ -126,6 +126,49 @@ export const projectQuery = groq`
 export const projectPathsQuery = groq`
 *[_type == "project" && defined(slug.current)] {
   "slug": slug.current
+}
+`
+
+export const materialCategoryPathsQuery = groq`
+*[_type == "materialCategory"] {
+  "slug": slug.current
+}
+`
+
+export const materialCategoryPageQuery = groq`
+*[_type == "materialCategory" && slug.current == $slug][0] {
+  _id,
+  title,
+  "slug": slug.current,
+  "materials": *[_type == "materialCategory"] | order(orderRank) {
+    _id,
+    title,
+    "slug": slug.current,
+    materials,
+    techniques,
+  },
+  "activeMaterial": *[_type == "materialCategory" && slug.current == $slug][0] {
+    _id,
+    title,
+    "slug": slug.current,
+    materials,
+    techniques,
+  },
+  "projects": *[_type == "project" && references(^._id)] | order(orderRank) {
+    ${projectFields},
+    taggedMaterials,
+    taggedTechniques,
+  }
+}
+`
+
+export const materialsFromRefsQuery = groq`
+*[_type == "materialCategory" && _id in $ids] {
+  _id,
+  title,
+  "slug": slug.current,
+  materials,
+  techniques,
 }
 `
 

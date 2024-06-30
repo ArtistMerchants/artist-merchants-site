@@ -4,7 +4,6 @@ import {
   getCategoryPage,
   getSettings,
 } from 'lib/sanity.client'
-import { cookies } from 'next/headers'
 
 import { ArchiveListPage } from 'components/Archive/ArchiveListPage'
 

@@ -7,7 +7,9 @@ import settings from 'schemas/settings'
 import homePage from 'schemas/pages/homePage'
 import informationPage from 'schemas/pages/informationPage'
 import project from 'schemas/pages/project'
+
 import projectCategory from 'schemas/pages/projectCategory'
+import materialCategory from 'schemas/pages/materialCategory'
 
 const title =
   process.env.NEXT_PUBLIC_SANITY_PROJECT_TITLE || 'Nextjs + Sanity Starter'
@@ -18,7 +20,14 @@ export default defineConfig({
   dataset,
   title,
   schema: {
-    types: [settings, homePage, project, projectCategory, informationPage],
+    types: [
+      settings,
+      homePage,
+      project,
+      projectCategory,
+      informationPage,
+      materialCategory,
+    ],
   },
   plugins: [
     structurePlugin({

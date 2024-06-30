@@ -1,5 +1,6 @@
 import { type DocumentDefinition, definePlugin } from 'sanity'
-import { type StructureResolver } from 'sanity/desk'
+import { DocumentTextIcon, ImagesIcon } from '@sanity/icons'
+import { orderableDocumentListDeskItem } from '@sanity/orderable-document-list'
 
 export const structurePlugin = definePlugin<{ type: string | string[] }>(
   ({ type }) => {
@@ -38,7 +39,7 @@ export const structurePlugin = definePlugin<{ type: string | string[] }>(
 )
 
 export const structureConfig = (typeDefs: DocumentDefinition[]) => {
-  return (S) => {
+  return (S, context) => {
     const singletons = typeDefs.map((typeDef) => {
       return S.listItem()
         .title(typeDef.title as string)
@@ -52,10 +53,20 @@ export const structureConfig = (typeDefs: DocumentDefinition[]) => {
         )
     })
 
-    const defaultListItems = S.documentTypeListItems().filter(
-      (listItem) =>
-        !typeDefs.find((typeDef) => listItem.getId() === typeDef.name)
-    )
+    const defaultListItems = S.documentTypeListItems()
+      .filter(
+        (listItem) =>
+          !typeDefs.find((typeDef) => listItem.getId() === typeDef.name)
+      )
+      .map((listItem) => {
+        return orderableDocumentListDeskItem({
+          type: listItem.getId(),
+          title: listItem.getTitle(),
+          icon: listItem.getId() === 'project' ? ImagesIcon : DocumentTextIcon,
+          S,
+          context,
+        })
+      })
 
     return S.list()
       .title('Content')

@@ -60,7 +60,7 @@ export const HomeGalleryMasked: FC<HomeGalleryMaskedProps> = ({
           onPointerLeave={handlePointerLeave}
         >
           {images?.map((image: any, index: number) => {
-            const url = urlForImage(image).width(800).quality(100).url()
+            const url = urlForImage(image).width(400).quality(100).url()
             return (
               <ImagePlane
                 key={index}

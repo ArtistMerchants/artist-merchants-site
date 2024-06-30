@@ -5,12 +5,12 @@ import {
 } from '@sanity/orderable-document-list'
 
 export default defineType({
-  name: 'projectCategory',
-  title: 'General Categories',
+  name: 'materialCategory',
+  title: 'Material Categories',
   type: 'document',
   orderings: [orderRankOrdering],
   fields: [
-    orderRankField({ type: 'projectCategory' }),
+    orderRankField({ type: 'materialCategory' }),
     defineField({
       name: 'title',
       title: 'Title',
@@ -26,6 +26,18 @@ export default defineType({
         isUnique: (value, context) => context.defaultIsUnique(value, context),
       },
       validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: 'materials',
+      title: 'Materials',
+      type: 'array',
+      of: [{ type: 'string' }],
+    }),
+    defineField({
+      name: 'techniques',
+      title: 'Techniques',
+      type: 'array',
+      of: [{ type: 'string' }],
     }),
   ],
 })

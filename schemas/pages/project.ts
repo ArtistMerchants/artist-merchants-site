@@ -1,10 +1,18 @@
-import { defineField, defineType } from 'sanity'
+import { defineArrayMember, defineField, defineType } from 'sanity'
+import { MaterialsSelect } from 'components/Sanity/MaterialsSelect'
+import { TechniquesSelect } from 'components/Sanity/TechniquesSelect'
+import {
+  orderRankField,
+  orderRankOrdering,
+} from '@sanity/orderable-document-list'
 
 export default defineType({
   name: 'project',
-  title: 'Archive Project',
+  title: 'Archive Projects',
   type: 'document',
+  orderings: [orderRankOrdering],
   fields: [
+    orderRankField({ type: 'project' }),
     defineField({
       name: 'client',
       title: 'Client',
@@ -23,17 +31,6 @@ export default defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
-      name: 'categories',
-      title: 'Categories',
-      type: 'array',
-      of: [{ type: 'reference', to: [{ type: 'projectCategory' }] }],
-    }),
-    defineField({
-      name: 'year',
-      title: 'Year',
-      type: 'string',
-    }),
-    defineField({
       name: 'media',
       title: 'Media',
       type: 'array',
@@ -45,6 +42,81 @@ export default defineType({
           fields: [{ name: 'alt', title: 'Alt', type: 'string' }],
         },
       ],
+    }),
+    defineField({
+      name: 'categories',
+      title: 'Categories',
+      type: 'array',
+      of: [{ type: 'reference', to: [{ type: 'projectCategory' }] }],
+    }),
+    defineField({
+      name: 'year',
+      title: 'Year',
+      type: 'string',
+    }),
+    defineField({
+      name: 'materials',
+      title: 'Materials',
+      type: 'array',
+      of: [{ type: 'reference', to: [{ type: 'materialCategory' }] }],
+    }),
+    defineField({
+      name: 'taggedMaterials',
+      title: 'Tagged Materials',
+      type: 'array',
+      components: {
+        input: MaterialsSelect,
+      },
+      of: [
+        defineArrayMember({
+          name: 'materialItem',
+          title: 'Material Item',
+          type: 'object',
+          fields: [
+            defineField({
+              name: 'label',
+              title: 'Label',
+              type: 'string',
+            }),
+            defineField({
+              name: 'items',
+              title: 'Items',
+              type: 'array',
+              of: [{ type: 'string' }],
+            }),
+          ],
+        }),
+      ],
+      hidden: ({ parent }) => !parent.materials?.length,
+    }),
+    defineField({
+      name: 'taggedTechniques',
+      title: 'Tagged Techniques',
+      type: 'array',
+      components: {
+        input: TechniquesSelect,
+      },
+      of: [
+        defineArrayMember({
+          name: 'techniqueItem',
+          title: 'Technique Item',
+          type: 'object',
+          fields: [
+            defineField({
+              name: 'label',
+              title: 'Label',
+              type: 'string',
+            }),
+            defineField({
+              name: 'items',
+              title: 'Items',
+              type: 'array',
+              of: [{ type: 'string' }],
+            }),
+          ],
+        }),
+      ],
+      hidden: ({ parent }) => !parent.materials?.length,
     }),
   ],
   preview: {
