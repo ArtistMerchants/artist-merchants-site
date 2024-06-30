@@ -6,7 +6,7 @@ import {
 
 import { ClientToolsListPage } from 'components/ClientTools/ClientToolsListPage'
 
-export default function ClientToolsDetail({ page, settings }) {
+export default function ClientToolsDetail({ page, settings, slug }) {
   return <ClientToolsListPage {...page} settings={settings} />
 }
 
@@ -24,18 +24,8 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps(context) {
-  const paths = await getMaterialCategoryPaths()
   const preview = context.draftMode
   const slug = context.params.slug
-
-  if (!slug) {
-    return {
-      redirect: {
-        destination: `/client-tools/${paths[0].slug}`,
-        permanent: false,
-      },
-    }
-  }
 
   const pageQuery = getMaterialCategoryPage
   const [settings, page] = await Promise.all([getSettings(), pageQuery(slug)])

@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { useSiteStore } from 'hooks/useSiteStore'
+import { useRouter } from 'next/router'
 import {
   getHomePage,
   getMaterialCategoryPaths,
@@ -8,8 +9,13 @@ import {
 
 import HomePage from 'components/Home/HomePage'
 
-export default function Index({ home, settings }) {
+export default function Index({ home, settings, redirect }) {
   const { setHomeData } = useSiteStore()
+  const router = useRouter()
+
+  if (redirect) {
+    router.push(`/client-tools/${redirect}`)
+  }
 
   useEffect(() => {
     setHomeData(home)
@@ -67,6 +73,7 @@ export async function getStaticProps(context) {
     props: {
       settings,
       home,
+      redirect: slug === 'client-tools' ? materialPaths[0]?.slug : null,
       preview: preview ?? false,
     },
     revalidate: 300,
