@@ -14,9 +14,12 @@ export const Header = () => {
   return (
     <HeaderWrapper>
       <motion.div
-        className="flex w-full flex-col gap-10 md:grid md:grid-cols-3"
-        initial={{ opacity: 0, y: -50 }}
-        animate={{ opacity: menuOpen ? 1 : 0, y: menuOpen ? 0 : -50 }}
+        className="flex w-full flex-col gap-10 [--y-from:-20px] md:grid md:grid-cols-3 md:[--y-from:-50px]"
+        initial={{ opacity: 0, y: 'var(--y-from)' }}
+        animate={{
+          opacity: menuOpen ? 1 : 0,
+          y: menuOpen ? 0 : 'var(--y-from)',
+        }}
         transition={{ duration: 0.65, ease: [0.82, 0.01, 0.22, 0.98] }}
       >
         <Nav />

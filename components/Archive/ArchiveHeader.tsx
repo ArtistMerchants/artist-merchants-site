@@ -11,9 +11,12 @@ export const ArchiveHeader = ({ categories = [] }) => {
   return (
     <HeaderWrapper>
       <motion.div
-        className="flex grid w-full grid-cols-2 flex-col gap-10 md:grid-cols-3"
-        initial={{ opacity: 0, y: -50 }}
-        animate={{ opacity: menuOpen ? 1 : 0, y: menuOpen ? 0 : -50 }}
+        className="flex grid w-full grid-cols-2 flex-col gap-10 [--y-from:-20px] md:grid-cols-3 md:[--y-from:-50px]"
+        initial={{ opacity: 0, y: 'var(--y-from)' }}
+        animate={{
+          opacity: menuOpen ? 1 : 0,
+          y: menuOpen ? 0 : 'var(--y-from)',
+        }}
         transition={{ duration: 0.6, ease: [0.22, 0.81, 0.13, 0.98] }}
       >
         <Nav />
