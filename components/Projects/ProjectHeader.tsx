@@ -37,7 +37,7 @@ export const ProjectHeader = (props) => {
   return (
     <HeaderWrapper>
       <motion.div
-        className="left-0 z-[2] flex w-full flex-col gap-10 [--y-from:-20px] md:absolute md:top-32 md:grid md:grid-cols-3 md:[--y-from:-50px]"
+        className="left-0 z-[2] grid w-full grid-cols-2 gap-10 [--y-from:-20px] md:absolute md:top-32 md:grid-cols-3 md:[--y-from:-50px]"
         initial={{ opacity: 0, y: 'var(--y-from)' }}
         animate={{
           opacity: menuOpen ? 1 : 0,
@@ -45,18 +45,31 @@ export const ProjectHeader = (props) => {
         }}
         transition={{ duration: 0.6, ease: [0.22, 0.81, 0.13, 0.98] }}
       >
-        <Nav />
-        <div className="col-span-2 grid grid-cols-2">
+        <div className="flex flex-col gap-10">
+          <Nav />
           <ArchiveCategoryList
+            className="md:hidden"
+            closeOnClick={false}
+            categories={allCategories}
+            activeCategories={categories}
+          />
+        </div>
+        <div className="md:col-span-2 md:grid md:grid-cols-2">
+          <ArchiveCategoryList
+            className="hidden md:flex"
             closeOnClick={false}
             categories={allCategories}
             activeCategories={categories}
           />
           <div className="flex flex-col gap-14 md:gap-20">
             <LabeledList label="Client" items={client} />
-            <LabeledList label="Project" items={[year]} />
-            <LabeledList label="Material" items={materialList} />
-            <LabeledList label="Technique" items={techniqueList} />
+            {year ? <LabeledList label="Project" items={[year]} /> : null}
+            {materialList?.length ? (
+              <LabeledList label="Material" items={materialList} />
+            ) : null}
+            {techniqueList?.length ? (
+              <LabeledList label="Technique" items={techniqueList} />
+            ) : null}
           </div>
         </div>
       </motion.div>
