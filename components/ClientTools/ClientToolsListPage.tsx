@@ -86,7 +86,7 @@ export const ClientToolsListPage = (props) => {
                   </span>
                 </motion.div>
               </motion.div>
-              <div className="relative top-0 ml-auto w-full self-start py-20 md:left-[5%] md:col-span-4 md:col-start-4 md:w-[95%] md:py-32">
+              <div className="relative top-0 ml-auto w-full self-start py-20 md:col-span-3 md:col-start-5 md:py-32">
                 <ClientToolsProjectList projects={projects} />
               </div>
               <div className="sticky top-0 hidden self-start py-20 text-right md:block md:py-32">

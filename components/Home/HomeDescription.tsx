@@ -13,7 +13,7 @@ export const HomeDescription = ({ content, isActive = false }) => {
       Artist Merchants
       <span className="relative -top-20 text-[clamp(20px,3vw,32px)]">®</span>
       <div
-        className={`ease max-w-[500px] transition-opacity duration-700 ${
+        className={`ease transition-opacity duration-700 ${
           isActive ? 'opacity-100' : 'opacity-0'
         }`}
       >

@@ -5,7 +5,7 @@
 :root {
   --global-ease: cubic-bezier(0.9, 0.1, 0.1, 0.9);
   --global-transition: 350ms var(--global-ease);
-  --text-large-heading: clamp(32px, 3.5vw, 56px);
+  --text-large-heading: 3.6vw;
 }
 
 @media (max-width: 960px) {

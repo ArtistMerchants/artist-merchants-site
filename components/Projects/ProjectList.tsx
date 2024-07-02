@@ -2,20 +2,21 @@ import { useArchiveStore } from 'hooks/useArchiveStore'
 import { useSiteStore } from 'hooks/useSiteStore'
 
 import { ProjectCard } from './ProjectCard'
+import { useMemo } from 'react'
 
 export const ProjectList = ({ projects = [] }) => {
   const { view } = useArchiveStore()
   const { menuOpen } = useSiteStore()
+
+  const gridClass = useMemo(() => {
+    if (view === 'two') {
+      return menuOpen ? 'grid-cols-2 md:grid-cols-1' : 'grid-cols-2'
+    }
+    return menuOpen ? 'grid-cols-4 md:grid-cols-2' : 'grid-cols-4'
+  }, [view, menuOpen])
+
   return (
-    <section
-      className={`grid ${
-        view === 'two'
-          ? 'grid-cols-1'
-          : menuOpen
-          ? 'grid-cols-4 md:grid-cols-2'
-          : 'grid-cols-4'
-      } gap-4 md:gap-10`}
-    >
+    <section className={`grid ${gridClass} gap-4 md:gap-10`}>
       {projects?.map((project: any) => {
         return (
           <ProjectCard
