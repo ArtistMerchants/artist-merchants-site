@@ -63,7 +63,7 @@ export const ArchiveForm = () => {
           Submit
         </button>
         {error ? (
-          <p className="text-[11px] uppercase" aria-live="polite">
+          <p className="text-caption uppercase" aria-live="polite">
             {error}
           </p>
         ) : null}

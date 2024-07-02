@@ -13,7 +13,7 @@ export const HeaderWrapper = ({ children, relative = false }) => {
         relative
           ? 'relative pt-20 md:absolute md:pt-0'
           : 'absolute left-0 top-20'
-      } z-[2] flex w-full items-start justify-between gap-20 text-13 leading-120 md:top-32 md:block md:text-14`}
+      } z-[2] flex w-full items-start justify-between gap-20 text-body md:top-32 md:block`}
     >
       <Link
         href="/"

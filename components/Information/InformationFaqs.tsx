@@ -15,8 +15,8 @@ export const InformationFaqs = ({ title, items }) => {
 
   return (
     <div className="flex flex-col gap-10">
-      <h2 className="text-10 uppercase">{title}</h2>
-      <ul className="group flex flex-col items-start text-14">
+      <h2 className="text-caption uppercase">{title}</h2>
+      <ul className="group flex flex-col items-start">
         {items?.map((item, index) => (
           <FaqItem
             key={item._key}

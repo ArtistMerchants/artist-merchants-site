@@ -13,7 +13,7 @@ export const ProjectPage = (props) => {
   return (
     <AnimatePresence initial={false}>
       <SiteMeta {...settings} />
-      <div className="absolute z-[3] w-full text-14 leading-130 md:hidden">
+      <div className="absolute z-[3] w-full md:hidden">
         <ProjectHeader {...props} />
       </div>
       <motion.div
@@ -28,13 +28,13 @@ export const ProjectPage = (props) => {
       {menuOpen ? (
         <motion.div
           key="archive-list-menu-open"
-          className="absolute inset-0 z-[1] h-full w-full text-14 leading-130"
+          className="absolute inset-0 z-[1] h-full w-full"
         >
           <ReactLenis
             options={{ lerp: 0.5 }}
             className="scrollbar-hidden relative min-h-screen overflow-auto md:h-screen"
           >
-            <div className="w-full text-14 leading-130 md:grid md:grid-cols-8">
+            <div className="w-full md:grid md:grid-cols-8">
               <motion.div
                 className="sticky top-0 col-span-3 hidden h-screen flex-col items-start justify-between self-start overflow-auto py-20 md:flex md:py-32"
                 initial={{ opacity: 0 }}
@@ -67,12 +67,12 @@ export const ProjectPage = (props) => {
           </ReactLenis>
         </motion.div>
       ) : (
-        <motion.div className="absolute inset-0 z-[2] col-span-8 h-full w-full text-14 leading-130">
+        <motion.div className="absolute inset-0 z-[2] col-span-8 h-full w-full">
           <ReactLenis
             options={{ lerp: 0.5 }}
-            className="scrollbar-hidden relative min-h-screen overflow-auto text-14 leading-130 md:h-screen"
+            className="scrollbar-hidden relative min-h-screen overflow-auto md:h-screen"
           >
-            <div className="w-full text-14 leading-130 md:grid md:grid-cols-8">
+            <div className="w-full md:grid md:grid-cols-8">
               <div className="col-span-7  pb-20 pt-200 md:pb-32 md:pt-32">
                 <ProjectMediaList media={media} />
               </div>

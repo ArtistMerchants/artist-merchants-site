@@ -51,20 +51,20 @@ export const ClientToolsListPage = (props) => {
       {menuOpen ? (
         <motion.div
           key="archive-list-menu-open"
-          className="absolute inset-0 z-[1] h-full w-full text-14 leading-130"
+          className="absolute inset-0 z-[1] h-full w-full"
         >
           <ReactLenis
             ref={lenisRef}
             options={{ lerp: 0.5 }}
             className="scrollbar-hidden relative min-h-screen overflow-auto md:h-screen"
           >
-            <div className="relative z-[3] w-full text-14 leading-130 md:hidden">
+            <div className="relative z-[3] w-full md:hidden">
               <ClientToolsHeader
                 materials={materials}
                 activeMaterial={activeMaterial}
               />
             </div>
-            <div className="w-full text-14 leading-130 md:grid md:grid-cols-8">
+            <div className="w-full md:grid md:grid-cols-8">
               <motion.div
                 className="sticky top-0 col-span-3 hidden h-screen flex-col items-start justify-between self-start overflow-auto py-20 md:flex md:py-32"
                 initial={{ opacity: 0 }}
@@ -78,7 +78,7 @@ export const ClientToolsListPage = (props) => {
                 />
                 <div></div>
                 <motion.div
-                  className="relative hyphens-auto font-serif text-large-heading leading-110"
+                  className="relative hyphens-auto font-serif text-large-heading leading-[40%]"
                   initial={{ y: 100 }}
                   animate={{ y: 0 }}
                   exit={{ y: 100 }}
@@ -100,18 +100,18 @@ export const ClientToolsListPage = (props) => {
           </ReactLenis>
         </motion.div>
       ) : (
-        <motion.div className="absolute inset-0 z-[2] col-span-8 h-full w-full text-14 leading-130">
+        <motion.div className="absolute inset-0 z-[2] col-span-8 h-full w-full">
           <ReactLenis
             options={{ lerp: 0.5 }}
-            className="scrollbar-hidden relative min-h-screen overflow-auto text-14 leading-130 md:h-screen"
+            className="scrollbar-hidden relative min-h-screen overflow-auto md:h-screen"
           >
-            <div className="relative z-[3] w-full text-14 leading-130 md:hidden">
+            <div className="relative z-[3] w-full md:hidden">
               <ClientToolsHeader
                 materials={materials}
                 activeMaterial={activeMaterial}
               />
             </div>
-            <div className="w-full text-14 leading-130 md:grid md:grid-cols-8">
+            <div className="w-full md:grid md:grid-cols-8">
               <div className="col-span-7 py-20 md:py-32">
                 <ClientToolsProjectList projects={projects} />
               </div>

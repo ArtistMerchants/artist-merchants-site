@@ -52,15 +52,15 @@ export default function HomePage(props) {
     <ReactLenis
       ref={initializeLenisRef}
       options={{ lerp: 0.5 }}
-      className={`scrollbar-hidden relative h-screen overflow-auto text-14 leading-130`}
+      className={`scrollbar-hidden relative h-screen overflow-auto`}
     >
       <Loading images={images} />
       <SiteMeta {...settings} />
       {loading ? null : (
-        <div className="col-span-8 w-full text-14 leading-130 md:grid md:grid-cols-8">
+        <div className="col-span-8 w-full md:grid md:grid-cols-8">
           <div className="relative col-span-3 h-full overflow-auto py-20 md:py-32">
             <Header />
-            <div className="relative z-[0] flex h-[calc(calc(calc(var(--vh,1vh)*100)-64px)-0.5ch)] items-center justify-center text-large-heading md:h-[calc(calc(calc(var(--vh,1vh)*100)-64px)-1.4ch)]">
+            <div className="relative z-[0] flex h-[calc(calc(calc(var(--vh,1vh)*100)-64px)-0.5ch)] items-center justify-center text-large-heading md:h-[calc(calc(calc(var(--vh,1vh)*100)-64px)-1.15ch)]">
               <motion.div
                 className="relative top-[5vw] h-[80%] w-full transform-gpu will-change-auto md:hidden"
                 initial={{ opacity: 0 }}

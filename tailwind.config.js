@@ -49,6 +49,20 @@ module.exports = {
             acc[val] = `${val}px`
             return acc
           }, {}),
+        body: [
+          '13px',
+          {
+            lineHeight: '16px',
+            letterSpacing: '0.03em',
+          },
+        ],
+        caption: [
+          '10px',
+          {
+            lineHeight: '16px',
+            letterSpacing: '0.03em',
+          },
+        ],
         'large-heading': 'var(--text-large-heading)',
         'large-heading-sup': 'var(--text-large-heading-sup)',
       },

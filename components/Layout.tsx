@@ -38,7 +38,7 @@ export const Layout: FC<LayoutProps> = ({ children }) => {
     <AnimatePresence mode="wait" initial={false}>
       <motion.main
         key={pageKey}
-        className="ease relative z-[1] min-h-screen bg-white px-20 text-black transition-colors duration-1000 dark:bg-black dark:text-white md:grid md:grid-cols-9 md:px-32"
+        className="ease relative z-[1] min-h-screen bg-white px-20 text-body text-black transition-colors duration-1000 dark:bg-black dark:text-white md:grid md:grid-cols-9 md:px-32"
       >
         <Link
           href="/"
@@ -47,7 +47,7 @@ export const Layout: FC<LayoutProps> = ({ children }) => {
         >
           <Logo className="h-auto w-40 md:w-52" />
         </Link>
-        <div className="fixed right-20 top-0 z-[100] py-20 text-14 leading-100 md:hidden">
+        <div className="fixed right-20 top-0 z-[100] py-20 md:hidden">
           <MenuButton />
         </div>
         <Link

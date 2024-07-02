@@ -24,8 +24,8 @@ export const ClientToolsFilters = ({ materials, techniques }) => {
   return (
     <div className="order-4 col-span-2 col-start-1 grid transform-gpu grid-cols-2 gap-8 pt-8 will-change-auto md:col-span-3 md:grid-cols-3 md:pt-[100px]">
       <div className="flex flex-col items-start gap-10">
-        <h3 className="text-10 uppercase tracking-[0.06em]">Material</h3>
-        <ul className="flex flex-col gap-2">
+        <h3 className="text-caption uppercase">Material</h3>
+        <ul className="flex flex-col gap-3">
           {materials.map((material, index) => (
             <Checkbox
               key={`${material}-${index}`}
@@ -38,8 +38,8 @@ export const ClientToolsFilters = ({ materials, techniques }) => {
         </ul>
       </div>
       <div className="flex flex-col items-start gap-10">
-        <h3 className="text-10 uppercase tracking-[0.06em]">Technique</h3>
-        <ul className="flex flex-col gap-2">
+        <h3 className="text-caption uppercase">Technique</h3>
+        <ul className="flex flex-col gap-3">
           {techniques.map((technique, index) => (
             <Checkbox
               key={`${technique}-${index}`}

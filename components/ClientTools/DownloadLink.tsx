@@ -6,7 +6,7 @@ export const DownloadLink = ({ className = '' }) => {
   console.log(pdfDownloadLink)
 
   return (
-    <div className={`text-13 leading-120 md:text-14 ${className}`}>
+    <div className={`text-body ${className}`}>
       <a
         href={pdfDownloadLink}
         download="am-mood-board.pdf"
