@@ -6,11 +6,25 @@
   --global-ease: cubic-bezier(0.9, 0.1, 0.1, 0.9);
   --global-transition: 350ms var(--global-ease);
   --text-large-heading: 3.6vw;
+  --text-large-heading-sup: 2vw;
+}
+
+@media (max-width: 1400px) and (min-width: 1080px) {
+  :root {
+    --text-large-heading: 3.5vw;
+  }
+}
+
+@media (max-width: 1080px) and (min-width: 960px) {
+  :root {
+    --text-large-heading: 3.5vw;
+  }
 }
 
 @media (max-width: 960px) {
   :root {
     --text-large-heading: 10vw;
+    --text-large-heading-sup: 5vw;
   }
 }
 

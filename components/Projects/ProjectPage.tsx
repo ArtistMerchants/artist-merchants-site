@@ -23,7 +23,7 @@ export const ProjectPage = (props) => {
         transition={{ duration: 0.6, ease: [0.22, 0.81, 0.13, 0.98] }}
       >
         Artist Merchants
-        <span className="relative -top-20 text-[clamp(20px,3vw,32px)]">®</span>
+        <span className="relative -top-20 text-large-heading-sup">®</span>
       </motion.div>
       {menuOpen ? (
         <motion.div
@@ -52,7 +52,7 @@ export const ProjectPage = (props) => {
                   transition={{ duration: 0.6, ease: [0.22, 0.81, 0.13, 0.98] }}
                 >
                   Artist Merchants
-                  <span className="relative -top-20 text-[clamp(20px,3vw,32px)]">
+                  <span className="relative -top-20 text-large-heading-sup">
                     ®
                   </span>
                 </motion.div>

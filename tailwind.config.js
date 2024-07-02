@@ -50,6 +50,7 @@ module.exports = {
             return acc
           }, {}),
         'large-heading': 'var(--text-large-heading)',
+        'large-heading-sup': 'var(--text-large-heading-sup)',
       },
       letterSpacing: {
         ...new Array(100)

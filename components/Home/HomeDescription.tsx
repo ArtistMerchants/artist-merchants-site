@@ -11,7 +11,7 @@ export const HomeDescription = ({ content, isActive = false }) => {
       transition={{ duration: 0.65, ease: [0.82, 0.01, 0.22, 0.98] }}
     >
       Artist Merchants
-      <span className="relative -top-20 text-[clamp(20px,3vw,32px)]">®</span>
+      <span className="relative -top-20 text-large-heading-sup">®</span>
       <div
         className={`ease transition-opacity duration-700 ${
           isActive ? 'opacity-100' : 'opacity-0'
