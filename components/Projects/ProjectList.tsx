@@ -12,7 +12,9 @@ export const ProjectList = ({ projects = [] }) => {
     if (view === 'two') {
       return menuOpen ? 'grid-cols-2 md:grid-cols-1' : 'grid-cols-2'
     }
-    return menuOpen ? 'grid-cols-4 md:grid-cols-2' : 'grid-cols-4'
+    return menuOpen
+      ? 'grid-cols-3 md:grid-cols-2'
+      : 'grid-cols-3 md:grid-cols-4'
   }, [view, menuOpen])
 
   return (

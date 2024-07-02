@@ -17,7 +17,6 @@ export const ArchiveTab = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.5, ease: 'easeInOut' }}
-            className="md:col-start-2"
           >
             <ArchiveCategoryList categories={homeData?.categories} />
           </motion.div>
