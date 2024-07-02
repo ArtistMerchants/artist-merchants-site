@@ -75,7 +75,7 @@ export default function HomePage(props) {
             </div>
             <HomeDescription content={content} isActive={isInfoActive} />
           </div>
-          <div className="sticky top-0 col-span-4 col-start-4 ml-auto hidden h-screen w-[calc(100%-calc(calc(100vw/9)/2))] w-full self-start py-20 md:block md:py-32">
+          <div className="sticky top-0 col-span-4 col-start-4 ml-auto hidden h-screen w-[calc(100%-calc(calc(100vw/9)/2))] self-start py-20 md:block md:py-32">
             <HomeGallery images={images} />
           </div>
           <div className="top-0 hidden self-start py-20 text-right md:sticky md:block md:py-32">
