@@ -11,6 +11,7 @@ export const Nav = () => {
 
   const activeClass = useCallback(
     (path: string) => {
+      if (path === '/client-tools' && !unlocked) return 'opacity-50'
       if (path === pathName || pathName?.includes(path)) return 'opacity-100'
 
       if (pathName === '/') {
@@ -19,7 +20,7 @@ export const Nav = () => {
 
       return 'opacity-50 hover:opacity-100'
     },
-    [pathName]
+    [pathName, unlocked]
   )
 
   return (
