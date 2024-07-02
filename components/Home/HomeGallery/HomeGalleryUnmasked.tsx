@@ -5,7 +5,7 @@ import Image from 'next/image'
 export const HomeGalleryUnmasked = ({ images, activeIndex }) => {
   return (
     <motion.div
-      className="absolute inset-0 z-[11] h-full w-full bg-white"
+      className="absolute inset-0 z-[11] h-full w-full bg-off-white"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
