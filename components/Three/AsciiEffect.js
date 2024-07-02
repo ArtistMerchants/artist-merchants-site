@@ -108,7 +108,7 @@ class AsciiEffect {
     if (strResolution == 'low') {
       switch (iScale) {
         case 1:
-          fLetterSpacing = 1.8
+          fLetterSpacing = 2.3
           break
         case 2:
         case 3:
