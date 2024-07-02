@@ -5,7 +5,7 @@ import { useArchiveStore } from 'hooks/useArchiveStore'
 import { useSiteStore } from 'hooks/useSiteStore'
 
 import { AnimatePresence, motion } from 'framer-motion'
-import { ClientToolsProjectCard } from './ClientToolsProjectCard'
+import { ProjectCard } from 'components/Projects/ProjectCard'
 
 export const ClientToolsProjectList = ({ projects = [] }) => {
   const { view } = useArchiveStore()
@@ -37,7 +37,7 @@ export const ClientToolsProjectList = ({ projects = [] }) => {
       >
         {filteredProjects?.map((project: any) => {
           return (
-            <ClientToolsProjectCard
+            <ProjectCard
               listIndex={0}
               key={project._id}
               {...project}
@@ -47,7 +47,7 @@ export const ClientToolsProjectList = ({ projects = [] }) => {
         })}
         {filteredProjects?.map((project: any) => {
           return (
-            <ClientToolsProjectCard
+            <ProjectCard
               listIndex={1}
               key={project._id}
               {...project}
@@ -57,7 +57,7 @@ export const ClientToolsProjectList = ({ projects = [] }) => {
         })}
         {filteredProjects?.map((project: any) => {
           return (
-            <ClientToolsProjectCard
+            <ProjectCard
               listIndex={2}
               key={project._id}
               {...project}
@@ -67,7 +67,7 @@ export const ClientToolsProjectList = ({ projects = [] }) => {
         })}
         {filteredProjects?.map((project: any) => {
           return (
-            <ClientToolsProjectCard
+            <ProjectCard
               listIndex={3}
               key={project._id}
               {...project}
@@ -77,7 +77,7 @@ export const ClientToolsProjectList = ({ projects = [] }) => {
         })}
         {filteredProjects?.map((project: any) => {
           return (
-            <ClientToolsProjectCard
+            <ProjectCard
               listIndex={4}
               key={project._id}
               {...project}
@@ -87,7 +87,7 @@ export const ClientToolsProjectList = ({ projects = [] }) => {
         })}
         {filteredProjects?.map((project: any) => {
           return (
-            <ClientToolsProjectCard
+            <ProjectCard
               listIndex={5}
               key={project._id}
               {...project}
@@ -97,7 +97,7 @@ export const ClientToolsProjectList = ({ projects = [] }) => {
         })}
         {filteredProjects?.map((project: any) => {
           return (
-            <ClientToolsProjectCard
+            <ProjectCard
               listIndex={6}
               key={project._id}
               {...project}

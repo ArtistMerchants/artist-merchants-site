@@ -50,6 +50,7 @@ export const HomeGalleryMasked: FC<HomeGalleryMaskedProps> = ({
           pointerEvents: 'none',
           backgroundColor: 'transparent',
         }}
+        className="h-full w-full"
         // @ts-ignore
         eventSource={eventSource}
         dpr={2}
