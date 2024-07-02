@@ -6,7 +6,7 @@ export const Checkbox = ({ label, value, checked, onChange }) => {
   return (
     <label
       htmlFor={value}
-      className="flex cursor-pointer items-start gap-8 text-body md:gap-12"
+      className="flex cursor-pointer items-start gap-8 text-body md:gap-10"
     >
       <input
         className="peer hidden"
@@ -16,8 +16,8 @@ export const Checkbox = ({ label, value, checked, onChange }) => {
         onChange={handleChange}
         checked={checked}
       />
-      <div className="ease h-10 w-10 border-1 border-solid border-black bg-white transition-colors duration-300 peer-checked:bg-black"></div>
-      <span className="relative -top-3 inline-block">{label}</span>
+      <div className="ease h-9 w-9 border-1 border-solid border-black bg-white transition-colors duration-300 peer-checked:bg-black"></div>
+      <span className="relative -top-[3.5px] inline-block">{label}</span>
     </label>
   )
 }

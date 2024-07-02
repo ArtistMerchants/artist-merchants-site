@@ -60,7 +60,7 @@ module.exports = {
           '10px',
           {
             lineHeight: '16px',
-            letterSpacing: '0.03em',
+            letterSpacing: '0.08em',
           },
         ],
         'large-heading': 'var(--text-large-heading)',

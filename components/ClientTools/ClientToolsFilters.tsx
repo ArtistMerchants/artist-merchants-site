@@ -23,7 +23,7 @@ export const ClientToolsFilters = ({ materials, techniques }) => {
 
   return (
     <div className="order-4 col-span-2 col-start-1 grid transform-gpu grid-cols-2 gap-8 pt-8 will-change-auto md:col-span-3 md:grid-cols-3 md:pt-[100px]">
-      <div className="flex flex-col items-start gap-10">
+      <div className="flex flex-col items-start gap-14 md:gap-20">
         <h3 className="text-caption uppercase">Material</h3>
         <ul className="flex flex-col gap-3">
           {materials.map((material, index) => (
@@ -37,7 +37,7 @@ export const ClientToolsFilters = ({ materials, techniques }) => {
           ))}
         </ul>
       </div>
-      <div className="flex flex-col items-start gap-10">
+      <div className="flex flex-col items-start gap-14 md:gap-20">
         <h3 className="text-caption uppercase">Technique</h3>
         <ul className="flex flex-col gap-3">
           {techniques.map((technique, index) => (
