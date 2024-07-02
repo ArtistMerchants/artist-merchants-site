@@ -31,7 +31,7 @@ export const ProjectPage = (props) => {
           className="absolute inset-0 z-[1] h-full w-full text-14 leading-130"
         >
           <ReactLenis
-            options={{ lerp: 0.15 }}
+            options={{ lerp: 0.5 }}
             className="scrollbar-hidden relative min-h-screen overflow-auto md:h-screen"
           >
             <div className="w-full text-14 leading-130 md:grid md:grid-cols-8">
@@ -69,7 +69,7 @@ export const ProjectPage = (props) => {
       ) : (
         <motion.div className="absolute inset-0 z-[2] col-span-8 h-full w-full text-14 leading-130">
           <ReactLenis
-            options={{ lerp: 0.15 }}
+            options={{ lerp: 0.5 }}
             className="scrollbar-hidden relative min-h-screen overflow-auto text-14 leading-130 md:h-screen"
           >
             <div className="w-full text-14 leading-130 md:grid md:grid-cols-8">

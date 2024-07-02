@@ -51,7 +51,7 @@ export const ClientToolsListPage = (props) => {
         >
           <ReactLenis
             ref={lenisRef}
-            options={{ lerp: 0.15 }}
+            options={{ lerp: 0.5 }}
             className="scrollbar-hidden relative min-h-screen overflow-auto md:h-screen"
           >
             <div className="relative z-[3] w-full text-14 leading-130 md:hidden">
@@ -98,7 +98,7 @@ export const ClientToolsListPage = (props) => {
       ) : (
         <motion.div className="absolute inset-0 z-[2] col-span-8 h-full w-full text-14 leading-130">
           <ReactLenis
-            options={{ lerp: 0.15 }}
+            options={{ lerp: 0.5 }}
             className="scrollbar-hidden relative min-h-screen overflow-auto text-14 leading-130 md:h-screen"
           >
             <div className="relative z-[3] w-full text-14 leading-130 md:hidden">

@@ -44,7 +44,7 @@ class AsciiEffect {
 
     function initAsciiSize() {
       iWidth = Math.floor(width * fResolution)
-      iHeight = Math.floor(height * fResolution) * 1.4
+      iHeight = Math.floor(height * fResolution) * 3
 
       oCanvas.width = iWidth
       oCanvas.height = iHeight
@@ -99,7 +99,7 @@ class AsciiEffect {
 
     // const fFontSize = (2 / fResolution) * iScale
     const fFontSize = 17
-    const fLineHeight = (1.45 / fResolution) * iScale
+    const fLineHeight = (0.7 / fResolution) * iScale
 
     // adjust letter-spacing for all combinations of scale and resolution to get it to fit the image width.
 
@@ -108,7 +108,7 @@ class AsciiEffect {
     if (strResolution == 'low') {
       switch (iScale) {
         case 1:
-          fLetterSpacing = -2
+          fLetterSpacing = 1.8
           break
         case 2:
         case 3:

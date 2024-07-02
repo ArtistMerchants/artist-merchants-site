@@ -4,14 +4,21 @@ import { usePathname } from 'next/navigation'
 import Link from 'next/link'
 import { SiteImage } from 'components/Global/SiteImage'
 
-export const ProjectCard = ({ client, year, media, id, slug }) => {
+export const ProjectCard = ({
+  client,
+  year,
+  media,
+  id,
+  slug,
+  listIndex = 0,
+}) => {
   const firstMedia = media[0]
   const path = usePathname()
 
   return (
     <motion.div
       layout="preserve-aspect"
-      layoutId={`project-card-${id}-${path}`}
+      layoutId={`${listIndex}-project-card-${id}-${path}`}
       transition={{
         duration: 0.55,
         ease: [0.32, 0.81, 0.02, 0.98],

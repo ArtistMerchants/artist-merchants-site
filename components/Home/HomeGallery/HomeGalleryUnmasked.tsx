@@ -5,7 +5,7 @@ import Image from 'next/image'
 export const HomeGalleryUnmasked = ({ images, activeIndex }) => {
   return (
     <motion.div
-      className="absolute inset-0 z-[11] h-full w-full bg-off-white"
+      className="absolute inset-0 z-[11] h-full w-full bg-gray"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
@@ -28,7 +28,7 @@ const GalleryImage = ({ image, isActive }) => {
   const imageProps = useImage(image)
   return (
     <div
-      className={`ease ease absolute inset-0 h-full w-full mix-blend-darken transition-opacity duration-700 ${
+      className={`ease ease absolute inset-0 h-full w-full transition-opacity duration-700 ${
         isActive ? 'z-[2] opacity-100' : 'z-[1] opacity-0'
       }`}
       key={`unmasked-image-${image._key}`}

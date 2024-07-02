@@ -51,6 +51,7 @@ export default function HomePage(props) {
   return (
     <ReactLenis
       ref={initializeLenisRef}
+      options={{ lerp: 0.5 }}
       className={`scrollbar-hidden relative h-screen overflow-auto text-14 leading-130`}
     >
       <Loading images={images} />

@@ -43,7 +43,7 @@ export const ArchiveListPage = ({ categories, projects, settings }) => {
         >
           <ReactLenis
             ref={lenisRef}
-            options={{ lerp: 0.15 }}
+            options={{ lerp: 0.5 }}
             className="scrollbar-hidden relative min-h-screen overflow-auto md:h-screen"
           >
             <div className="w-full text-14 leading-130 md:grid md:grid-cols-8">
@@ -81,7 +81,7 @@ export const ArchiveListPage = ({ categories, projects, settings }) => {
       ) : (
         <motion.div className="absolute inset-0 z-[2] h-full min-h-screen w-full text-14 leading-130 md:col-span-8  md:pt-0">
           <ReactLenis
-            options={{ lerp: 0.15 }}
+            options={{ lerp: 0.5 }}
             className="scrollbar-hidden relative min-h-screen overflow-auto text-14 leading-130 md:h-screen"
           >
             <div className="w-full text-14 leading-130 md:grid md:grid-cols-8">
