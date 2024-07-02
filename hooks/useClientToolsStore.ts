@@ -3,6 +3,8 @@ import { create } from 'zustand'
 type ClientToolsStoreProps = {
   materials: string[]
   toggleMaterial: (material: string) => void
+  pdfDownloadLink: string
+  setPdfDownloadLink: (link: string) => void
   techniques: string[]
   toggleTechnique: (technique: string) => void
   projects: any[]
@@ -30,4 +32,6 @@ export const useClientToolsStore = create<ClientToolsStoreProps>((set) => ({
   setProjects: (projects) => set({ projects }),
   materialLabel: '',
   setMaterialLabel: (label) => set({ materialLabel: label }),
+  pdfDownloadLink: '',
+  setPdfDownloadLink: (link) => set({ pdfDownloadLink: link }),
 }))

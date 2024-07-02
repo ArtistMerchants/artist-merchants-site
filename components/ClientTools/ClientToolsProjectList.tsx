@@ -38,6 +38,67 @@ export const ClientToolsProjectList = ({ projects = [] }) => {
         {filteredProjects?.map((project: any) => {
           return (
             <ClientToolsProjectCard
+              listIndex={0}
+              key={project._id}
+              {...project}
+              id={project._id}
+            />
+          )
+        })}
+        {filteredProjects?.map((project: any) => {
+          return (
+            <ClientToolsProjectCard
+              listIndex={1}
+              key={project._id}
+              {...project}
+              id={project._id}
+            />
+          )
+        })}
+        {filteredProjects?.map((project: any) => {
+          return (
+            <ClientToolsProjectCard
+              listIndex={2}
+              key={project._id}
+              {...project}
+              id={project._id}
+            />
+          )
+        })}
+        {filteredProjects?.map((project: any) => {
+          return (
+            <ClientToolsProjectCard
+              listIndex={3}
+              key={project._id}
+              {...project}
+              id={project._id}
+            />
+          )
+        })}
+        {filteredProjects?.map((project: any) => {
+          return (
+            <ClientToolsProjectCard
+              listIndex={4}
+              key={project._id}
+              {...project}
+              id={project._id}
+            />
+          )
+        })}
+        {filteredProjects?.map((project: any) => {
+          return (
+            <ClientToolsProjectCard
+              listIndex={5}
+              key={project._id}
+              {...project}
+              id={project._id}
+            />
+          )
+        })}
+        {filteredProjects?.map((project: any) => {
+          return (
+            <ClientToolsProjectCard
+              listIndex={6}
               key={project._id}
               {...project}
               id={project._id}

@@ -1,4 +1,4 @@
-import { useRef, useEffect } from 'react'
+import { useRef, useEffect, Suspense } from 'react'
 import { useSiteStore } from 'hooks/useSiteStore'
 import { useClientToolsStore } from 'hooks/useClientToolsStore'
 
@@ -9,6 +9,7 @@ import { useArchiveStore } from 'hooks/useArchiveStore'
 import { ClientToolsHeader } from './ClientToolsHeader'
 import { ClientToolsProjectList } from './ClientToolsProjectList'
 import { SiteMeta } from 'components/SiteMeta'
+import { SetPdfLink } from './SetPdfLink'
 
 export const ClientToolsListPage = (props) => {
   const { materials, activeMaterial, projects, settings } = props
@@ -34,6 +35,9 @@ export const ClientToolsListPage = (props) => {
 
   return (
     <AnimatePresence initial={false}>
+      <Suspense fallback={null}>
+        <SetPdfLink />
+      </Suspense>
       <SiteMeta {...settings} />
       <motion.div
         className="fixed bottom-20 left-0 z-[4] w-full text-center font-serif text-[10.3vw] leading-100 md:hidden"
