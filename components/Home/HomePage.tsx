@@ -56,33 +56,31 @@ export default function HomePage(props) {
     >
       <Loading images={images} />
       <SiteMeta {...settings} />
-      {loading ? null : (
-        <div className="col-span-8 w-full md:grid md:grid-cols-8">
-          <div className="relative col-span-3 h-full overflow-auto py-20 md:py-32">
-            <Header />
-            <div className="relative z-[0] flex h-[calc(calc(calc(var(--vh,1vh)*100)-64px)-0.5ch)] items-center justify-center text-large-heading md:h-[calc(calc(calc(var(--vh,1vh)*100)-64px)-1.15ch)]">
-              <motion.div
-                className="relative top-[5vw] h-[80%] w-full transform-gpu will-change-auto md:hidden"
-                initial={{ opacity: 0 }}
-                animate={{
-                  opacity: isInfoActive ? 0 : 1,
-                  y: menuOpen && !isInfoActive ? '30vh' : 0,
-                }}
-                transition={{ duration: 0.65, ease: [0.82, 0.01, 0.22, 0.98] }}
-              >
-                <HomeGallery images={images} />
-              </motion.div>
-            </div>
-            <HomeDescription content={content} isActive={isInfoActive} />
+      <div className="col-span-8 w-full md:grid md:grid-cols-8">
+        <div className="relative col-span-3 h-full overflow-auto py-20 md:py-32">
+          <Header />
+          <div className="relative z-[0] flex h-[calc(calc(calc(var(--vh,1vh)*100)-64px)-0.5ch)] items-center justify-center text-large-heading md:h-[calc(calc(calc(var(--vh,1vh)*100)-64px)-1.15ch)]">
+            <motion.div
+              className="relative top-[5vw] h-[80%] w-full transform-gpu will-change-auto md:hidden"
+              initial={{ opacity: 0 }}
+              animate={{
+                opacity: isInfoActive ? 0 : 1,
+                y: menuOpen && !isInfoActive ? '30vh' : 0,
+              }}
+              transition={{ duration: 0.65, ease: [0.82, 0.01, 0.22, 0.98] }}
+            >
+              <HomeGallery images={images} />
+            </motion.div>
           </div>
-          <div className="sticky top-0 col-span-4 col-start-4 ml-auto hidden h-screen w-[calc(100%-calc(calc(100vw/9)/2))] self-start py-20 md:block md:py-32">
-            <HomeGallery images={images} />
-          </div>
-          <div className="top-0 hidden self-start py-20 text-right md:sticky md:block md:py-32">
-            <MenuButton />
-          </div>
+          <HomeDescription content={content} isActive={isInfoActive} />
         </div>
-      )}
+        <div className="sticky top-0 col-span-4 col-start-4 ml-auto hidden h-screen w-[calc(100%-calc(calc(100vw/9)/2))] self-start py-20 md:block md:py-32">
+          <HomeGallery images={images} />
+        </div>
+        <div className="top-0 hidden self-start py-20 text-right md:sticky md:block md:py-32">
+          <MenuButton />
+        </div>
+      </div>
     </ReactLenis>
   )
 }

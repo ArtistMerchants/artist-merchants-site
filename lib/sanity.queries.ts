@@ -56,6 +56,11 @@ export const homeQuery = groq`
       title,
       "slug": slug.current
     },
+    "materials": *[_type == "materialCategory"] | order(orderRank) {
+      _id,
+      title,
+      "slug": slug.current
+    },
     "information": *[_type == "informationPage"][0] {
       _id,
       faqs {

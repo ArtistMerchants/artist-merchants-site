@@ -5,8 +5,7 @@ import { usePathname } from 'next/navigation'
 import Link from 'next/link'
 
 export const Nav = () => {
-  const { unlocked, settings } = useSiteStore()
-  const clientToolsSlug = settings?.clientToolsSlug ?? ''
+  const { unlocked } = useSiteStore()
   const pathName = usePathname()
 
   const activeClass = useCallback(
@@ -49,7 +48,7 @@ export const Nav = () => {
         <li>
           {unlocked ? (
             <Link
-              href={`/client-tools/${clientToolsSlug}`}
+              href={`/client-tools`}
               className={`ease inline-block py-1 transition-opacity duration-500 ${activeClass(
                 '/client-tools'
               )}`}

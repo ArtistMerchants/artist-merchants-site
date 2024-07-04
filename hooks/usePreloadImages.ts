@@ -5,7 +5,6 @@ export const usePreloadImages = (imageUrls: string[], delay = 5000) => {
 
   useEffect(() => {
     const preloadImages = (urls: string[]): Promise<void> => {
-      console.log(urls)
       return new Promise((resolve) => {
         let loadedCount = 0
 
@@ -20,7 +19,7 @@ export const usePreloadImages = (imageUrls: string[], delay = 5000) => {
           const img = new Image()
           img.src = url
           img.onload = onLoad
-          img.onerror = onLoad // Handle errors as well
+          img.onerror = onLoad
         })
       })
     }

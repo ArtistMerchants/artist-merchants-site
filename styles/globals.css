@@ -63,6 +63,6 @@ html[data-theme='dark'] {
 }
 
 html[data-theme='light'] {
-  background-color: #F8F8F8;
+  background-color: #fff;
   color-scheme: light;
 }

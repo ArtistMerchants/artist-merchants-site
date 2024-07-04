@@ -11,13 +11,6 @@ import HomePage from 'components/Home/HomePage'
 
 export default function Index({ home, settings, redirect }) {
   const { setHomeData } = useSiteStore()
-  const router = useRouter()
-
-  useEffect(() => {
-    if (redirect) {
-      router.push(`/client-tools/${redirect}`)
-    }
-  }, [])
 
   useEffect(() => {
     setHomeData(home)
@@ -58,15 +51,11 @@ export async function getStaticPaths() {
 export async function getStaticProps(context) {
   const preview = context.draftMode
   const [settings, home] = await Promise.all([getSettings(), getHomePage()])
-  const materialPaths = await getMaterialCategoryPaths()
-
-  const slug = context.params.slug?.join('/')
 
   return {
     props: {
       settings,
       home,
-      redirect: slug === 'client-tools' ? materialPaths[0]?.slug : null,
       preview: preview ?? false,
     },
     revalidate: 300,

@@ -24,6 +24,7 @@ module.exports = {
         gray: '#E6E6E7',
       },
       spacing: {
+        panel: 'calc(calc(calc(100vw - 64px) / 9) + 32px)',
         ...new Array(401)
           .fill()
           .map((_, i) => i)

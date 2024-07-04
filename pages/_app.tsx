@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { useSiteStore } from 'hooks/useSiteStore'
 import localFont from 'next/font/local'
 
+import { AnimatePresence, motion } from 'framer-motion'
 import { VH } from 'components/Global/VH'
 import { Layout } from 'components/Layout'
 
@@ -43,7 +44,7 @@ export const gerstner = localFont({
   variable: '--font-gerstner',
 })
 
-function MyApp({ Component, pageProps }) {
+function MyApp({ Component, pageProps, router }) {
   const { setSettings } = useSiteStore()
 
   useEffect(() => {
@@ -55,7 +56,7 @@ function MyApp({ Component, pageProps }) {
       className={`${constellation.variable} ${selfModern.variable} ${gerstner.variable} ${gerstner.variable} font-sans`}
     >
       <VH />
-      <Layout>
+      <Layout key={router.route} route={router.route}>
         <Component {...pageProps} />
       </Layout>
     </div>
