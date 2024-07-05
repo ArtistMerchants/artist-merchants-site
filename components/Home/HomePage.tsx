@@ -51,7 +51,6 @@ export default function HomePage(props) {
       options={{ lerp: 0.5 }}
       className={`scrollbar-hidden relative h-screen overflow-auto`}
     >
-      <Loading images={images} />
       {!loading ? (
         <div className="col-span-8 w-full md:grid md:grid-cols-8">
           <div className="relative col-span-3 h-full overflow-auto py-20 md:py-32">

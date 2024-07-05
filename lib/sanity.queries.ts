@@ -39,6 +39,10 @@ export const settingsQuery = groq`*[_type == "settings"][0] {
   favicon {
     ${imageFields}
   },
+  "images": *[_type == "homePage"][0].images[] {
+    _key,
+    ${imageFields}
+  },
   "categories": *[_type == "projectCategory"] | order(orderRank) {
     _id,
     title,

@@ -1,10 +1,8 @@
 import { useEffect } from 'react'
 import { useSiteStore } from 'hooks/useSiteStore'
-import { Logo } from './Global/Logo'
-import { MenuButton } from './Global/MenuButton'
+import { Loading } from './Loading/Loading'
 import { motion } from 'framer-motion'
 import { FC } from 'react'
-import Link from 'next/link'
 import { Header } from './Header'
 import { SiteMeta } from './SiteMeta'
 
@@ -32,6 +30,7 @@ export const Layout: FC<LayoutProps> = ({ children, route, settings }) => {
   return (
     <>
       <SiteMeta {...settings} />
+      <Loading images={settings?.images} />
       <Header {...settings} />
       <main className="ease relative z-[1] min-h-screen px-20 text-body md:grid md:grid-cols-9 md:px-32">
         <motion.div
