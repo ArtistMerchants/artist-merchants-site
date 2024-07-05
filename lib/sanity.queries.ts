@@ -39,29 +39,40 @@ export const settingsQuery = groq`*[_type == "settings"][0] {
   favicon {
     ${imageFields}
   },
-  "clientToolsSlug": *[_type == "materialCategory"][0].slug.current
-}`
-
-export const homeQuery = groq`
-  *[_type == "homePage"][0] {
-    ...,
+  "categories": *[_type == "projectCategory"] | order(orderRank) {
+    _id,
     title,
-    content,
-    images[] {
-      _key,
-      ${imageFields}
-    },
-    "categories": *[_type == "projectCategory"] | order(orderRank) {
+    "slug": slug.current
+  },
+  "materials": *[_type == "materialCategory"] | order(orderRank) {
+    _id,
+    title,
+    "slug": slug.current,
+    materials,
+    techniques,
+  },
+  "activeMaterial": *[_type == "materialCategory" && slug.current == $slug][0] {
+    _id,
+    title,
+    "slug": slug.current,
+    materials,
+    techniques,
+  },
+  "activeProject": *[_type == "project" && slug.current == $slug][0] {
+    _id,
+    title,
+    "slug": slug.current,
+    taggedMaterials,
+    taggedTechniques,
+    client,
+    year,
+    categories[] -> {
       _id,
       title,
       "slug": slug.current
     },
-    "materials": *[_type == "materialCategory"] | order(orderRank) {
-      _id,
-      title,
-      "slug": slug.current
-    },
-    "information": *[_type == "informationPage"][0] {
+  },
+  "information": *[_type == "informationPage"][0] {
       _id,
       faqs {
         title,
@@ -79,6 +90,30 @@ export const homeQuery = groq`
           url
         }
       }
+    }
+}`
+
+export const homeQuery = groq`
+  *[_type == "homePage"][0] {
+    ...,
+    title,
+    images[] {
+      _key,
+      ${imageFields}
+    },
+    "categories": *[_type == "projectCategory"] | order(orderRank) {
+      _id,
+      title,
+      "slug": slug.current
+    },
+    "materials": *[_type == "materialCategory"] | order(orderRank) {
+      _id,
+      title,
+      "slug": slug.current
+    },
+    "information": *[_type == "informationPage"][0] {
+      _id,
+      description
     }
   }
 `

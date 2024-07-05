@@ -1,18 +1,20 @@
 import { useEffect } from 'react'
 import { useSiteStore } from 'hooks/useSiteStore'
-import { usePathname } from 'next/navigation'
 import { Logo } from './Global/Logo'
 import { MenuButton } from './Global/MenuButton'
 import { motion } from 'framer-motion'
 import { FC } from 'react'
 import Link from 'next/link'
+import { Header } from './Header'
+import { SiteMeta } from './SiteMeta'
 
 interface LayoutProps {
   children: React.ReactNode
+  settings: any
   route: string
 }
 
-export const Layout: FC<LayoutProps> = ({ children, route }) => {
+export const Layout: FC<LayoutProps> = ({ children, route, settings }) => {
   const { unlocked, setMenuOpen } = useSiteStore()
 
   useEffect(() => {
@@ -28,26 +30,20 @@ export const Layout: FC<LayoutProps> = ({ children, route }) => {
   }, [unlocked])
 
   return (
-    <motion.main className="ease relative z-[1] min-h-screen bg-white px-20 text-body text-black transition-colors duration-1000 dark:bg-black dark:text-white md:grid md:grid-cols-9 md:px-32">
-      <Link
-        key={route}
-        href="/"
-        className="fixed left-20 top-20 z-[100] inline-block md:hidden"
-        onClick={() => setMenuOpen(false)}
-      >
-        <Logo className="h-auto w-40 md:w-52" />
-      </Link>
-      <div className="fixed right-20 top-0 z-[100] py-20 md:hidden">
-        <MenuButton />
-      </div>
-      <Link
-        href="/"
-        className="hidden py-20 md:col-span-1 md:inline-block md:py-32"
-        onClick={() => setMenuOpen(false)}
-      >
-        <Logo className="h-auto w-40 md:w-52" />
-      </Link>
-      <div className="relative md:col-span-8">{children}</div>
-    </motion.main>
+    <>
+      <SiteMeta {...settings} />
+      <Header {...settings} />
+      <main className="ease relative z-[1] min-h-screen px-20 text-body md:grid md:grid-cols-9 md:px-32">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.5, ease: 'easeInOut' }}
+          className="relative md:col-span-8 md:col-start-2"
+        >
+          {children}
+        </motion.div>
+      </main>
+    </>
   )
 }

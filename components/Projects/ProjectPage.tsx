@@ -23,9 +23,6 @@ export const ProjectPage = (props) => {
   return (
     <>
       <SiteMeta {...settings} />
-      <div className="absolute z-[3] w-full text-body md:hidden">
-        <ProjectHeader {...props} />
-      </div>
       <motion.div
         className="fixed bottom-20 left-0 z-[4] w-full text-center font-serif text-[10.3vw] leading-[40%] [--y-from:60px] md:hidden md:[--y-from:100px]"
         initial={{ y: 'var(--y-from)', opacity: 0 }}
@@ -48,17 +45,16 @@ export const ProjectPage = (props) => {
           className="scrollbar-hidden relative min-h-screen overflow-auto md:h-screen"
         >
           <div className="relative w-full md:grid md:grid-cols-8">
-            <AnimatePresence initial={false}>
+            <AnimatePresence initial={false} mode="popLayout">
               {menuOpen ? (
                 <motion.div
                   key={menuOpen ? 'open' : 'closed'}
-                  className="sticky left-0 top-0 col-span-3 hidden h-screen flex-col items-start justify-between self-start overflow-auto py-20 md:fixed md:left-panel md:flex md:py-32"
+                  className="sticky left-0 top-0 col-span-3 hidden h-screen flex-col items-start justify-between self-start overflow-auto py-20 md:flex md:py-32"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.6 }}
                 >
-                  <ProjectHeader {...props} />
                   <div></div>
                   <motion.div
                     className="relative hyphens-auto font-serif text-large-heading leading-[40%]"

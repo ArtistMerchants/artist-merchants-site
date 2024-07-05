@@ -1,11 +1,6 @@
 import { useEffect } from 'react'
 import { useSiteStore } from 'hooks/useSiteStore'
-import { useRouter } from 'next/router'
-import {
-  getHomePage,
-  getMaterialCategoryPaths,
-  getSettings,
-} from 'lib/sanity.client'
+import { getHomePage, getSettings } from 'lib/sanity.client'
 
 import HomePage from 'components/Home/HomePage'
 

@@ -6,7 +6,7 @@ export const MenuButton = () => {
   const lenis = useLenis()
 
   const handleClick = () => {
-    if (typeof window !== 'undefined' && !menuOpen) {
+    if (typeof window !== 'undefined') {
       lenis?.scrollTo(0)
       window.scrollTo({
         top: 0,

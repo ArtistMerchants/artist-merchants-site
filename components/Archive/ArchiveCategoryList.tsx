@@ -18,9 +18,7 @@ export const ArchiveCategoryList = ({
   }
 
   return (
-    <ul
-      className={`${className} group order-2 flex flex-col items-start md:order-none`}
-    >
+    <ul className={`${className} group flex flex-col items-start`}>
       <li
         className={`ease transition-opacity duration-300 ${
           path?.includes('all')

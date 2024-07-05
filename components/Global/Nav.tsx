@@ -23,49 +23,47 @@ export const Nav = () => {
   )
 
   return (
-    <nav className="flex justify-start">
-      <ul className="group flex flex-col items-start">
-        <li>
+    <ul className="group flex flex-col items-start">
+      <li>
+        <Link
+          href="/information"
+          className={`ease inline-block py-1 transition-opacity duration-500 ${activeClass(
+            '/information'
+          )}`}
+        >
+          Information
+        </Link>
+      </li>
+      <li>
+        <Link
+          href="/archive"
+          className={`ease inline-block py-1 transition-opacity duration-500 ${activeClass(
+            '/archive'
+          )}`}
+        >
+          Archive
+        </Link>
+      </li>
+      <li>
+        {unlocked ? (
           <Link
-            href="/information"
+            href={`/client-tools`}
             className={`ease inline-block py-1 transition-opacity duration-500 ${activeClass(
-              '/information'
+              '/client-tools'
             )}`}
           >
-            Information
+            Client Tools
           </Link>
-        </li>
-        <li>
-          <Link
-            href="/archive"
-            className={`ease inline-block py-1 transition-opacity duration-500 ${activeClass(
-              '/archive'
-            )}`}
+        ) : (
+          <div
+            className={`cursor-not-allowed ${activeClass(
+              '/client-tools'
+            )} ease transition-opacity duration-300`}
           >
-            Archive
-          </Link>
-        </li>
-        <li>
-          {unlocked ? (
-            <Link
-              href={`/client-tools`}
-              className={`ease inline-block py-1 transition-opacity duration-500 ${activeClass(
-                '/client-tools'
-              )}`}
-            >
-              Client Tools
-            </Link>
-          ) : (
-            <div
-              className={`cursor-not-allowed ${activeClass(
-                '/client-tools'
-              )} ease transition-opacity duration-300`}
-            >
-              Client Tools
-            </div>
-          )}
-        </li>
-      </ul>
-    </nav>
+            Client Tools
+          </div>
+        )}
+      </li>
+    </ul>
   )
 }

@@ -22,7 +22,7 @@ export async function getStaticPaths() {
 export async function getStaticProps(context) {
   const preview = context.draftMode
   const [settings, page] = await Promise.all([
-    getSettings(),
+    getSettings(context.params.slug),
     getProjectPage(context.params.slug),
   ])
 

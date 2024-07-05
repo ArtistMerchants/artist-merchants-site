@@ -1,0 +1,38 @@
+import { useSiteStore } from 'hooks/useSiteStore'
+import { usePathname } from 'next/navigation'
+
+import { AnimatePresence, motion } from 'framer-motion'
+import { HeaderTab } from 'components/Header/HeaderTab'
+import { ArchiveForm } from 'components/Archive/ArchiveForm'
+import { ArchiveCategoryList } from 'components/Archive/ArchiveCategoryList'
+
+export const ArchiveHeader = ({
+  categories = [],
+  activeCategories = [],
+  className = '',
+}) => {
+  const { unlocked } = useSiteStore()
+
+  return (
+    <HeaderTab className={`${className} order-2 w-full md:order-none`}>
+      <AnimatePresence initial={false} mode="wait">
+        {unlocked ? (
+          <motion.div
+            key="archive-unlocked"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.4, ease: 'easeInOut' }}
+          >
+            <ArchiveCategoryList
+              categories={categories}
+              activeCategories={activeCategories}
+            />
+          </motion.div>
+        ) : (
+          <ArchiveForm />
+        )}
+      </AnimatePresence>
+    </HeaderTab>
+  )
+}

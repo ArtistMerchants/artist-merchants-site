@@ -8,6 +8,12 @@ export default defineType({
   type: 'document',
   fields: [
     defineField({
+      name: 'description',
+      title: 'Description',
+      type: 'array',
+      of: [{ type: 'block' }],
+    }),
+    defineField({
       name: 'faqs',
       title: 'FAQs',
       type: 'object',

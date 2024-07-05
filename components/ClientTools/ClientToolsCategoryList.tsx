@@ -16,7 +16,7 @@ export const ClientToolsCategoryList = ({
   }
 
   return (
-    <ul className="group order-2 flex flex-col items-start md:order-none">
+    <ul className="group flex flex-col items-start">
       {materials.map((material: any) => {
         const isActive = path
           ?.replaceAll('client-tools', '')

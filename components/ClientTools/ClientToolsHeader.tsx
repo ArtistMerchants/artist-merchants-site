@@ -10,9 +10,11 @@ export const ClientToolsHeader = ({ materials = [], activeMaterial }) => {
   const { menuOpen } = useSiteStore()
 
   return (
-    <HeaderWrapper relative>
+    <HeaderWrapper>
       <motion.div
-        className="z-[2] flex grid w-full grid-cols-2 flex-col gap-10 [--y-from:-20px] md:grid-cols-3 md:[--y-from:-50px]"
+        className={`z-[2] flex grid w-full grid-cols-2 flex-col gap-10 pb-32 [--y-from:-20px] md:grid-cols-3 md:[--y-from:-50px] ${
+          menuOpen ? 'pointer-events-auto' : 'pointer-events-none'
+        }`}
         initial={{ opacity: 0, y: 'var(--y-from)' }}
         animate={{
           opacity: menuOpen ? 1 : 0,

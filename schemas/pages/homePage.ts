@@ -24,12 +24,6 @@ export default defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
-      name: 'content',
-      title: 'Content',
-      type: 'array',
-      of: [{ type: 'block' }],
-    }),
-    defineField({
       name: 'images',
       title: 'Images',
       type: 'array',

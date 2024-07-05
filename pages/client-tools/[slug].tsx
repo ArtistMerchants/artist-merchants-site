@@ -28,7 +28,10 @@ export async function getStaticProps(context) {
   const slug = context.params.slug
 
   const pageQuery = getMaterialCategoryPage
-  const [settings, page] = await Promise.all([getSettings(), pageQuery(slug)])
+  const [settings, page] = await Promise.all([
+    getSettings(slug),
+    pageQuery(slug),
+  ])
 
   return {
     props: {

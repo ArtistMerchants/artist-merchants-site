@@ -56,9 +56,15 @@ function MyApp({ Component, pageProps, router }) {
       className={`${constellation.variable} ${selfModern.variable} ${gerstner.variable} ${gerstner.variable} font-sans`}
     >
       <VH />
-      <Layout key={router.route} route={router.route}>
-        <Component {...pageProps} />
-      </Layout>
+      <AnimatePresence mode="wait">
+        <Layout
+          key={router.route}
+          route={router.route}
+          settings={pageProps?.settings ?? {}}
+        >
+          <Component {...pageProps} />
+        </Layout>
+      </AnimatePresence>
     </div>
   )
 }

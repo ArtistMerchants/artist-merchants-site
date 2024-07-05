@@ -3,8 +3,6 @@ import { useClientToolsStore } from 'hooks/useClientToolsStore'
 export const DownloadLink = ({ className = '' }) => {
   const { pdfDownloadLink } = useClientToolsStore()
 
-  console.log(pdfDownloadLink)
-
   return (
     <div className={`text-body ${className}`}>
       <a

@@ -16,9 +16,9 @@ import { createClient } from 'next-sanity'
 
 export const client = createClient({ projectId, dataset, apiVersion, useCdn })
 
-export async function getSettings(): Promise<Settings> {
+export async function getSettings(slug?: string): Promise<Settings> {
   if (client) {
-    return (await client.fetch(settingsQuery)) || {}
+    return (await client.fetch(settingsQuery, { slug: slug ?? '/' })) || {}
   }
   return {}
 }
