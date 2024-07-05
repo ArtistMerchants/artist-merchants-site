@@ -15,7 +15,7 @@ export const ArchiveHeader = ({
 
   return (
     <HeaderTab
-      className={`${className} order-2 row-start-2 w-full pb-32 md:order-none md:row-start-1`}
+      className={`${className} order-2 row-start-2 w-full pb-32 md:order-none md:col-start-2 md:row-start-1`}
     >
       <AnimatePresence initial={false} mode="wait">
         {unlocked ? (
