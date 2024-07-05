@@ -49,6 +49,7 @@ export const Header = ({
         {path === '/information' ? (
           <InfoHeader data={information} key="info" />
         ) : null}
+
         {path?.includes('/archive') ? (
           <ArchiveHeader
             className={`${
@@ -59,18 +60,21 @@ export const Header = ({
             key="archive"
           />
         ) : null}
+
         {path?.includes('/client-tools') ? (
           <ClientToolsHeader materials={materials} key="client-tools" />
         ) : null}
       </AnimatePresence>
       <AnimatePresence mode="wait" initial={false}>
         {viewSelectorActive ? <ViewSelector key="view-selector" /> : null}
+
         {path !== '/client-tools' && path?.includes('/client-tools') ? (
           <ClientToolsFilters
             {...activeMaterial}
             key={`client-tools-filters`}
           />
         ) : null}
+
         {router.route === '/archive/[slug]' ? (
           <ProjectHeader {...activeProject} key={`project-header`} />
         ) : null}
