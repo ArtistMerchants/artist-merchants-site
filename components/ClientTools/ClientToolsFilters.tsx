@@ -17,7 +17,7 @@ export const ClientToolsFilters = ({ materials, techniques }) => {
 
   return (
     <motion.div
-      className="order-4 col-span-2 col-start-1 grid transform-gpu grid-cols-2 gap-8 pt-8 will-change-auto md:col-span-3 md:grid-cols-3 md:pt-[100px]"
+      className="order-4 col-span-2 col-start-1 grid transform-gpu grid-cols-2 gap-8 pb-32 pt-8 will-change-auto md:col-span-3 md:grid-cols-3 md:pt-[100px]"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
