@@ -23,8 +23,8 @@ export const ClientToolsCategoryList = ({
           .includes(material.slug)
         const activeClass = isActive
           ? 'opacity-100'
-          : path !== '/archive'
-          ? 'opacity-60 hover:opacity-100'
+          : path !== '/client-tools'
+          ? 'opacity-50 hover:opacity-100'
           : 'group-hover:opacity-50 group-hover:hover:opacity-100'
         return (
           <li
