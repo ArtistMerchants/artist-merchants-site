@@ -34,14 +34,16 @@ export const Header = ({
     <HeaderWrapper>
       <div className="flex flex-col gap-10">
         <Nav />
-        {router.route === '/archive/[slug]' ? (
-          <ArchiveHeader
-            className="md:hidden"
-            categories={categories}
-            activeCategories={activeProject?.categories}
-            key="archive-project"
-          />
-        ) : null}
+        <AnimatePresence>
+          {router.route === '/archive/[slug]' ? (
+            <ArchiveHeader
+              className="md:hidden"
+              categories={categories}
+              activeCategories={activeProject?.categories}
+              key="archive-project"
+            />
+          ) : null}
+        </AnimatePresence>
       </div>
       <AnimatePresence mode="wait" initial={false}>
         {path === '/information' ? (

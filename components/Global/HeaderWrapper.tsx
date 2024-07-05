@@ -13,7 +13,6 @@ export const HeaderWrapper = ({ children }) => {
   const { setMenuOpen, menuOpen } = useSiteStore()
 
   const isRelative = useMemo(() => {
-    console.log(router.route)
     return (
       router.route === '/archive/[slug]' ||
       router.route === '/archive/categories/[slug]' ||
@@ -25,7 +24,7 @@ export const HeaderWrapper = ({ children }) => {
     <header
       className={`${
         isRelative ? 'relative md:absolute' : 'absolute'
-      } left-0 top-0 z-[2] flex w-full items-start justify-between gap-20 p-20 text-body md:grid md:grid-cols-9 md:gap-10 md:p-32`}
+      } left-0 top-0 z-[2] flex w-full items-start justify-between gap-20 pl-20 pt-20 text-body md:grid md:w-[calc(calc(100%/9)*4)] md:grid-cols-4 md:gap-10 md:pl-32 md:pt-32`}
       ref={headerRef}
     >
       <Link href="/" aria-hidden onClick={() => setMenuOpen(false)}>
@@ -49,7 +48,7 @@ export const HeaderWrapper = ({ children }) => {
       >
         {children}
       </motion.nav>
-      <div className="text-right md:col-start-9">
+      <div className="fixed right-20 top-20 text-right md:right-32 md:top-32">
         <MenuButton />
       </div>
     </header>
