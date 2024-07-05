@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import { useSiteStore } from 'hooks/useSiteStore'
 import localFont from 'next/font/local'
 
+import { Header } from 'components/Header/Header'
 import { AnimatePresence, motion } from 'framer-motion'
 import { VH } from 'components/Global/VH'
 import { Layout } from 'components/Layout'
@@ -56,6 +57,7 @@ function MyApp({ Component, pageProps, router }) {
       className={`${constellation.variable} ${selfModern.variable} ${gerstner.variable} ${gerstner.variable} font-sans`}
     >
       <VH />
+      <Header {...(pageProps?.settings ?? {})} />
       <AnimatePresence mode="wait">
         <Layout
           key={router.route}
