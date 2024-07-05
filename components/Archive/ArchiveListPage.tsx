@@ -76,9 +76,9 @@ export const ArchiveListPage = ({ categories, projects, settings }) => {
             </AnimatePresence>
             <AnimatePresence mode="wait" initial={false}>
               <motion.div
-                className={`mb:pb-32 relative top-0 ml-auto w-full self-start pb-20 ${
+                className={`relative top-0 ml-auto w-full self-start pb-20 ${
                   menuOpen ? 'md:col-span-3 md:col-start-5' : 'md:col-span-7'
-                } md:pt-32`}
+                } md:pb-32 md:pt-32`}
                 key={path}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}

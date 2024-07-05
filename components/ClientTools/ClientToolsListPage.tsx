@@ -87,9 +87,9 @@ export const ClientToolsListPage = (props) => {
               ) : null}
             </AnimatePresence>
             <motion.div
-              className={`relative top-0 ml-auto w-full self-start pb-20 md:py-32 ${
+              className={`relative top-0 ml-auto w-full self-start pb-20 ${
                 menuOpen ? 'md:col-span-3 md:col-start-5' : 'md:col-span-7'
-              } `}
+              } md:pb-32 md:pt-32`}
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
