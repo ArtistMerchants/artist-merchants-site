@@ -48,7 +48,7 @@ export const HeaderWrapper = ({ children }) => {
       >
         {children}
       </motion.nav>
-      <div className="fixed right-20 top-20 text-right md:right-32 md:top-32">
+      <div className="relative right-20 text-right md:fixed md:right-32 md:top-32">
         <MenuButton />
       </div>
     </header>

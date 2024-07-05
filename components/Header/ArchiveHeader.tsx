@@ -14,7 +14,7 @@ export const ArchiveHeader = ({
   const { unlocked } = useSiteStore()
 
   return (
-    <HeaderTab className={`${className} order-2 w-full md:order-none`}>
+    <HeaderTab className={`${className} order-2 w-full pb-32 md:order-none`}>
       <AnimatePresence initial={false} mode="wait">
         {unlocked ? (
           <motion.div

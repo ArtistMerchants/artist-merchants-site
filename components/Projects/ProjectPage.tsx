@@ -75,7 +75,7 @@ export const ProjectPage = (props) => {
               ) : null}
             </AnimatePresence>
             <motion.div
-              className={`mb:pb-32 relative top-0 ml-auto w-full self-start pb-20 pt-350 ${
+              className={`mb:pb-32 relative top-0 ml-auto w-full self-start pb-20 ${
                 menuOpen ? 'md:col-span-3 md:col-start-5' : 'md:col-span-7'
               } md:pt-32`}
               initial={{ opacity: 0 }}

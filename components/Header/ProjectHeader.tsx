@@ -27,7 +27,7 @@ export const ProjectHeader = ({
   }, [taggedTechniques])
 
   return (
-    <HeaderTab className="flex flex-col gap-14 md:gap-20">
+    <HeaderTab className="flex flex-col gap-14 pb-32 md:gap-20">
       <LabeledList label="Client" items={client} />
       {year ? <LabeledList label="Project" items={[year]} /> : null}
       {materialList?.length ? (

@@ -63,7 +63,7 @@ export default function HomePage(props) {
                   opacity: isInfoActive ? 0 : 1,
                   y: menuOpen && !isInfoActive ? '30vh' : 0,
                 }}
-                transition={{ duration: 0.65, ease: [0.82, 0.01, 0.22, 0.98] }}
+                transition={{ duration: 0.6, ease: [0.22, 0.81, 0.13, 0.98] }}
               >
                 <HomeGallery images={images} />
               </motion.div>
