@@ -31,7 +31,7 @@ export const Layout: FC<LayoutProps> = ({ children, route, settings }) => {
     <>
       <SiteMeta {...settings} />
       <Loading images={settings?.images} />
-      <main className="ease relative z-[1] min-h-screen px-20 text-body md:grid md:grid-cols-9 md:px-32">
+      <main className="ease relative z-[1] px-20 text-body md:grid md:grid-cols-9 md:px-32">
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}

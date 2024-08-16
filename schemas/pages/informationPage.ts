@@ -11,45 +11,54 @@ export default defineType({
       name: 'description',
       title: 'Description',
       type: 'array',
-      of: [{ type: 'block' }],
-    }),
-    defineField({
-      name: 'faqs',
-      title: 'FAQs',
-      type: 'object',
-      fields: [
-        defineField({
-          name: 'title',
-          title: 'Title',
-          type: 'string',
-        }),
-        defineField({
-          name: 'items',
-          title: 'Items',
-          type: 'array',
-          of: [
-            defineArrayMember({
-              name: 'faqItem',
-              title: 'FAQ Item',
-              type: 'object',
-              fields: [
-                defineField({
-                  name: 'question',
-                  title: 'Question',
-                  type: 'string',
-                }),
-                defineField({
-                  name: 'answer',
-                  title: 'Answer',
-                  type: 'array',
-                  of: [{ type: 'block' }],
-                }),
-              ],
-            }),
-          ],
-        }),
+      of: [
+        {
+          type: 'block',
+          styles: [{ title: 'Normal', value: 'normal' }],
+          lists: [],
+          marks: {
+            decorators: [{ title: 'Superscript', value: 'superscript' }],
+          },
+        },
       ],
     }),
+    // defineField({
+    //   name: 'faqs',
+    //   title: 'FAQs',
+    //   type: 'object',
+    //   fields: [
+    //     defineField({
+    //       name: 'title',
+    //       title: 'Title',
+    //       type: 'string',
+    //     }),
+    //     defineField({
+    //       name: 'items',
+    //       title: 'Items',
+    //       type: 'array',
+    //       of: [
+    //         defineArrayMember({
+    //           name: 'faqItem',
+    //           title: 'FAQ Item',
+    //           type: 'object',
+    //           fields: [
+    //             defineField({
+    //               name: 'question',
+    //               title: 'Question',
+    //               type: 'string',
+    //             }),
+    //             defineField({
+    //               name: 'answer',
+    //               title: 'Answer',
+    //               type: 'array',
+    //               of: [{ type: 'block' }],
+    //             }),
+    //           ],
+    //         }),
+    //       ],
+    //     }),
+    //   ],
+    // }),
     defineField({
       name: 'contact',
       title: 'Contact',

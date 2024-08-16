@@ -14,7 +14,7 @@ export const ViewSelector: FC<ViewSelectorProps> = ({
   const { view: currentView, setView } = useArchiveStore()
 
   const activeClass = useCallback(
-    (view: 'one' | 'two') => {
+    (view: 'single' | 'multi') => {
       if (view === currentView) return 'opacity-100'
 
       return 'opacity-50 hover:opacity-100'
@@ -32,24 +32,24 @@ export const ViewSelector: FC<ViewSelectorProps> = ({
     >
       <li>
         <button
-          onClick={() => setView('one')}
-          aria-selected={currentView === 'one'}
+          onClick={() => setView('single')}
+          aria-selected={currentView === 'single'}
           className={`ease transition-opacity duration-300 ${activeClass(
-            'one'
+            'single'
           )}`}
         >
-          View 1
+          Single View
         </button>
       </li>
       <li>
         <button
-          onClick={() => setView('two')}
-          aria-selected={currentView === 'two'}
+          onClick={() => setView('multi')}
+          aria-selected={currentView === 'multi'}
           className={`ease transition-opacity duration-300 ${activeClass(
-            'two'
+            'multi'
           )}`}
         >
-          View 2
+          Multi View
         </button>
       </li>
       {withDownload && <DownloadLink className="pt-10 md:hidden" />}

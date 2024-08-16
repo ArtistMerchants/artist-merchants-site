@@ -1,6 +1,6 @@
 import { create } from 'zustand'
 
-type ViewTypes = 'one' | 'two'
+type ViewTypes = 'single' | 'multi'
 
 type ArchiveStoreProps = {
   view: ViewTypes
@@ -8,6 +8,6 @@ type ArchiveStoreProps = {
 }
 
 export const useArchiveStore = create<ArchiveStoreProps>((set) => ({
-  view: 'one',
+  view: 'multi',
   setView: (view) => set({ view }),
 }))

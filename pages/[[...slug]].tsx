@@ -28,6 +28,11 @@ export async function getStaticPaths() {
     },
     {
       params: {
+        slug: ['contact'],
+      },
+    },
+    {
+      params: {
         slug: ['archive'],
       },
     },

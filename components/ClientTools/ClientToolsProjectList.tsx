@@ -19,12 +19,11 @@ export const ClientToolsProjectList = ({ projects = [] }) => {
   }, [filteredProjects])
 
   const gridClass = useMemo(() => {
-    if (view === 'two') {
-      return menuOpen ? 'grid-cols-2 md:grid-cols-1' : 'grid-cols-2'
+    if (view === 'single') {
+      return 'grid-cols-1'
     }
-    return menuOpen
-      ? 'grid-cols-3 md:grid-cols-2'
-      : 'grid-cols-3 md:grid-cols-4'
+
+    return 'grid-cols-3 md:grid-cols-4'
   }, [view, menuOpen])
 
   return (

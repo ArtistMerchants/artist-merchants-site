@@ -36,7 +36,17 @@ export const Nav = () => {
       </li>
       <li>
         <Link
-          href="/archive"
+          href="/contact"
+          className={`ease inline-block py-1 transition-opacity duration-500 ${activeClass(
+            '/contact'
+          )}`}
+        >
+          Contact
+        </Link>
+      </li>
+      <li>
+        <Link
+          href={unlocked ? '/archive/categories/all' : '/archive'}
           className={`ease inline-block py-1 transition-opacity duration-500 ${activeClass(
             '/archive'
           )}`}
@@ -44,7 +54,7 @@ export const Nav = () => {
           Archive
         </Link>
       </li>
-      <li>
+      {/* <li>
         {unlocked ? (
           <Link
             href={`/client-tools`}
@@ -63,7 +73,7 @@ export const Nav = () => {
             Client Tools
           </div>
         )}
-      </li>
+      </li> */}
     </ul>
   )
 }

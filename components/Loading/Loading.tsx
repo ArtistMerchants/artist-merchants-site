@@ -32,10 +32,10 @@ export const Loading = ({ images = [] }) => {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.5, delay: 1.5 }}
-          className="fixed inset-0 z-[9999] h-full w-full bg-black text-white will-change-auto"
+          className="fixed inset-0 z-[9999] flex h-full w-full items-center justify-center bg-black text-white will-change-auto"
         >
           <motion.div
-            className="absolute flex h-full w-full items-center justify-center"
+            className="absolute flex h-[80px] w-[50vh] items-center justify-center md:h-[200px]"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 1 }}

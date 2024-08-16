@@ -78,14 +78,7 @@ export const settingsQuery = groq`*[_type == "settings"][0] {
   },
   "information": *[_type == "informationPage"][0] {
       _id,
-      faqs {
-        title,
-        items[] {
-          _key,
-          question,
-          answer
-        }
-      },
+      description,
       contact {
         title,
         items[] {

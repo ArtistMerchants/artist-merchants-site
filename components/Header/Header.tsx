@@ -1,4 +1,3 @@
-import { useSiteStore } from 'hooks/useSiteStore'
 import { usePathname } from 'next/navigation'
 
 import { Nav } from '../Global/Nav'
@@ -6,6 +5,7 @@ import { AnimatePresence } from 'framer-motion'
 import { ClientToolsHeader } from 'components/Header/ClientToolsHeader'
 import { HeaderWrapper } from '../Global/HeaderWrapper'
 import { InfoHeader } from './InfoHeader'
+import { ContactHeader } from './ContactHeader'
 import { ArchiveHeader } from './ArchiveHeader'
 import { ViewSelector } from 'components/Global/ViewSelector'
 import { useMemo } from 'react'
@@ -45,9 +45,14 @@ export const Header = ({
           ) : null}
         </AnimatePresence>
       </div>
+
       <AnimatePresence mode="wait" initial={false}>
         {path === '/information' ? (
           <InfoHeader data={information} key="info" />
+        ) : null}
+
+        {path === '/contact' ? (
+          <ContactHeader data={information} key="contact" />
         ) : null}
 
         {path?.includes('/archive') ? (
@@ -65,6 +70,7 @@ export const Header = ({
           <ClientToolsHeader materials={materials} key="client-tools" />
         ) : null}
       </AnimatePresence>
+
       <AnimatePresence mode="wait" initial={false}>
         {viewSelectorActive ? <ViewSelector key="view-selector" /> : null}
 
