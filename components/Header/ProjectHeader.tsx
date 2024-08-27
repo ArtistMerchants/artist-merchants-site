@@ -8,34 +8,23 @@ export const ProjectHeader = ({
   taggedMaterials,
   taggedTechniques,
 }) => {
-  const materialList: string[] = useMemo(() => {
-    if (!taggedMaterials) return []
-    const materialSet = taggedMaterials?.reduce((acc, material) => {
-      material?.items?.forEach((item) => acc.add(item))
-      return acc
-    }, new Set())
-    return Array.from(materialSet)
-  }, [taggedMaterials])
-
-  const techniqueList: string[] = useMemo(() => {
-    if (!taggedTechniques) return []
-    const techniqueSet = taggedTechniques?.reduce((acc, technique) => {
-      technique?.items?.forEach((item) => acc.add(item))
-      return acc
-    }, new Set())
-    return Array.from(techniqueSet)
-  }, [taggedTechniques])
+  const taggedItems = useMemo(
+    () => ({
+      materials: getUniqueItems(taggedMaterials),
+      techniques: getUniqueItems(taggedTechniques),
+    }),
+    [taggedMaterials, taggedTechniques]
+  )
 
   return (
     <HeaderTab className="flex flex-col gap-14 pb-32 md:gap-20">
       <LabeledList label="Client" items={client} />
-      {year ? <LabeledList label="Project" items={[year]} /> : null}
-      {materialList?.length ? (
-        <LabeledList label="Material" items={materialList} />
-      ) : null}
-      {techniqueList?.length ? (
-        <LabeledList label="Technique" items={techniqueList} />
-      ) : null}
+      <LabeledList label="Project" items={[year]} />
+      <LabeledList label="Material" items={taggedItems.materials} />
+      <LabeledList label="Technique" items={taggedItems.techniques} />
     </HeaderTab>
   )
 }
+
+const getUniqueItems = (items): string[] =>
+  Array.from(new Set(items?.flatMap((item) => item?.items || []))) || []

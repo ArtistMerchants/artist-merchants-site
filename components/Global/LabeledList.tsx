@@ -6,6 +6,8 @@ type LabeledListProps = {
 }
 
 export const LabeledList: FC<LabeledListProps> = ({ label, items = [] }) => {
+  if (items?.length < 1) return null
+
   return (
     <div className="flex flex-col">
       <h3 className="text-caption uppercase">{label}</h3>

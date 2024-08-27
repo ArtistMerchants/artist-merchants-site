@@ -6,11 +6,10 @@ import {
   settingsQuery,
   categoryPathsQuery,
   categoryAllPageQuery,
-  categoryPageQuery,
   projectQuery,
   projectPathsQuery,
-  materialCategoryPageQuery,
   materialCategoryPathsQuery,
+  materialPageQuery,
 } from 'lib/sanity.queries'
 import { createClient } from 'next-sanity'
 
@@ -47,14 +46,6 @@ export const getCategoryAllPage = async (): Promise<any> => {
   return []
 }
 
-export const getCategoryPage = async (slug: string): Promise<any> => {
-  if (client) {
-    return (await client.fetch(categoryPageQuery, { slug })) || []
-  }
-
-  return []
-}
-
 export const getProjectPaths = async (): Promise<any> => {
   if (client) {
     return (await client.fetch(projectPathsQuery)) || []
@@ -79,9 +70,9 @@ export const getMaterialCategoryPaths = async (): Promise<any> => {
   return []
 }
 
-export const getMaterialCategoryPage = async (slug: string): Promise<any> => {
+export const getMaterialPage = async (): Promise<any> => {
   if (client) {
-    return (await client.fetch(materialCategoryPageQuery, { slug })) || []
+    return (await client.fetch(materialPageQuery)) || []
   }
 
   return []

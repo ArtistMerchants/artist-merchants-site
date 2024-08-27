@@ -2,14 +2,12 @@ import { useEffect, useMemo } from 'react'
 import { useClientToolsStore } from 'hooks/useClientToolsStore'
 import { useFilteredProjects } from './useFilteredProjects'
 import { useArchiveStore } from 'hooks/useArchiveStore'
-import { useSiteStore } from 'hooks/useSiteStore'
 
 import { AnimatePresence, motion } from 'framer-motion'
 import { ProjectCard } from 'components/Projects/ProjectCard'
 
 export const ClientToolsProjectList = ({ projects = [] }) => {
   const { view } = useArchiveStore()
-  const { menuOpen } = useSiteStore()
   const { setProjects } = useClientToolsStore()
 
   const filteredProjects = useFilteredProjects({ projects })
@@ -24,7 +22,7 @@ export const ClientToolsProjectList = ({ projects = [] }) => {
     }
 
     return 'grid-cols-3 md:grid-cols-4'
-  }, [view, menuOpen])
+  }, [view])
 
   return (
     <AnimatePresence initial={false} mode="wait">
@@ -34,7 +32,7 @@ export const ClientToolsProjectList = ({ projects = [] }) => {
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
         transition={{ duration: 0.35 }}
-        className={`grid ${gridClass} gap-4 md:gap-10`}
+        className={`grid md:col-span-7 md:col-start-2 ${gridClass} gap-4 md:gap-10`}
       >
         {filteredProjects?.map((project: any) => {
           return (

@@ -13,7 +13,11 @@ export const HeaderTab: FC<HeaderTabProps> = ({ children, className }) => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      transition={{ duration: 0.35 }}
+      /**
+       * This is hacky, but needs to be .01 shorter than the main layout transition
+       * so layout doesn't shift because of elements with `layout` set
+       */
+      transition={{ duration: 0.49 }}
     >
       {children}
     </motion.div>

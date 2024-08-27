@@ -1,56 +1,46 @@
 import { usePathname } from 'next/navigation'
+import { useArchiveStore } from 'hooks/useArchiveStore'
+
 import Link from 'next/link'
-import { useSiteStore } from 'hooks/useSiteStore'
 
 export const ArchiveCategoryList = ({
   categories = [],
   activeCategories = [],
-  closeOnClick = false,
   className = '',
 }) => {
   const path = usePathname()
-  const { setMenuOpen } = useSiteStore()
-
-  const handleLinkClick = () => {
-    if (closeOnClick) {
-      setMenuOpen(false)
-    }
-  }
+  const { activeCategory, setActiveCategory } = useArchiveStore()
 
   return (
     <ul className={`${className} group flex flex-col items-start`}>
       <li
         className={`ease transition-opacity duration-300 ${
-          path?.includes('all')
+          activeCategory === 'all'
             ? 'opacity-100'
-            : path !== '/archive'
+            : activeCategory !== 'all'
             ? 'opacity-60 hover:opacity-100'
             : 'group-hover:opacity-50 group-hover:hover:opacity-100'
         }`}
       >
-        <Link onClick={handleLinkClick} href="/archive/categories/all">
+        <Link href={`/archive`} onClick={() => setActiveCategory('all')}>
           All
         </Link>
       </li>
       {categories.map((category: any) => {
-        const isActive = path
-          ?.replaceAll('archive/categories', '')
-          .includes(category.slug)
+        const isActive = activeCategory === category.slug
         const activeClass =
           isActive ||
           activeCategories.find((c: any) => c.slug === category.slug)
             ? 'opacity-100'
-            : path !== '/archive'
-            ? 'opacity-60 hover:opacity-100'
-            : 'group-hover:opacity-50 group-hover:hover:opacity-100'
+            : 'opacity-60 hover:opacity-100'
         return (
           <li
             key={category._id}
             className={`ease transition-opacity duration-300 ${activeClass}`}
           >
             <Link
-              onClick={handleLinkClick}
-              href={`/archive/categories/${category.slug}`}
+              href={`/archive`}
+              onClick={() => setActiveCategory(category.slug)}
             >
               {category.title}
             </Link>

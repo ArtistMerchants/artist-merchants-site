@@ -1,5 +1,4 @@
 import { useSiteStore } from 'hooks/useSiteStore'
-import { usePathname } from 'next/navigation'
 
 import { AnimatePresence, motion } from 'framer-motion'
 import { HeaderTab } from 'components/Header/HeaderTab'

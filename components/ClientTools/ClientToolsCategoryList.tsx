@@ -1,39 +1,24 @@
-import { usePathname } from 'next/navigation'
+import { useClientToolsStore } from 'hooks/useClientToolsStore'
 import Link from 'next/link'
-import { useSiteStore } from 'hooks/useSiteStore'
 
-export const ClientToolsCategoryList = ({
-  materials = [],
-  closeOnClick = true,
-}) => {
-  const path = usePathname()
-  const { setMenuOpen } = useSiteStore()
-
-  const handleLinkClick = () => {
-    if (closeOnClick) {
-      setMenuOpen(false)
-    }
-  }
+export const ClientToolsCategoryList = ({ materials = [] }) => {
+  const { activeMaterial, setActiveMaterial } = useClientToolsStore()
 
   return (
     <ul className="group flex flex-col items-start">
       {materials.map((material: any) => {
-        const isActive = path
-          ?.replaceAll('client-tools', '')
-          .includes(material.slug)
+        const isActive = activeMaterial === material.slug
         const activeClass = isActive
           ? 'opacity-100'
-          : path !== '/client-tools'
-          ? 'opacity-50 hover:opacity-100'
-          : 'group-hover:opacity-50 group-hover:hover:opacity-100'
+          : 'opacity-50 hover:opacity-100'
         return (
           <li
             key={material._id}
             className={`ease transition-opacity duration-300 ${activeClass}`}
           >
             <Link
-              onClick={handleLinkClick}
-              href={`/client-tools/${material.slug}`}
+              href={`/client-tools`}
+              onClick={() => setActiveMaterial(material.slug)}
             >
               {material.title}
             </Link>

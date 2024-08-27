@@ -108,6 +108,12 @@ module.exports = {
           },
         },
       },
+      height: {
+        screen: 'calc(var(--vh, 1vh) * 100)',
+      },
+      minHeight: {
+        screen: 'calc(var(--vh, 1vh) * 100)',
+      },
       // responsive sizes
       screens: {
         md: '960px',

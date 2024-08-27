@@ -1,8 +1,10 @@
-import { motion } from 'framer-motion'
+import { useArchiveStore } from 'hooks/useArchiveStore'
+import { useSiteStore } from 'hooks/useSiteStore'
 import { usePathname } from 'next/navigation'
 
-import Link from 'next/link'
+import { motion } from 'framer-motion'
 import { SiteImage } from 'components/Global/SiteImage'
+import Link from 'next/link'
 
 export const ProjectCard = ({
   client,
@@ -13,12 +15,14 @@ export const ProjectCard = ({
   listIndex = 0,
 }) => {
   const firstMedia = media[0]
+  const { unlocked } = useSiteStore()
+  const { activeCategory } = useArchiveStore()
   const path = usePathname()
 
   return (
     <motion.div
       layout="preserve-aspect"
-      layoutId={`${listIndex}-project-card-${id}-${path}`}
+      layoutId={`${listIndex}-project-card-${id}-${activeCategory}-${unlocked}-${path}`}
       transition={{
         duration: 0.65,
         ease: [0.42, 0.71, 0.02, 0.99],

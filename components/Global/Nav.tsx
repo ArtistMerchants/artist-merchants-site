@@ -10,12 +10,9 @@ export const Nav = () => {
 
   const activeClass = useCallback(
     (path: string) => {
-      if (path === '/client-tools' && !unlocked) return 'opacity-50'
-      if (path === pathName || pathName?.includes(path)) return 'opacity-100'
-
-      if (pathName === '/') {
-        return 'group-hover:opacity-50 group-hover:hover:opacity-100'
-      }
+      if (path === '/' && pathName === '/') return 'opacity-100'
+      if (path !== '/' && (path === pathName || pathName?.includes(path)))
+        return 'opacity-100'
 
       return 'opacity-50 hover:opacity-100'
     },
@@ -24,38 +21,30 @@ export const Nav = () => {
 
   return (
     <ul className="group flex flex-col items-start">
+      {!unlocked ? (
+        <li>
+          <Link
+            href="/"
+            className={`ease inline-block py-1 transition-opacity duration-500 ${activeClass(
+              '/'
+            )}`}
+          >
+            Information
+          </Link>
+        </li>
+      ) : null}
       <li>
         <Link
-          href="/information"
+          href={unlocked ? '/archive' : '/login'}
           className={`ease inline-block py-1 transition-opacity duration-500 ${activeClass(
-            '/information'
-          )}`}
-        >
-          Information
-        </Link>
-      </li>
-      <li>
-        <Link
-          href="/contact"
-          className={`ease inline-block py-1 transition-opacity duration-500 ${activeClass(
-            '/contact'
-          )}`}
-        >
-          Contact
-        </Link>
-      </li>
-      <li>
-        <Link
-          href={unlocked ? '/archive/categories/all' : '/archive'}
-          className={`ease inline-block py-1 transition-opacity duration-500 ${activeClass(
-            '/archive'
+            unlocked ? '/archive' : '/login'
           )}`}
         >
           Archive
         </Link>
       </li>
-      {/* <li>
-        {unlocked ? (
+      {unlocked ? (
+        <li>
           <Link
             href={`/client-tools`}
             className={`ease inline-block py-1 transition-opacity duration-500 ${activeClass(
@@ -64,16 +53,8 @@ export const Nav = () => {
           >
             Client Tools
           </Link>
-        ) : (
-          <div
-            className={`cursor-not-allowed ${activeClass(
-              '/client-tools'
-            )} ease transition-opacity duration-300`}
-          >
-            Client Tools
-          </div>
-        )}
-      </li> */}
+        </li>
+      ) : null}
     </ul>
   )
 }

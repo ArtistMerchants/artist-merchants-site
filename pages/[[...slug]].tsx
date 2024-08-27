@@ -18,27 +18,12 @@ export async function getStaticPaths() {
   const paths = [
     {
       params: {
-        slug: [],
+        slug: [''],
       },
     },
     {
       params: {
-        slug: ['information'],
-      },
-    },
-    {
-      params: {
-        slug: ['contact'],
-      },
-    },
-    {
-      params: {
-        slug: ['archive'],
-      },
-    },
-    {
-      params: {
-        slug: ['client-tools'],
+        slug: ['login'],
       },
     },
   ]
@@ -58,6 +43,6 @@ export async function getStaticProps(context) {
       home,
       preview: preview ?? false,
     },
-    revalidate: 300,
+    revalidate: 3600,
   }
 }

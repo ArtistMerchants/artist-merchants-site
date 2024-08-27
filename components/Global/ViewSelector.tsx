@@ -24,7 +24,7 @@ export const ViewSelector: FC<ViewSelectorProps> = ({
 
   return (
     <motion.ul
-      className="order-1 flex flex-col md:order-none"
+      className="col-span-1 col-start-2 row-span-1 row-start-1 flex flex-col md:order-none md:col-start-3"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}

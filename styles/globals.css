@@ -38,16 +38,6 @@ body {
   font-kerning: normal;
 }
 
-.h-screen {
-  height: 100vh;
-  height: calc(var(--vh, 1vh) * 100);
-}
-
-.min-h-screen {
-  min-height: 100vh;
-  min-height: calc(var(--vh, 1vh) * 100);
-}
-
 .scrollbar-hidden {
   scrollbar-width: none;
 }
@@ -65,4 +55,8 @@ html[data-theme='dark'] {
 html[data-theme='light'] {
   background-color: #fff;
   color-scheme: light;
+}
+
+.site-grid {
+  @apply px-20 py-20 md:px-0 md:py-32 flex flex-col md:grid md:grid-cols-9;
 }

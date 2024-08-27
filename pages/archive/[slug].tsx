@@ -32,6 +32,6 @@ export async function getStaticProps(context) {
       page,
       preview: preview ?? false,
     },
-    revalidate: 300,
+    revalidate: 3600,
   }
 }

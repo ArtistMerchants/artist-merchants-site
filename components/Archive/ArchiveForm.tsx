@@ -1,5 +1,6 @@
 import { useState, useRef } from 'react'
 import { useSiteStore } from 'hooks/useSiteStore'
+import { useRouter } from 'next/navigation'
 
 import { motion } from 'framer-motion'
 
@@ -7,6 +8,7 @@ export const ArchiveForm = () => {
   const [error, setError] = useState<string | null>(null)
   const passwordRef = useRef<HTMLInputElement>(null)
   const { setUnlocked } = useSiteStore()
+  const router = useRouter()
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -29,6 +31,7 @@ export const ArchiveForm = () => {
       }
 
       setUnlocked(true)
+      router.push('/archive')
     } catch (error) {
       setError('Incorrect password')
     }

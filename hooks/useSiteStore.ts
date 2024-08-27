@@ -2,8 +2,6 @@ import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 
 type SiteStoreProps = {
-  menuOpen: boolean
-  setMenuOpen: (menuOpen: boolean) => void
   loading: boolean
   setLoading: (loading: boolean) => void
   hasLoaded: boolean
@@ -19,8 +17,6 @@ type SiteStoreProps = {
 export const useSiteStore = create<SiteStoreProps>()(
   persist(
     (set) => ({
-      menuOpen: false,
-      setMenuOpen: (menuOpen) => set({ menuOpen }),
       loading: true,
       setLoading: (loading) => set({ loading }),
       hasLoaded: false,

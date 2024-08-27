@@ -11,6 +11,8 @@ type ClientToolsStoreProps = {
   setProjects: (projects: any[]) => void
   materialLabel: string
   setMaterialLabel: (label: string) => void
+  activeMaterial: any
+  setActiveMaterial: (material: any) => void
 }
 
 export const useClientToolsStore = create<ClientToolsStoreProps>((set) => ({
@@ -34,4 +36,6 @@ export const useClientToolsStore = create<ClientToolsStoreProps>((set) => ({
   setMaterialLabel: (label) => set({ materialLabel: label }),
   pdfDownloadLink: '',
   setPdfDownloadLink: (link) => set({ pdfDownloadLink: link }),
+  activeMaterial: null,
+  setActiveMaterial: (material) => set({ activeMaterial: material }),
 }))

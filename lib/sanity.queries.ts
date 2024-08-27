@@ -55,13 +55,6 @@ export const settingsQuery = groq`*[_type == "settings"][0] {
     materials,
     techniques,
   },
-  "activeMaterial": *[_type == "materialCategory" && slug.current == $slug][0] {
-    _id,
-    title,
-    "slug": slug.current,
-    materials,
-    techniques,
-  },
   "activeProject": *[_type == "project" && slug.current == $slug][0] {
     _id,
     title,
@@ -175,11 +168,8 @@ export const materialCategoryPathsQuery = groq`
 }
 `
 
-export const materialCategoryPageQuery = groq`
-*[_type == "materialCategory" && slug.current == $slug][0] {
-  _id,
-  title,
-  "slug": slug.current,
+export const materialPageQuery = groq`
+{
   "materials": *[_type == "materialCategory"] | order(orderRank) {
     _id,
     title,
@@ -187,18 +177,18 @@ export const materialCategoryPageQuery = groq`
     materials,
     techniques,
   },
-  "activeMaterial": *[_type == "materialCategory" && slug.current == $slug][0] {
-    _id,
-    title,
-    "slug": slug.current,
-    materials,
-    techniques,
-  },
-  "projects": *[_type == "project" && references(^._id)] | order(orderRank) {
+  "projects": *[_type == "project"] | order(orderRank) {
     ${projectFields},
     taggedMaterials,
     taggedTechniques,
   }
+}`
+
+export const materialCategoryPageQuery = groq`
+*[_type == "materialCategory" && slug.current == $slug][0] {
+  _id,
+  title,
+  "slug": slug.current,
 }
 `
 
