@@ -2,10 +2,8 @@ import { createStore } from 'zustand'
 
 export interface ClientToolsStoreProps {
   materials: string[]
-  pdfDownloadLink: string
   techniques: string[]
   projects: any[]
-  materialLabel: string
   activeMaterial: any
 }
 
@@ -13,7 +11,6 @@ export interface ClientToolsStoreState extends ClientToolsStoreProps {
   toggleMaterial: (material: string) => void
   toggleTechnique: (technique: string) => void
   setProjects: (projects: any[]) => void
-  setMaterialLabel: (label: string) => void
   setActiveMaterial: (material: any) => void
 }
 
@@ -39,10 +36,6 @@ export const createClientToolsStore = (
       ),
     projects: [],
     setProjects: (projects) => set({ projects }),
-    materialLabel: '',
-    setMaterialLabel: (label) => set({ materialLabel: label }),
-    pdfDownloadLink: '',
-    setPdfDownloadLink: (link) => set({ pdfDownloadLink: link }),
     activeMaterial: null,
     setActiveMaterial: (material) => set({ activeMaterial: material }),
     ...props,

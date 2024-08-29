@@ -15,7 +15,7 @@ export const ProjectCard = ({
   slug,
   listIndex = 0,
 }) => {
-  const firstMedia = media[0]
+  const firstMedia = media?.[0]
   const { unlocked } = useAuthStore()
   const { activeCategory } = useArchiveStore()
   const { activeMaterial } = useClientToolsStore((state) => state)

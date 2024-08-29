@@ -55,8 +55,7 @@ function MyApp({ Component, pageProps, router }) {
   const { setSettings } = useSiteStore()
   const store = useRef(
     createClientToolsStore({
-      activeMaterial: pageProps?.settings?.materials[0]?.slug,
-      materialLabel: pageProps?.settings?.materials[0]?.title,
+      activeMaterial: pageProps?.settings?.materials?.[0]?.slug,
     })
   ).current
 

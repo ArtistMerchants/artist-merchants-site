@@ -16,7 +16,7 @@ export const HeaderUnlocked = ({ categories, materials, activeProject }) => {
   const { activeMaterial } = useClientToolsStore((state) => state)
 
   const activeMaterialProps = useMemo(() => {
-    if (!activeMaterial) return materials[0]
+    if (!activeMaterial) return materials?.[0]
     return materials?.find((material) => material.slug === activeMaterial)
   }, [activeMaterial, materials])
 
