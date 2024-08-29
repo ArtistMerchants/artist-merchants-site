@@ -9,25 +9,36 @@ const TRANSITION = {
   ease: [0.82, 0.01, 0.02, 0.88],
 }
 
-export const LoadingLogo = () => {
-  const { loading } = useSiteStore()
+export const LoadingLogo = ({ isLoaded }) => {
+  const { setLoading, setHasLoaded } = useSiteStore()
+  const hasLoadedRef = useRef(false)
   const [letter, setLetter] = useState<'a' | 'm' | 'full'>('a')
   const intervalRef = useRef<any>()
 
   useEffect(() => {
     intervalRef.current = setInterval(() => {
+      if (hasLoadedRef.current) {
+        clearInterval(intervalRef.current)
+        handleLoaded()
+      }
       setLetter((prev) => (prev === 'a' ? 'm' : 'a'))
     }, 1500)
 
     return () => clearInterval(intervalRef.current)
   }, [])
 
+  const handleLoaded = () => {
+    setLoading(false)
+    setTimeout(() => {
+      setHasLoaded(true)
+    }, 2000)
+  }
+
   useEffect(() => {
-    if (!loading) {
-      clearInterval(intervalRef.current)
-      setLetter('full')
+    if (isLoaded) {
+      hasLoadedRef.current = true
     }
-  }, [loading])
+  }, [isLoaded])
 
   return (
     <motion.svg

@@ -1,4 +1,3 @@
-import { useEffect } from 'react'
 import { usePreloadImages } from 'hooks/usePreloadImages'
 import { useAuthStore } from 'hooks/useAuthStore'
 import { useSiteStore } from 'hooks/useSiteStore'
@@ -9,19 +8,10 @@ import { LoadingLogo } from './LoadingLogo'
 
 export const Loading = ({ images = [] }) => {
   const { unlocked } = useAuthStore()
-  const { loading, setLoading, hasLoaded, setHasLoaded } = useSiteStore()
+  const { loading, hasLoaded } = useSiteStore()
 
   const imageUrls = images.map((image) => urlForImage(image).url())
   const isLoaded = usePreloadImages(imageUrls)
-
-  useEffect(() => {
-    if (isLoaded) {
-      setLoading(false)
-      setTimeout(() => {
-        setHasLoaded(true)
-      }, 2000)
-    }
-  }, [isLoaded, setLoading, hasLoaded])
 
   if (unlocked || hasLoaded) return null
 
@@ -42,7 +32,7 @@ export const Loading = ({ images = [] }) => {
             exit={{ opacity: 1 }}
             transition={{ duration: 0.5 }}
           >
-            <LoadingLogo />
+            <LoadingLogo isLoaded={isLoaded} />
           </motion.div>
         </motion.div>
       )}
