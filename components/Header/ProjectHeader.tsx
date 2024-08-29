@@ -18,7 +18,7 @@ export const ProjectHeader = ({
   )
 
   return (
-    <HeaderTab className="flex flex-col gap-14 pb-32 md:gap-20">
+    <HeaderTab className="col-start-2 row-start-1 flex flex-col gap-14 pb-32 md:col-start-3 md:gap-20">
       <LabeledList label="Project" items={[title]} />
       <LabeledList label="Client" items={client} />
       <LabeledList label="Year" items={[year]} />
