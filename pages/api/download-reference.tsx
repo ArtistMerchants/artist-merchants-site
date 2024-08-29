@@ -169,9 +169,24 @@ export default async function handler(
     )
   }
 
+  const todaysDate = new Date().toLocaleDateString('en-US', {
+    month: 'long',
+    day: 'numeric',
+    year: 'numeric',
+  })
+
   const ClientToolsPDF = ({ projects }) => {
     return (
-      <Document>
+      <Document
+        title={`Artist Merchants Reference - ${todaysDate}`}
+        author="Artist Merchants"
+        creator="Artist Merchants"
+        producer="Artist Merchants"
+        subject={`Included Projects: ${projects
+          ?.map((project) => project.title)
+          .join(', ')}`}
+        language="en-US"
+      >
         {projects?.map((project, index) => {
           return (
             <Page key={index} size="LETTER">
