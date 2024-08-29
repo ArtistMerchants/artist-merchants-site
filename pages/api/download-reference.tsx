@@ -80,6 +80,7 @@ export default async function handler(
       width: '100vw',
       height: '100vh',
       padding: '30px',
+      position: 'relative',
     },
     leftColumn: {
       width: '35%',
@@ -124,6 +125,21 @@ export default async function handler(
       objectFit: 'cover',
       objectPosition: 'center',
     },
+    pageNumber: {
+      position: 'absolute',
+      right: 30,
+      bottom: 12,
+      zIndex: 100,
+      width: 200,
+      textAlign: 'right',
+    },
+    pageNumberText: {
+      textTransform: 'uppercase',
+      fontSize: 5,
+      fontFamily: 'Gerstner',
+      color: 'rgba(0, 0, 0, 0.5)',
+      letterSpacing: '0.4px',
+    },
   })
 
   const LabeledList = ({
@@ -160,6 +176,11 @@ export default async function handler(
           return (
             <Page key={index} size="LETTER">
               <View style={styles.body}>
+                <View style={styles.pageNumber}>
+                  <Text style={styles.pageNumberText}>
+                    Page {index + 1} / {projects?.length ?? 0}
+                  </Text>
+                </View>
                 <View style={styles.leftColumn}>
                   <Logo />
                   <View style={styles.details}>
