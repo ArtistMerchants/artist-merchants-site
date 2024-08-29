@@ -1,20 +1,14 @@
-import { useEffect, useMemo } from 'react'
-import { useClientToolsStore } from 'hooks/useClientToolsStore'
-import { useFilteredProjects } from './useFilteredProjects'
+import { useMemo } from 'react'
 import { useArchiveStore } from 'hooks/useArchiveStore'
 
-import { AnimatePresence, motion } from 'framer-motion'
 import { ProjectCard } from 'components/Projects/ProjectCard'
 
-export const ClientToolsProjectList = ({ projects = [] }) => {
+export const ClientToolsProjectList = ({
+  projects = [],
+}: {
+  projects: any[]
+}) => {
   const { view } = useArchiveStore()
-  const { setProjects } = useClientToolsStore()
-
-  const filteredProjects = useFilteredProjects({ projects })
-
-  useEffect(() => {
-    setProjects(filteredProjects)
-  }, [filteredProjects])
 
   const gridClass = useMemo(() => {
     if (view === 'single') {
@@ -25,86 +19,79 @@ export const ClientToolsProjectList = ({ projects = [] }) => {
   }, [view])
 
   return (
-    <AnimatePresence initial={false} mode="wait">
-      <motion.section
-        key={filteredProjects?.length}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        transition={{ duration: 0.35 }}
-        className={`grid md:col-span-7 md:col-start-2 ${gridClass} gap-4 md:gap-10`}
-      >
-        {filteredProjects?.map((project: any) => {
-          return (
-            <ProjectCard
-              listIndex={0}
-              key={project._id}
-              {...project}
-              id={project._id}
-            />
-          )
-        })}
-        {filteredProjects?.map((project: any) => {
-          return (
-            <ProjectCard
-              listIndex={1}
-              key={project._id}
-              {...project}
-              id={project._id}
-            />
-          )
-        })}
-        {filteredProjects?.map((project: any) => {
-          return (
-            <ProjectCard
-              listIndex={2}
-              key={project._id}
-              {...project}
-              id={project._id}
-            />
-          )
-        })}
-        {filteredProjects?.map((project: any) => {
-          return (
-            <ProjectCard
-              listIndex={3}
-              key={project._id}
-              {...project}
-              id={project._id}
-            />
-          )
-        })}
-        {filteredProjects?.map((project: any) => {
-          return (
-            <ProjectCard
-              listIndex={4}
-              key={project._id}
-              {...project}
-              id={project._id}
-            />
-          )
-        })}
-        {filteredProjects?.map((project: any) => {
-          return (
-            <ProjectCard
-              listIndex={5}
-              key={project._id}
-              {...project}
-              id={project._id}
-            />
-          )
-        })}
-        {filteredProjects?.map((project: any) => {
-          return (
-            <ProjectCard
-              listIndex={6}
-              key={project._id}
-              {...project}
-              id={project._id}
-            />
-          )
-        })}
-      </motion.section>
-    </AnimatePresence>
+    <section
+      className={`grid min-h-screen md:col-span-7 md:col-start-2 ${gridClass} gap-4 md:gap-10`}
+    >
+      {projects?.map((project: any) => {
+        return (
+          <ProjectCard
+            listIndex={0}
+            key={project._id}
+            {...project}
+            id={project._id}
+          />
+        )
+      })}
+      {projects?.map((project: any) => {
+        return (
+          <ProjectCard
+            listIndex={1}
+            key={project._id}
+            {...project}
+            id={project._id}
+          />
+        )
+      })}
+      {projects?.map((project: any) => {
+        return (
+          <ProjectCard
+            listIndex={2}
+            key={project._id}
+            {...project}
+            id={project._id}
+          />
+        )
+      })}
+      {projects?.map((project: any) => {
+        return (
+          <ProjectCard
+            listIndex={3}
+            key={project._id}
+            {...project}
+            id={project._id}
+          />
+        )
+      })}
+      {projects?.map((project: any) => {
+        return (
+          <ProjectCard
+            listIndex={4}
+            key={project._id}
+            {...project}
+            id={project._id}
+          />
+        )
+      })}
+      {projects?.map((project: any) => {
+        return (
+          <ProjectCard
+            listIndex={5}
+            key={project._id}
+            {...project}
+            id={project._id}
+          />
+        )
+      })}
+      {projects?.map((project: any) => {
+        return (
+          <ProjectCard
+            listIndex={6}
+            key={project._id}
+            {...project}
+            id={project._id}
+          />
+        )
+      })}
+    </section>
   )
 }

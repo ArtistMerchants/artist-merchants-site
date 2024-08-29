@@ -9,6 +9,7 @@ export default defineType({
   preview: { select: { title: 'title', subtitle: 'description' } },
   groups: [
     { name: 'seo', title: 'SEO' },
+    { name: 'download', title: 'PDF Download' },
     { name: 'passwords', title: 'Passwords' },
   ],
   fields: [
@@ -39,6 +40,12 @@ export default defineType({
       title: 'Favicon',
       type: 'image',
       group: 'seo',
+    }),
+    defineField({
+      name: 'downloadFilename',
+      title: 'Downloaded PDF Filename',
+      type: 'string',
+      group: 'download',
     }),
     defineField({
       name: 'passwords',

@@ -5,7 +5,6 @@ import { defineConfig } from 'sanity'
 import { structureTool } from 'sanity/structure'
 import settings from 'schemas/settings'
 import homePage from 'schemas/pages/homePage'
-import informationPage from 'schemas/pages/informationPage'
 import project from 'schemas/pages/project'
 
 import projectCategory from 'schemas/pages/projectCategory'
@@ -20,21 +19,14 @@ export default defineConfig({
   dataset,
   title,
   schema: {
-    types: [
-      settings,
-      homePage,
-      project,
-      projectCategory,
-      informationPage,
-      materialCategory,
-    ],
+    types: [settings, homePage, project, projectCategory, materialCategory],
   },
   plugins: [
     structurePlugin({
-      type: [settings.name, homePage.name, informationPage.name],
+      type: [settings.name, homePage.name],
     }),
     structureTool({
-      structure: structureConfig([settings, homePage, informationPage]),
+      structure: structureConfig([settings, homePage]),
     }),
     visionTool({ defaultApiVersion: apiVersion }),
   ],

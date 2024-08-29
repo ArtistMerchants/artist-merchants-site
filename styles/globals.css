@@ -49,11 +49,13 @@ body {
 
 html[data-theme='dark'] {
   background-color: #000;
+  transition: background-color 500ms ease;
   color-scheme: dark;
 }
 
 html[data-theme='light'] {
   background-color: #fff;
+  transition: background-color 500ms ease;
   color-scheme: light;
 }
 

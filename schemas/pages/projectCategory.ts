@@ -6,7 +6,7 @@ import {
 
 export default defineType({
   name: 'projectCategory',
-  title: 'General Categories',
+  title: 'Categories',
   type: 'document',
   orderings: [orderRankOrdering],
   fields: [

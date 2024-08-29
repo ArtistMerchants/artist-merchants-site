@@ -1,4 +1,4 @@
-import { useSiteStore } from 'hooks/useSiteStore'
+import { useAuthStore } from 'hooks/useAuthStore'
 
 import { AnimatePresence, motion } from 'framer-motion'
 import { HeaderTab } from 'components/Header/HeaderTab'
@@ -10,7 +10,7 @@ export const ArchiveHeader = ({
   activeCategories = [],
   className = '',
 }) => {
-  const { unlocked } = useSiteStore()
+  const { unlocked } = useAuthStore()
 
   return (
     <HeaderTab

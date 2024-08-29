@@ -13,12 +13,12 @@ import { HeaderTab } from './HeaderTab'
 
 export const HeaderUnlocked = ({ categories, materials, activeProject }) => {
   const path = usePathname()
-  const { activeMaterial } = useClientToolsStore()
+  const { activeMaterial } = useClientToolsStore((state) => state)
 
-  const activeMaterialProps = useMemo(
-    () => materials?.find((material) => material.slug === activeMaterial),
-    [activeMaterial, materials]
-  )
+  const activeMaterialProps = useMemo(() => {
+    if (!activeMaterial) return materials[0]
+    return materials?.find((material) => material.slug === activeMaterial)
+  }, [activeMaterial, materials])
 
   const viewSelectorActive = path === '/archive' || path === '/client-tools'
 
@@ -113,7 +113,14 @@ const SideHeaderSection = ({ path, activeMaterialProps, activeProject }) => (
           {...activeProject}
           key={`${activeProject?._id}-${path}`}
         />
-      ) : null}
+      ) : (
+        <HeaderTab
+          className="col-start-1 row-start-3"
+          key="placeholder-project-header"
+        >
+          <span></span>
+        </HeaderTab>
+      )}
     </AnimatePresence>
   </>
 )

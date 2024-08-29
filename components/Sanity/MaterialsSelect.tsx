@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from 'react'
 import { uuid } from '@sanity/uuid'
-import { useFormValue, set, unset } from 'sanity'
+import { useFormValue, set } from 'sanity'
 import { client } from 'lib/sanity.client'
 import { materialsFromRefsQuery } from 'lib/sanity.queries'
 import Select from 'react-select'
@@ -92,7 +92,7 @@ export const MaterialsSelect = (props) => {
                 }),
                 option: (styles) => ({
                   ...styles,
-                  color: 'black',
+                  color: 'var(--card-fg-color)',
                 }),
                 multiValue: (styles) => ({
                   ...styles,
@@ -100,7 +100,7 @@ export const MaterialsSelect = (props) => {
                 }),
                 multiValueLabel: (styles) => ({
                   ...styles,
-                  color: 'white',
+                  color: 'var(--card-fg-color)',
                 }),
               }}
             />

@@ -3,6 +3,7 @@ import { HeaderTab } from './HeaderTab'
 import { LabeledList } from 'components/Global/LabeledList'
 
 export const ProjectHeader = ({
+  title,
   client,
   year,
   taggedMaterials,
@@ -18,8 +19,9 @@ export const ProjectHeader = ({
 
   return (
     <HeaderTab className="flex flex-col gap-14 pb-32 md:gap-20">
+      <LabeledList label="Project" items={[title]} />
       <LabeledList label="Client" items={client} />
-      <LabeledList label="Project" items={[year]} />
+      <LabeledList label="Year" items={[year]} />
       <LabeledList label="Material" items={taggedItems.materials} />
       <LabeledList label="Technique" items={taggedItems.techniques} />
     </HeaderTab>

@@ -1,41 +1,13 @@
-import { create } from 'zustand'
+import { useContext } from 'react'
+import { useStore } from 'zustand'
 
-type ClientToolsStoreProps = {
-  materials: string[]
-  toggleMaterial: (material: string) => void
-  pdfDownloadLink: string
-  setPdfDownloadLink: (link: string) => void
-  techniques: string[]
-  toggleTechnique: (technique: string) => void
-  projects: any[]
-  setProjects: (projects: any[]) => void
-  materialLabel: string
-  setMaterialLabel: (label: string) => void
-  activeMaterial: any
-  setActiveMaterial: (material: any) => void
+import type { ClientToolsStoreState } from './createClientToolsStore'
+import { ClientToolsContext } from 'components/ClientTools/ClientTools.context'
+
+export const useClientToolsStore = (
+  selector: (state: ClientToolsStoreState) => any
+) => {
+  const store = useContext(ClientToolsContext)
+  if (!store) throw new Error('Missing ClientToolsContext.Provider in the tree')
+  return useStore(store, selector)
 }
-
-export const useClientToolsStore = create<ClientToolsStoreProps>((set) => ({
-  materials: [],
-  toggleMaterial: (material) =>
-    set((state) =>
-      state.materials.includes(material)
-        ? { materials: state.materials.filter((m) => m !== material) }
-        : { materials: [...state.materials, material] }
-    ),
-  techniques: [],
-  toggleTechnique: (technique) =>
-    set((state) =>
-      state.techniques.includes(technique)
-        ? { techniques: state.techniques.filter((t) => t !== technique) }
-        : { techniques: [...state.techniques, technique] }
-    ),
-  projects: [],
-  setProjects: (projects) => set({ projects }),
-  materialLabel: '',
-  setMaterialLabel: (label) => set({ materialLabel: label }),
-  pdfDownloadLink: '',
-  setPdfDownloadLink: (link) => set({ pdfDownloadLink: link }),
-  activeMaterial: null,
-  setActiveMaterial: (material) => set({ activeMaterial: material }),
-}))

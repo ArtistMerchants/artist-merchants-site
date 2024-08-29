@@ -1,9 +1,14 @@
+import { ReactNode } from 'react'
+import { defineField, defineType, defineArrayMember } from 'sanity'
 import { HomeIcon } from '@sanity/icons'
-import { defineArrayMember, defineField, defineType } from 'sanity'
+
+const SuperScript = ({ children }: { children: ReactNode }) => {
+  return <sup>{children}</sup>
+}
 
 export default defineType({
-  name: 'informationPage',
-  title: 'Information Page',
+  name: 'homePage',
+  title: 'Home Page',
   icon: HomeIcon,
   type: 'document',
   fields: [
@@ -17,48 +22,18 @@ export default defineType({
           styles: [{ title: 'Normal', value: 'normal' }],
           lists: [],
           marks: {
-            decorators: [{ title: 'Superscript', value: 'superscript' }],
+            decorators: [
+              {
+                title: 'Superscript',
+                value: 'superscript',
+                icon: () => <span>S</span>,
+                component: SuperScript,
+              },
+            ],
           },
         },
       ],
     }),
-    // defineField({
-    //   name: 'faqs',
-    //   title: 'FAQs',
-    //   type: 'object',
-    //   fields: [
-    //     defineField({
-    //       name: 'title',
-    //       title: 'Title',
-    //       type: 'string',
-    //     }),
-    //     defineField({
-    //       name: 'items',
-    //       title: 'Items',
-    //       type: 'array',
-    //       of: [
-    //         defineArrayMember({
-    //           name: 'faqItem',
-    //           title: 'FAQ Item',
-    //           type: 'object',
-    //           fields: [
-    //             defineField({
-    //               name: 'question',
-    //               title: 'Question',
-    //               type: 'string',
-    //             }),
-    //             defineField({
-    //               name: 'answer',
-    //               title: 'Answer',
-    //               type: 'array',
-    //               of: [{ type: 'block' }],
-    //             }),
-    //           ],
-    //         }),
-    //       ],
-    //     }),
-    //   ],
-    // }),
     defineField({
       name: 'contact',
       title: 'Contact',
@@ -99,10 +74,34 @@ export default defineType({
         }),
       ],
     }),
+    defineField({
+      name: 'images',
+      title: 'Images',
+      type: 'array',
+      of: [
+        {
+          name: 'image',
+          title: 'Image',
+          type: 'image',
+          fields: [{ name: 'alt', title: 'Alt', type: 'string' }],
+          preview: {
+            select: {
+              alt: 'alt',
+              asset: 'asset',
+            },
+            prepare: ({ alt, asset }) => ({
+              title: alt || 'Image',
+              subtitle: asset?.caption,
+              media: asset,
+            }),
+          },
+        },
+      ],
+    }),
   ],
   preview: {
     prepare: () => ({
-      title: 'Information Page',
+      title: 'Home Page',
     }),
   },
 })

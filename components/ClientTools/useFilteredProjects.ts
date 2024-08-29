@@ -1,43 +1,70 @@
-import { useMemo } from 'react'
-import { usePathname } from 'next/navigation'
+import { useMemo, useEffect } from 'react'
 import { useClientToolsStore } from 'hooks/useClientToolsStore'
 import { handleize } from 'lib/helpers'
 
-export const useFilteredProjects = ({ projects }): any[] => {
-  const { materials, techniques } = useClientToolsStore()
-  const path = usePathname()
-  const label = useMemo(() => path?.replaceAll('/client-tools/', ''), [path])
+type Project = {
+  taggedMaterials: Array<{ label: string; items: string[] }>
+  taggedTechniques: Array<{ label: string; items: string[] }>
+}
 
-  const filteredProjects: any[] = useMemo(() => {
-    if (materials?.length === 0 && techniques?.length === 0) return projects
+export const useFilteredProjects = ({
+  projects,
+}: {
+  projects: Project[]
+}): Project[] => {
+  const { activeMaterial, materials, techniques, setProjects } =
+    useClientToolsStore((state) => state)
 
-    return projects?.filter((project: any) => {
-      const productMaterials =
-        project.taggedMaterials?.find(
-          (material: any) => handleize(material.label) === label
-        )?.items ?? []
-      const productTechniques =
-        project.taggedTechniques?.find(
-          (technique: any) => handleize(technique.label) === label
-        )?.items ?? []
+  const filteredProjects = useMemo(() => {
+    if (materials.length === 0 && techniques.length === 0) return projects
 
-      const hasTaggedMaterials = productMaterials.some((material: any) =>
-        materials.includes(material)
+    const filteredProjects = projects.filter((project) => {
+      const projectMaterials = getTaggedItems(
+        project.taggedMaterials,
+        activeMaterial
       )
-      const hasTaggedTechniques = productTechniques.some((technique: any) =>
-        techniques.includes(technique)
+      const projectTechniques = getTaggedItems(
+        project.taggedTechniques,
+        activeMaterial
       )
 
-      if (materials?.length >= 1 && techniques?.length <= 0)
+      const hasTaggedMaterials = hasMatchingItems(projectMaterials, materials)
+      const hasTaggedTechniques = hasMatchingItems(
+        projectTechniques,
+        techniques
+      )
+
+      if (materials.length > 0 && techniques.length === 0)
         return hasTaggedMaterials
-      if (techniques?.length >= 1 && materials?.length <= 0)
+      if (techniques.length > 0 && materials.length === 0)
         return hasTaggedTechniques
 
       return hasTaggedMaterials && hasTaggedTechniques
     })
 
-    return projects
-  }, [projects, materials, techniques])
+    return filteredProjects
+  }, [projects, materials, techniques, activeMaterial])
+
+  useEffect(() => {
+    setProjects(filteredProjects)
+  }, [filteredProjects])
 
   return filteredProjects
+}
+
+const getTaggedItems = (
+  taggedItems: Array<{ label: string; items: string[] }>,
+  activeItem: string
+): string[] => {
+  return (
+    taggedItems?.find((item) => handleize(item.label) === activeItem)?.items ??
+    []
+  )
+}
+
+const hasMatchingItems = (
+  projectItems: string[],
+  selectedItems: string[]
+): boolean => {
+  return projectItems.some((item) => selectedItems.includes(item))
 }

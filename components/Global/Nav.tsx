@@ -1,11 +1,11 @@
 import { useCallback } from 'react'
-import { useSiteStore } from 'hooks/useSiteStore'
 import { usePathname } from 'next/navigation'
 
 import Link from 'next/link'
+import { useAuthStore } from 'hooks/useAuthStore'
 
 export const Nav = () => {
-  const { unlocked } = useSiteStore()
+  const { unlocked } = useAuthStore()
   const pathName = usePathname()
 
   const activeClass = useCallback(

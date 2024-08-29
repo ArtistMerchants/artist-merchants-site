@@ -1,31 +1,46 @@
-import { useRef, useEffect, useMemo } from 'react'
+import { useMemo } from 'react'
 import { useClientToolsStore } from 'hooks/useClientToolsStore'
+import { useFilteredProjects } from 'components/ClientTools/useFilteredProjects'
 
 import { AnimatePresence, motion } from 'framer-motion'
-import { useArchiveStore } from 'hooks/useArchiveStore'
 import { ClientToolsProjectList } from './ClientToolsProjectList'
 import { Wordmark } from 'components/Global/Wordmark'
 
-export const ClientToolsListPage = (props) => {
-  const { materials, activeMaterial, projects, settings } = props
+export const ClientToolsListPage = ({ projects }) => {
+  const activeMaterial = useClientToolsStore((state) => state.activeMaterial)
 
-  const {
-    materials: activeMaterials,
-    techniques: activeTechniques,
-    setMaterialLabel,
-  } = useClientToolsStore()
+  const projectsWithCurrentMaterial = useMemo(() => {
+    if (!activeMaterial) {
+      return projects
+    }
 
-  useEffect(() => {
-    setMaterialLabel(activeMaterial?.title)
-  }, [activeMaterial])
+    const filtered = projects.filter((project) => {
+      return project.materials.find(
+        (material) => material.slug === activeMaterial
+      )
+    })
 
-  // ease: [0.22, 0.81, 0.13, 0.98],
+    return filtered
+  }, [projects, activeMaterial])
+
+  const filteredProjects = useFilteredProjects({
+    projects: projectsWithCurrentMaterial,
+  })
 
   return (
     <div className="flex w-full flex-col gap-20">
-      <div className="site-grid w-full">
-        <ClientToolsProjectList projects={projects} />
-      </div>
+      <AnimatePresence mode="wait" initial={false}>
+        <motion.div
+          className="site-grid w-full"
+          key={`${activeMaterial}`}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.35 }}
+        >
+          <ClientToolsProjectList projects={filteredProjects} />
+        </motion.div>
+      </AnimatePresence>
       <div className="site-grid">
         <Wordmark className="h-auto w-full md:col-span-3 md:col-start-2" />
       </div>

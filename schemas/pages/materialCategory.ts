@@ -6,7 +6,7 @@ import {
 
 export default defineType({
   name: 'materialCategory',
-  title: 'Material Categories',
+  title: 'Materials',
   type: 'document',
   orderings: [orderRankOrdering],
   fields: [

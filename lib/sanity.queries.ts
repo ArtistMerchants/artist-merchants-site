@@ -10,6 +10,7 @@ const imageFields = `
 
 const projectFields = `
 _id,
+title,
 "slug": slug.current,
 client,
 year,
@@ -33,6 +34,7 @@ media[] {
 export const settingsQuery = groq`*[_type == "settings"][0] {
   title,
   description,
+  downloadFilename,
   ogImage {
     ${imageFields}
   },
@@ -69,7 +71,7 @@ export const settingsQuery = groq`*[_type == "settings"][0] {
       "slug": slug.current
     },
   },
-  "information": *[_type == "informationPage"][0] {
+  "information": *[_type == "homePage"][0] {
       _id,
       description,
       contact {
@@ -86,7 +88,8 @@ export const settingsQuery = groq`*[_type == "settings"][0] {
 export const homeQuery = groq`
   *[_type == "homePage"][0] {
     ...,
-    title,
+    description,
+    contact,
     images[] {
       _key,
       ${imageFields}
@@ -101,10 +104,6 @@ export const homeQuery = groq`
       title,
       "slug": slug.current
     },
-    "information": *[_type == "informationPage"][0] {
-      _id,
-      description
-    }
   }
 `
 
@@ -179,6 +178,10 @@ export const materialPageQuery = groq`
   },
   "projects": *[_type == "project"] | order(orderRank) {
     ${projectFields},
+    materials[] -> {
+      title,
+      "slug": slug.current,
+    },
     taggedMaterials,
     taggedTechniques,
   }

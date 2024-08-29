@@ -4,7 +4,7 @@ import { getHomePage, getSettings } from 'lib/sanity.client'
 
 import HomePage from 'components/Home/HomePage'
 
-export default function Index({ home, settings, redirect }) {
+export default function Index({ home, settings, preview }) {
   const { setHomeData } = useSiteStore()
 
   useEffect(() => {

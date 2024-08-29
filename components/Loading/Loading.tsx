@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
 import { usePreloadImages } from 'hooks/usePreloadImages'
+import { useAuthStore } from 'hooks/useAuthStore'
 import { useSiteStore } from 'hooks/useSiteStore'
 import { urlForImage } from 'lib/sanity.image'
 
@@ -7,8 +8,8 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { LoadingLogo } from './LoadingLogo'
 
 export const Loading = ({ images = [] }) => {
-  const { loading, setLoading, hasLoaded, setHasLoaded, unlocked } =
-    useSiteStore()
+  const { unlocked } = useAuthStore()
+  const { loading, setLoading, hasLoaded, setHasLoaded } = useSiteStore()
 
   const imageUrls = images.map((image) => urlForImage(image).url())
   const isLoaded = usePreloadImages(imageUrls)

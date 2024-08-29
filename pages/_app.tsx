@@ -1,5 +1,8 @@
-import { useEffect } from 'react'
+import { useEffect, useMemo, useRef } from 'react'
 import { useSiteStore } from 'hooks/useSiteStore'
+import { createClientToolsStore } from 'hooks/createClientToolsStore'
+import { ClientToolsContext } from 'components/ClientTools/ClientTools.context'
+
 import { useThemeSwitcher } from 'hooks/useThemeSwitcher'
 import localFont from 'next/font/local'
 
@@ -8,10 +11,9 @@ import { AnimatePresence } from 'framer-motion'
 import { VH } from 'components/Global/VH'
 import { LayoutUnlocked } from 'components/Layouts/LayoutUnlocked'
 import { LayoutLocked } from 'components/Layouts/LayoutLocked'
-import { Logo } from 'components/Global/Logo'
-import Link from 'next/link'
 
 import '../styles/globals.css'
+import { HomeButton } from 'components/Global/HomeButton'
 
 const constellation = localFont({
   src: [
@@ -50,7 +52,13 @@ export const gerstner = localFont({
 })
 
 function MyApp({ Component, pageProps, router }) {
-  const { setSettings, unlocked } = useSiteStore()
+  const { setSettings } = useSiteStore()
+  const store = useRef(
+    createClientToolsStore({
+      activeMaterial: pageProps?.settings?.materials[0]?.slug,
+      materialLabel: pageProps?.settings?.materials[0]?.title,
+    })
+  ).current
 
   useThemeSwitcher()
 
@@ -58,41 +66,42 @@ function MyApp({ Component, pageProps, router }) {
     setSettings(pageProps.settings)
   }, [pageProps.settings])
 
+  const isLocked = useMemo(() => {
+    const lockedPaths = ['/login', '/']
+    return lockedPaths.includes(router.asPath)
+  }, [router.pathname])
+
   return (
     <div
       className={`${constellation.variable} ${selfModern.variable} ${gerstner.variable} ${gerstner.variable} font-sans`}
     >
       <VH />
-      <Link
-        className="fixed left-20 top-21 z-[20] md:left-32 md:top-32"
-        href="/"
-        aria-hidden
-      >
-        <Logo className="h-auto w-36 md:w-52" />
-      </Link>
+      <HomeButton />
       <ReactLenis
         options={{ lerp: 0.25 }}
         className="scrollbar-hidden relative min-h-screen overflow-auto md:h-screen"
       >
-        <AnimatePresence mode="wait" initial={false}>
-          {unlocked ? (
-            <LayoutUnlocked
-              key={router.route}
-              route={router.route}
-              settings={pageProps?.settings ?? {}}
-            >
-              <Component {...pageProps} />
-            </LayoutUnlocked>
-          ) : (
-            <LayoutLocked
-              key={router.route}
-              route={router.route}
-              settings={pageProps?.settings ?? {}}
-            >
-              <Component {...pageProps} />
-            </LayoutLocked>
-          )}
-        </AnimatePresence>
+        <ClientToolsContext.Provider value={store}>
+          <AnimatePresence mode="wait" initial={false}>
+            {isLocked ? (
+              <LayoutLocked
+                key={router.route}
+                route={router.route}
+                settings={pageProps?.settings ?? {}}
+              >
+                <Component {...pageProps} />
+              </LayoutLocked>
+            ) : (
+              <LayoutUnlocked
+                key={router.route}
+                route={router.route}
+                settings={pageProps?.settings ?? {}}
+              >
+                <Component {...pageProps} />
+              </LayoutUnlocked>
+            )}
+          </AnimatePresence>
+        </ClientToolsContext.Provider>
       </ReactLenis>
     </div>
   )

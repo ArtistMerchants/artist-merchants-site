@@ -8,27 +8,36 @@ import {
 
 export default defineType({
   name: 'project',
-  title: 'Archive Projects',
+  title: 'Projects',
   type: 'document',
   orderings: [orderRankOrdering],
   fields: [
     orderRankField({ type: 'project' }),
     defineField({
-      name: 'client',
-      title: 'Client',
-      type: 'array',
-      of: [{ type: 'string' }],
+      name: 'title',
+      title: 'Title',
+      type: 'string',
     }),
     defineField({
       name: 'slug',
       title: 'Slug',
       type: 'slug',
       options: {
-        source: 'client.0',
-        maxLength: 96,
+        source: 'title',
         isUnique: (value, context) => context.defaultIsUnique(value, context),
       },
       validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: 'client',
+      title: 'Client(s)',
+      type: 'array',
+      of: [{ type: 'string' }],
+    }),
+    defineField({
+      name: 'year',
+      title: 'Year',
+      type: 'string',
     }),
     defineField({
       name: 'media',
@@ -50,11 +59,6 @@ export default defineType({
       of: [{ type: 'reference', to: [{ type: 'projectCategory' }] }],
     }),
     defineField({
-      name: 'year',
-      title: 'Year',
-      type: 'string',
-    }),
-    defineField({
       name: 'materials',
       title: 'Materials',
       type: 'array',
@@ -62,7 +66,7 @@ export default defineType({
     }),
     defineField({
       name: 'taggedMaterials',
-      title: 'Tagged Materials',
+      title: 'Material Filters',
       type: 'array',
       components: {
         input: MaterialsSelect,
@@ -91,7 +95,7 @@ export default defineType({
     }),
     defineField({
       name: 'taggedTechniques',
-      title: 'Tagged Techniques',
+      title: 'Technique Filters',
       type: 'array',
       components: {
         input: TechniquesSelect,
@@ -121,16 +125,17 @@ export default defineType({
   ],
   preview: {
     select: {
-      title: 'client',
+      title: 'title',
+      client: 'client',
       category: 'categories.0.title',
       year: 'year',
       media: 'media',
     },
-    prepare: ({ title, category, year, media }) => {
+    prepare: ({ title, client, category, year, media }) => {
       const image = media?.length > 0 ? media[0] : null
       return {
-        title: title.join(', '),
-        subtitle: `Year: ${year} — Category: ${category}`,
+        title: title,
+        subtitle: `Client: ${client} — Year: ${year} — Category: ${category}`,
         media: image,
       }
     },
