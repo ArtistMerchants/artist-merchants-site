@@ -9,7 +9,7 @@ export const ProjectMediaImage = ({ image }) => {
       layout="preserve-aspect"
       layoutId={`project-media-${image._key}`}
       transition={{
-        duration: 0.55,
+        duration: 0.39,
         ease: [0.32, 0.81, 0.02, 0.98],
       }}
       className="relative w-full transform-gpu overflow-hidden bg-gray will-change-auto"

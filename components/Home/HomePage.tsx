@@ -5,9 +5,9 @@ import { HomeGallery } from './HomeGallery'
 
 export default function HomePage(props) {
   const { images } = props
-  const { loading } = useSiteStore()
+  const { loading, hasLoaded } = useSiteStore()
 
-  if (loading) return null
+  if (loading && !hasLoaded) return null
 
   return (
     <div className="flex h-full w-full flex-1 flex-col justify-between gap-20 md:block">

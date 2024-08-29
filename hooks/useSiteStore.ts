@@ -6,8 +6,6 @@ type SiteStoreProps = {
   setLoading: (loading: boolean) => void
   hasLoaded: boolean
   setHasLoaded: (hasLoaded: boolean) => void
-  unlocked: boolean
-  setUnlocked: (unlocked: boolean) => void
   homeData: any
   setHomeData: (homeData: any) => void
   settings?: any
@@ -21,8 +19,6 @@ export const useSiteStore = create<SiteStoreProps>()(
       setLoading: (loading) => set({ loading }),
       hasLoaded: false,
       setHasLoaded: (hasLoaded) => set({ hasLoaded }),
-      unlocked: false,
-      setUnlocked: (unlocked) => set({ unlocked }),
       homeData: {},
       setHomeData: (homeData) => set({ homeData }),
       settings: {},
@@ -31,10 +27,7 @@ export const useSiteStore = create<SiteStoreProps>()(
     {
       name: 'site-store',
       partialize: (state) => ({
-        loading: state.loading,
-        hasLoaded: state.hasLoaded,
         settings: state.settings,
-        unlocked: state.unlocked,
       }),
     }
   )

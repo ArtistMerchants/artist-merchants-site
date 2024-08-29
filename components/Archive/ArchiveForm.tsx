@@ -41,7 +41,7 @@ export const ArchiveForm = () => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      transition={{ duration: 0.5, ease: 'easeInOut' }}
+      transition={{ duration: 0.39, ease: 'easeInOut' }}
     >
       <form
         className={`flex w-full flex-col gap-6 ${error ? 'animate-shake' : ''}`}
