@@ -17,6 +17,27 @@ export const ClientToolsFilters = ({ materials, techniques }) => {
   const handleMaterialChange = (material) => toggleMaterial(material)
   const handleTechniqueChange = (technique) => toggleTechnique(technique)
 
+  const skipFocusToTechniques = (e) => {
+    e.preventDefault()
+    const techniquesElement: HTMLInputElement | null =
+      document.querySelector('#techniques a')
+    if (techniquesElement) {
+      techniquesElement.focus()
+    }
+  }
+
+  const skipFocusToDownload = (e) => {
+    e.preventDefault()
+
+    const els = document.querySelectorAll('.download-link')
+    els.forEach((el: HTMLButtonElement) => {
+      const style = window.getComputedStyle(el)
+      if (style.display !== 'none' && style.visibility !== 'hidden') {
+        el.focus()
+      }
+    })
+  }
+
   return (
     <HeaderTab className="col-span-2 col-start-1 row-start-3 gap-8 pb-32 pt-8 md:col-span-3 md:row-start-2 md:pt-[100px]">
       <AnimatePresence initial={false} mode="wait">
@@ -28,33 +49,53 @@ export const ClientToolsFilters = ({ materials, techniques }) => {
           exit={{ opacity: 0 }}
           transition={{ duration: 0.39 }}
         >
-          <div className="flex h-fit flex-col items-start gap-14 md:gap-20">
+          <div
+            id="materials"
+            className="relative flex h-fit flex-col items-start gap-14 md:gap-20"
+          >
             <h3 className="text-caption uppercase">Material</h3>
+            <a
+              onClick={skipFocusToTechniques}
+              href="#techniques"
+              className="sr-only focus:not-sr-only focus:absolute focus:bottom-[calc(100%+12px)] focus:z-10 focus:w-fit focus:whitespace-nowrap focus:bg-white focus:p-2 focus:text-12 focus:text-[blue]"
+            >
+              Skip to techniques filters
+            </a>
             <ul className="flex flex-col gap-3">
               {materials?.map((material, index) => (
-                <div key={`${index}-${material}`}>
+                <li key={`${index}-${material}`}>
                   <Checkbox
                     label={material}
                     value={material}
                     onChange={handleMaterialChange}
                     checked={activeMaterials.includes(material)}
                   />
-                </div>
+                </li>
               ))}
             </ul>
           </div>
-          <div className="flex h-fit flex-col items-start gap-14 md:gap-20">
+          <div
+            id="techniques"
+            className="relative flex h-fit flex-col items-start gap-14 md:gap-20"
+          >
             <h3 className="text-caption uppercase">Technique</h3>
+            <a
+              onClick={skipFocusToDownload}
+              href="#download"
+              className="sr-only focus:not-sr-only focus:absolute focus:bottom-[calc(100%+12px)] focus:z-10 focus:w-fit focus:whitespace-nowrap focus:bg-white focus:p-2 focus:text-12 focus:text-[blue]"
+            >
+              Skip to download
+            </a>
             <ul className="flex flex-col gap-3">
               {techniques?.map((technique, index) => (
-                <div key={`${index}-${technique}`}>
+                <li key={`${index}-${technique}`}>
                   <Checkbox
                     label={technique}
                     value={technique}
                     onChange={handleTechniqueChange}
                     checked={activeTechniques.includes(technique)}
                   />
-                </div>
+                </li>
               ))}
             </ul>
           </div>

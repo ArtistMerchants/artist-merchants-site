@@ -62,3 +62,22 @@ html[data-theme='light'] {
 .site-grid {
   @apply px-20 py-20 md:px-0 md:py-32 flex flex-col md:grid md:grid-cols-9;
 }
+
+/* remove outline on all focused elements that support focus-visible */
+
+*:focus:not(:focus-visible) {
+  outline: none;
+  border: none;
+}
+
+*:focus-visible {
+  outline: 1px dotted rgba(0, 0, 0, 0.75);
+  outline-offset: 1px;
+  outline-width: 1px;
+}
+
+.am-checkbox:focus-within {
+  outline: 1px dotted rgba(0, 0, 0, 0.75);
+  outline-offset: 1px;
+  outline-width: 1px;
+}

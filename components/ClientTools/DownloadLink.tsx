@@ -58,14 +58,12 @@ export const DownloadLink = ({ className = '' }) => {
   }
 
   return (
-    <div className={`text-body ${className}`}>
-      <button
-        disabled={isLoading || !projects || projects?.length <= 0}
-        onClick={handleDownload}
-        className="underline-offset-3 ease underline transition-opacity duration-300 disabled:opacity-50"
-      >
-        {isLoading ? 'Downloading...' : 'Download PDF'}
-      </button>
-    </div>
+    <button
+      disabled={isLoading || !projects || projects?.length <= 0}
+      onClick={handleDownload}
+      className={`${className} download-link underline-offset-3 ease w-fit self-start text-left text-body underline transition-opacity duration-300 disabled:opacity-50`}
+    >
+      {isLoading ? 'Downloading...' : 'Download PDF'}
+    </button>
   )
 }

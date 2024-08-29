@@ -5,9 +5,16 @@ import { useFilteredProjects } from 'components/ClientTools/useFilteredProjects'
 import { AnimatePresence, motion } from 'framer-motion'
 import { ClientToolsProjectList } from './ClientToolsProjectList'
 import { Wordmark } from 'components/Global/Wordmark'
+import { useLenis } from '@studio-freight/react-lenis'
 
 export const ClientToolsListPage = ({ projects }) => {
   const activeMaterial = useClientToolsStore((state) => state.activeMaterial)
+
+  const lenis = useLenis()
+
+  const onAnimationComplete = () => {
+    lenis?.resize()
+  }
 
   const projectsWithCurrentMaterial = useMemo(() => {
     if (!activeMaterial) {
@@ -37,6 +44,7 @@ export const ClientToolsListPage = ({ projects }) => {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.39 }}
+          onAnimationComplete={onAnimationComplete}
         >
           <ClientToolsProjectList projects={filteredProjects} />
         </motion.div>

@@ -22,6 +22,7 @@ export const LayoutLocked: FC<LayoutLockedProps> = ({ children, settings }) => {
         <Wordmark className="hidden h-auto w-full md:block" />
       </div>
       <motion.main
+        id="main"
         className="md:col-span-4 md:col-start-5"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}

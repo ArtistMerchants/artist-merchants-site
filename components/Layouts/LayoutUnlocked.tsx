@@ -22,6 +22,7 @@ export const LayoutUnlocked: FC<LayoutUnlockedProps> = ({
       <SiteMeta {...settings} />
       <Loading images={settings?.images} />
       <motion.main
+        id="main"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
