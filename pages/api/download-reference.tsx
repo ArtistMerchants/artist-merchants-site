@@ -193,7 +193,7 @@ export default async function handler(
               <View style={styles.body}>
                 <View style={styles.pageNumber}>
                   <Text style={styles.pageNumberText}>
-                    Page {index + 1} / {projects?.length ?? 0}
+                    Page {index + 1} of {projects?.length ?? 0}
                   </Text>
                 </View>
                 <View style={styles.leftColumn}>
