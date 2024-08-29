@@ -83,13 +83,8 @@ export function ImagePlane({
 
   const aspect = aspectRatio
 
-  let planeWidth = viewport.width
-  let planeHeight = viewport.width / aspect
-
-  if (aspectRatio < 0.6) {
-    planeWidth = viewport.height * aspect
-    planeHeight = viewport.height
-  }
+  const planeWidth = viewport.width
+  const planeHeight = viewport.width / aspect
 
   return (
     <group>
@@ -98,7 +93,7 @@ export function ImagePlane({
         <meshBasicMaterial color="#000" />
       </mesh>
       <mesh>
-        <planeGeometry args={[planeWidth, planeHeight, 64, 64]} />
+        <planeGeometry args={[planeWidth * 0.95, planeHeight * 0.95, 64, 64]} />
         <waveMaterial
           attach="material"
           ref={ref}
