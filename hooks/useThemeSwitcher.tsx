@@ -1,13 +1,10 @@
 import { useEffect } from 'react'
-import { usePathname } from 'next/navigation'
+import { useAuthStore } from 'hooks/useAuthStore'
 
 export const useThemeSwitcher = () => {
-  const path = usePathname()
+  const { unlocked } = useAuthStore()
 
   useEffect(() => {
-    const lockedPaths = ['/login', '/']
-    const unlocked = !lockedPaths.includes(path ?? '')
-
     if (unlocked) {
       document.body.classList.remove('dark')
       document.documentElement.setAttribute('data-theme', 'light')
@@ -17,7 +14,7 @@ export const useThemeSwitcher = () => {
       document.documentElement.setAttribute('data-theme', 'dark')
       document.documentElement.setAttribute('data-theme', 'dark')
     }
-  }, [path])
+  }, [unlocked])
 
   return null
 }

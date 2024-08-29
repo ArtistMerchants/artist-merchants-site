@@ -14,6 +14,7 @@ import { LayoutLocked } from 'components/Layouts/LayoutLocked'
 
 import '../styles/globals.css'
 import { HomeButton } from 'components/Global/HomeButton'
+import { useAuthStore } from 'hooks/useAuthStore'
 
 const constellation = localFont({
   src: [
@@ -52,6 +53,7 @@ export const gerstner = localFont({
 })
 
 function MyApp({ Component, pageProps, router }) {
+  const { unlocked } = useAuthStore()
   const { setSettings } = useSiteStore()
   const store = useRef(
     createClientToolsStore({
@@ -65,11 +67,6 @@ function MyApp({ Component, pageProps, router }) {
     setSettings(pageProps.settings)
   }, [pageProps.settings])
 
-  const isLocked = useMemo(() => {
-    const lockedPaths = ['/login', '/']
-    return lockedPaths.includes(router.asPath)
-  }, [router.pathname])
-
   return (
     <div
       className={`${constellation.variable} ${selfModern.variable} ${gerstner.variable} ${gerstner.variable} font-sans`}
@@ -82,7 +79,7 @@ function MyApp({ Component, pageProps, router }) {
       >
         <ClientToolsContext.Provider value={store}>
           <AnimatePresence mode="wait" initial={false}>
-            {isLocked ? (
+            {!unlocked ? (
               <LayoutLocked
                 key={router.route}
                 route={router.route}

@@ -3,6 +3,7 @@ import { useArchiveStore } from 'hooks/useArchiveStore'
 import { motion } from 'framer-motion'
 
 import { DownloadLink } from 'components/ClientTools/DownloadLink'
+import { HeaderTab } from 'components/Header/HeaderTab'
 
 type ViewSelectorProps = {
   withDownload?: boolean
@@ -23,36 +24,38 @@ export const ViewSelector: FC<ViewSelectorProps> = ({
   )
 
   return (
-    <motion.ul
-      className="col-span-1 col-start-2 row-span-1 row-start-1 flex flex-col md:order-none md:col-start-3"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.39, ease: 'easeInOut' }}
-    >
-      <li>
-        <button
-          onClick={() => setView('single')}
-          aria-selected={currentView === 'single'}
-          className={`ease transition-opacity duration-300 ${activeClass(
-            'single'
-          )}`}
-        >
-          Single View
-        </button>
-      </li>
-      <li>
-        <button
-          onClick={() => setView('multi')}
-          aria-selected={currentView === 'multi'}
-          className={`ease transition-opacity duration-300 ${activeClass(
-            'multi'
-          )}`}
-        >
-          Multi View
-        </button>
-      </li>
-      {withDownload && <DownloadLink className="pt-10 md:hidden" />}
-    </motion.ul>
+    <HeaderTab className="col-span-1 col-start-2 row-span-1 row-start-1 md:order-none md:col-start-3">
+      <motion.ul
+        className="flex flex-col"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        transition={{ duration: 0.39, ease: 'easeInOut' }}
+      >
+        <li>
+          <button
+            onClick={() => setView('single')}
+            aria-selected={currentView === 'single'}
+            className={`ease transition-opacity duration-300 ${activeClass(
+              'single'
+            )}`}
+          >
+            Single View
+          </button>
+        </li>
+        <li>
+          <button
+            onClick={() => setView('multi')}
+            aria-selected={currentView === 'multi'}
+            className={`ease transition-opacity duration-300 ${activeClass(
+              'multi'
+            )}`}
+          >
+            Multi View
+          </button>
+        </li>
+        {withDownload && <DownloadLink className="pt-10 md:hidden" />}
+      </motion.ul>
+    </HeaderTab>
   )
 }

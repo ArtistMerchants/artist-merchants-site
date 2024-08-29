@@ -17,7 +17,7 @@ export const HeaderTab: FC<HeaderTabProps> = ({ children, className }) => {
        * This is hacky, but needs to be .01 shorter than the main layout transition
        * so layout doesn't shift because of elements with `layout` set
        */
-      transition={{ duration: 0.39 }}
+      transition={{ duration: 0.3 }}
     >
       {children}
     </motion.div>

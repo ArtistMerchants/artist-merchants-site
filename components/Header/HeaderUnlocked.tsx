@@ -85,7 +85,13 @@ const MainHeaderSection = ({ path, categories, materials, activeProject }) => (
 
 const ViewSelectorSection = ({ path, viewSelectorActive }) => (
   <AnimatePresence mode="wait" initial={false}>
-    {viewSelectorActive ? <ViewSelector key={`view-selector-${path}`} /> : null}
+    {viewSelectorActive ? (
+      <ViewSelector key={`view-selector-${path}`} />
+    ) : (
+      <HeaderTab key="placeholder-view-selector">
+        <span></span>
+      </HeaderTab>
+    )}
   </AnimatePresence>
 )
 

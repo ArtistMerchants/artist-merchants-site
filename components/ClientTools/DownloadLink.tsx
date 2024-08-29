@@ -29,8 +29,6 @@ export const DownloadLink = ({ className = '' }) => {
     })
   }, [projects])
 
-  console.log(projectObject)
-
   const handleDownload = async () => {
     setIsLoading(true)
     try {
