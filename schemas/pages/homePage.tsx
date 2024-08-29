@@ -43,6 +43,7 @@ export default defineType({
           name: 'title',
           title: 'Title',
           type: 'string',
+          description: 'Optional title for the contact section',
         }),
         defineField({
           name: 'items',
