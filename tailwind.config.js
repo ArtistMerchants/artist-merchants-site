@@ -110,9 +110,11 @@ module.exports = {
       },
       height: {
         screen: 'calc(var(--vh, 1vh) * 100)',
+        'screen-s': '100svh',
       },
       minHeight: {
         screen: 'calc(var(--vh, 1vh) * 100)',
+        'screen-s': '100svh',
       },
       // responsive sizes
       screens: {

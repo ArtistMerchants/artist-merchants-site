@@ -20,7 +20,9 @@ export const HeaderUnlocked = ({ categories, materials, activeProject }) => {
     return materials?.find((material) => material.slug === activeMaterial)
   }, [activeMaterial, materials])
 
-  const viewSelectorActive = path === '/archive' || path === '/client-tools'
+  const viewSelectorActive = useMemo(() => {
+    return path === '/archive' || path === '/client-tools'
+  }, [path])
 
   return (
     <header className="relative z-[10] grid grid-cols-2 gap-10 pl-55 md:col-span-3 md:col-start-2 md:grid-cols-3 md:pl-0">
@@ -86,7 +88,7 @@ const MainHeaderSection = ({ path, categories, materials, activeProject }) => (
 const ViewSelectorSection = ({ path, viewSelectorActive }) => (
   <AnimatePresence mode="wait" initial={false}>
     {viewSelectorActive ? (
-      <ViewSelector key={`view-selector-${path}`} />
+      <ViewSelector key={`view-selector-${path}`} withDownload={true} />
     ) : (
       <HeaderTab key="placeholder-view-selector">
         <span></span>

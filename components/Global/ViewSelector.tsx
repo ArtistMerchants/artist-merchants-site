@@ -25,13 +25,7 @@ export const ViewSelector: FC<ViewSelectorProps> = ({
 
   return (
     <HeaderTab className="col-span-1 col-start-2 row-span-1 row-start-1 md:order-none md:col-start-3">
-      <motion.ul
-        className="flex flex-col"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        transition={{ duration: 0.39, ease: 'easeInOut' }}
-      >
+      <ul className="flex flex-col">
         <li>
           <button
             onClick={() => setView('single')}
@@ -55,7 +49,7 @@ export const ViewSelector: FC<ViewSelectorProps> = ({
           </button>
         </li>
         {withDownload && <DownloadLink className="pt-10 md:hidden" />}
-      </motion.ul>
+      </ul>
     </HeaderTab>
   )
 }
