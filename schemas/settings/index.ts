@@ -44,6 +44,7 @@ export default defineType({
     defineField({
       name: 'downloadFilename',
       title: 'Downloaded PDF Filename',
+      description: 'Note: do not add .pdf, this will be added automatically',
       type: 'string',
       group: 'download',
     }),

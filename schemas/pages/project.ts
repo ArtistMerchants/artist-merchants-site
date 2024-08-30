@@ -1,6 +1,6 @@
 import { defineArrayMember, defineField, defineType } from 'sanity'
-import { MaterialsSelect } from 'components/Sanity/MaterialsSelect'
-import { TechniquesSelect } from 'components/Sanity/TechniquesSelect'
+import { MaterialsSelect } from '../../components/Sanity/MaterialsSelect'
+import { TechniquesSelect } from '../../components/Sanity/TechniquesSelect'
 import {
   orderRankField,
   orderRankOrdering,

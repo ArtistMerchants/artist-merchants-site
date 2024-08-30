@@ -49,9 +49,6 @@ export const ClientToolsListPage = ({ projects }) => {
           <ClientToolsProjectList projects={filteredProjects} />
         </motion.div>
       </AnimatePresence>
-      <div className="site-grid">
-        <Wordmark className="h-auto w-full md:col-span-3 md:col-start-2" />
-      </div>
     </div>
   )
 }

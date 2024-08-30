@@ -2,7 +2,6 @@ import { useMemo } from 'react'
 import { useArchiveStore } from 'hooks/useArchiveStore'
 import { AnimatePresence, motion } from 'framer-motion'
 import { ProjectList } from 'components/Projects/ProjectList'
-import { Wordmark } from 'components/Global/Wordmark'
 
 export const ArchiveListPage = ({ projects }) => {
   const { activeCategory } = useArchiveStore()
@@ -30,9 +29,6 @@ export const ArchiveListPage = ({ projects }) => {
           <ProjectList projects={filteredProjects} />
         </motion.div>
       </AnimatePresence>
-      <div className="site-grid">
-        <Wordmark className="h-auto w-full md:col-span-3 md:col-start-2" />
-      </div>
     </div>
   )
 }

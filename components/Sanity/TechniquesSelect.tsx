@@ -1,8 +1,8 @@
 import { useEffect, useState, useRef } from 'react'
 import { uuid } from '@sanity/uuid'
 import { useFormValue, set } from 'sanity'
-import { client } from 'lib/sanity.client'
-import { materialsFromRefsQuery } from 'lib/sanity.queries'
+import { client } from '../../lib/sanity.client'
+import { materialsFromRefsQuery } from '../../lib/sanity.queries'
 import Select from 'react-select'
 
 import { Stack, Text } from '@sanity/ui'

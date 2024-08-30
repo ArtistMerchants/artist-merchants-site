@@ -20,7 +20,7 @@ export const ClientToolsProjectList = ({
 
   return (
     <section
-      className={`grid min-h-screen-s md:col-span-7 md:col-start-2 ${gridClass} gap-4 md:gap-10`}
+      className={`grid md:col-span-7 md:col-start-2 ${gridClass} gap-4 md:gap-10`}
     >
       {projects?.map((project: any) => {
         return (

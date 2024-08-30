@@ -88,7 +88,10 @@ const MainHeaderSection = ({ path, categories, materials, activeProject }) => (
 const ViewSelectorSection = ({ path, viewSelectorActive }) => (
   <AnimatePresence mode="wait" initial={false}>
     {viewSelectorActive ? (
-      <ViewSelector key={`view-selector-${path}`} withDownload={true} />
+      <ViewSelector
+        key={`view-selector-${path}`}
+        withDownload={path === '/client-tools'}
+      />
     ) : (
       <HeaderTab key="placeholder-view-selector">
         <span></span>
