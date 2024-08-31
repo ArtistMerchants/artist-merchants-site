@@ -1,4 +1,4 @@
-import { apiVersion, dataset, projectId, useCdn } from 'lib/sanity.api'
+import { apiVersion, dataset, projectId, useCdn } from '../lib/sanity.api'
 import {
   type Settings,
   type Home,
@@ -10,7 +10,7 @@ import {
   projectPathsQuery,
   materialCategoryPathsQuery,
   materialPageQuery,
-} from 'lib/sanity.queries'
+} from '../lib/sanity.queries'
 import { createClient } from 'next-sanity'
 
 export const client = createClient({ projectId, dataset, apiVersion, useCdn })

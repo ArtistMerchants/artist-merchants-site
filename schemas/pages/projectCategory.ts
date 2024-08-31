@@ -6,11 +6,11 @@ import {
 
 export default defineType({
   name: 'projectCategory',
-  title: 'Categories',
+  title: 'Categories (Archive)',
   type: 'document',
   orderings: [orderRankOrdering],
   fields: [
-    orderRankField({ type: 'projectCategory' }),
+    orderRankField({ type: 'projectCategory', newItemPosition: 'before' }),
     defineField({
       name: 'title',
       title: 'Title',

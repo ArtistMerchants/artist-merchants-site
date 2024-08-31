@@ -1,5 +1,6 @@
 import { useEffect, useState, useRef } from 'react'
 import { uuid } from '@sanity/uuid'
+import { compareArrays } from '../../lib/helpers'
 import { useFormValue, set } from 'sanity'
 import { client } from '../../lib/sanity.client'
 import { materialsFromRefsQuery } from '../../lib/sanity.queries'
@@ -39,7 +40,7 @@ export const MaterialsSelect = (props) => {
   useEffect(() => {
     if (
       materialsRefs &&
-      materialsRefs?.length !== lastMaterialsRefs.current?.length
+      !compareArrays(materialsRefs, lastMaterialsRefs.current)
     ) {
       client
         .fetch(materialsFromRefsQuery, { ids: materialsRefs })
@@ -59,6 +60,8 @@ export const MaterialsSelect = (props) => {
       lastMaterialsRefs.current = materialsRefs
     }
   }, [materialsRefs])
+
+  if (!materials?.length) return null
 
   return (
     <Stack space={3} paddingTop={3}>
@@ -82,6 +85,11 @@ export const MaterialsSelect = (props) => {
               options={material.items}
               onChange={(selected) => handleChange(selected, material.label)}
               styles={{
+                menu: (base) => ({
+                  ...base,
+                  backgroundColor: 'var(--card-bg-color)',
+                  border: '1px solid var(--card-border-color)',
+                }),
                 control: (base) => ({
                   ...base,
                   backgroundColor: 'transparent',
@@ -90,17 +98,22 @@ export const MaterialsSelect = (props) => {
                     borderColor: 'var(--card-border-color)',
                   },
                 }),
-                option: (styles) => ({
+                option: (styles, { isFocused, isSelected }) => ({
                   ...styles,
                   color: 'var(--card-fg-color)',
+                  backgroundColor: 'var(--card-bg-color)',
+                  '&:hover, &:active, &:focus': {
+                    backgroundColor: 'var(--card-code-bg-color)',
+                  },
                 }),
                 multiValue: (styles) => ({
                   ...styles,
-                  backgroundColor: 'var(--card-border-color)',
+                  backgroundColor: 'var(--card-code-bg-color)',
                 }),
                 multiValueLabel: (styles) => ({
                   ...styles,
                   color: 'var(--card-fg-color)',
+                  backgroundColor: 'var(--card-code-bg-color)',
                 }),
               }}
             />

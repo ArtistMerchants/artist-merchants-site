@@ -10,25 +10,24 @@ export const SiteImage: React.FC<SiteImageProps> = ({ image, sizes }) => {
   if (!image) return null
 
   const srcSet = `
-    ${urlForImage(image).width(320).url()} 320w,
-    ${urlForImage(image).width(480).url()} 480w,
-    ${urlForImage(image).width(800).url()} 800w,
-    ${urlForImage(image).width(1200).url()} 1200w,
-    ${urlForImage(image).width(1600).url()} 1600w,
-    ${urlForImage(image).width(2000).url()} 2000w
+    ${urlForImage(image).width(320).auto('format').quality(95).url()} 320w,
+    ${urlForImage(image).width(480).auto('format').quality(95).url()} 480w,
+    ${urlForImage(image).width(800).auto('format').quality(95).url()} 800w,
+    ${urlForImage(image).width(1200).auto('format').quality(95).url()} 1200w,
+    ${urlForImage(image).width(1600).auto('format').quality(95).url()} 1600w,
+    ${urlForImage(image).width(2000).auto('format').quality(95).url()} 2000w
   `
 
-  const src = urlForImage(image).width(800).url() // Default image URL
+  const src = urlForImage(image).width(300).url()
 
   return (
-    <picture className="absolute inset-0 h-full w-full">
-      <source srcSet={srcSet} sizes={sizes} />
-      <img
-        src={src}
-        alt={image.alt}
-        style={{ aspectRatio: image.aspectRatio }}
-        className="h-full w-full transform-gpu object-contain mix-blend-darken will-change-auto"
-      />
-    </picture>
+    <img
+      src={src}
+      srcSet={srcSet}
+      alt={image.alt}
+      sizes={sizes}
+      style={{ aspectRatio: image.aspectRatio, objectFit: 'cover' }}
+      className="absolute inset-0 h-full w-full transform-gpu object-contain mix-blend-darken will-change-auto"
+    />
   )
 }

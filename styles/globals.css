@@ -76,7 +76,7 @@ html[data-theme='light'] {
   outline-width: 1px;
 }
 
-.am-checkbox:focus-within {
+.am-checkbox:has(input:focus-visible) {
   outline: 1px dotted rgba(0, 0, 0, 0.75);
   outline-offset: 1px;
   outline-width: 1px;

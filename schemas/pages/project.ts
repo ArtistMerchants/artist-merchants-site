@@ -1,6 +1,8 @@
 import { defineArrayMember, defineField, defineType } from 'sanity'
 import { MaterialsSelect } from '../../components/Sanity/MaterialsSelect'
 import { TechniquesSelect } from '../../components/Sanity/TechniquesSelect'
+import { OrderedArrayInput } from '../../components/Sanity/OrderedArrayInput'
+import { ImagePreview } from '../../components/Sanity/ImagePreview'
 import {
   orderRankField,
   orderRankOrdering,
@@ -12,7 +14,7 @@ export default defineType({
   type: 'document',
   orderings: [orderRankOrdering],
   fields: [
-    orderRankField({ type: 'project' }),
+    orderRankField({ type: 'project', newItemPosition: 'before' }),
     defineField({
       name: 'title',
       title: 'Title',
@@ -31,24 +33,32 @@ export default defineType({
     defineField({
       name: 'client',
       title: 'Client(s)',
+      description: "Leave blank you don't want the client to show on the site",
       type: 'array',
       of: [{ type: 'string' }],
     }),
     defineField({
       name: 'year',
       title: 'Year',
+      description: "Leave blank you don't want the year to show on the site",
       type: 'string',
     }),
     defineField({
       name: 'media',
       title: 'Media',
       type: 'array',
+      components: {
+        input: OrderedArrayInput,
+      },
       of: [
         {
           name: 'image',
           title: 'Image',
           type: 'image',
           fields: [{ name: 'alt', title: 'Alt', type: 'string' }],
+          components: {
+            preview: ImagePreview,
+          },
         },
       ],
     }),

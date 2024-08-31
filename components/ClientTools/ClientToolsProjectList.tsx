@@ -32,66 +32,6 @@ export const ClientToolsProjectList = ({
           />
         )
       })}
-      {projects?.map((project: any) => {
-        return (
-          <ProjectCard
-            listIndex={1}
-            key={project._id}
-            {...project}
-            id={project._id}
-          />
-        )
-      })}
-      {projects?.map((project: any) => {
-        return (
-          <ProjectCard
-            listIndex={2}
-            key={project._id}
-            {...project}
-            id={project._id}
-          />
-        )
-      })}
-      {projects?.map((project: any) => {
-        return (
-          <ProjectCard
-            listIndex={3}
-            key={project._id}
-            {...project}
-            id={project._id}
-          />
-        )
-      })}
-      {projects?.map((project: any) => {
-        return (
-          <ProjectCard
-            listIndex={4}
-            key={project._id}
-            {...project}
-            id={project._id}
-          />
-        )
-      })}
-      {projects?.map((project: any) => {
-        return (
-          <ProjectCard
-            listIndex={5}
-            key={project._id}
-            {...project}
-            id={project._id}
-          />
-        )
-      })}
-      {projects?.map((project: any) => {
-        return (
-          <ProjectCard
-            listIndex={6}
-            key={project._id}
-            {...project}
-            id={project._id}
-          />
-        )
-      })}
     </section>
   )
 }

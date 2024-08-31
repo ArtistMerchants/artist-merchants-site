@@ -1,6 +1,7 @@
 import { useEffect, useState, useRef } from 'react'
 import { uuid } from '@sanity/uuid'
 import { useFormValue, set } from 'sanity'
+import { compareArrays } from '../../lib/helpers'
 import { client } from '../../lib/sanity.client'
 import { materialsFromRefsQuery } from '../../lib/sanity.queries'
 import Select from 'react-select'
@@ -39,7 +40,7 @@ export const TechniquesSelect = (props) => {
   useEffect(() => {
     if (
       materialsRefs &&
-      materialsRefs?.length !== lastMaterialsRefs.current?.length
+      !compareArrays(materialsRefs, lastMaterialsRefs.current)
     ) {
       client
         .fetch(materialsFromRefsQuery, { ids: materialsRefs })
@@ -59,6 +60,8 @@ export const TechniquesSelect = (props) => {
       lastMaterialsRefs.current = materialsRefs
     }
   }, [materialsRefs])
+
+  if (!techniques?.length) return null
 
   return (
     <Stack space={3} paddingTop={3}>

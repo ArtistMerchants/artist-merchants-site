@@ -17,7 +17,7 @@ export const ProjectCard = ({
 }) => {
   const firstMedia = media?.[0]
   const { unlocked } = useAuthStore()
-  const { activeCategory } = useArchiveStore()
+  const { activeCategory, view } = useArchiveStore()
   const { activeMaterial } = useClientToolsStore((state) => state)
   const path = usePathname()
 
@@ -32,7 +32,12 @@ export const ProjectCard = ({
       className="relative aspect-[2/1.7] w-full overflow-hidden bg-gray will-change-auto"
     >
       <Link href={`/archive/${slug}`}>
-        {firstMedia ? <SiteImage image={firstMedia} sizes="800px" /> : null}
+        {firstMedia ? (
+          <SiteImage
+            image={firstMedia}
+            sizes={view === 'multi' ? '(max-width: 768px) 33vw, 30vw' : '90vw'}
+          />
+        ) : null}
         <span className="sr-only">
           Project for {client?.join(', ')} from {year}
         </span>

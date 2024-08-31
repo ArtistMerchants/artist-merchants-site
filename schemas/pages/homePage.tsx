@@ -77,7 +77,8 @@ export default defineType({
     }),
     defineField({
       name: 'images',
-      title: 'Images',
+      title: 'Masked Images',
+      description: 'Masked images should all have a white background',
       type: 'array',
       of: [
         {

@@ -6,11 +6,11 @@ import {
 
 export default defineType({
   name: 'materialCategory',
-  title: 'Materials',
+  title: 'Materials (Client Tools)',
   type: 'document',
   orderings: [orderRankOrdering],
   fields: [
-    orderRankField({ type: 'materialCategory' }),
+    orderRankField({ type: 'materialCategory', newItemPosition: 'before' }),
     defineField({
       name: 'title',
       title: 'Title',

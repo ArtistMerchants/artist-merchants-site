@@ -10,13 +10,12 @@ import project from './schemas/pages/project'
 import projectCategory from './schemas/pages/projectCategory'
 import materialCategory from './schemas/pages/materialCategory'
 
-const title =
-  process.env.NEXT_PUBLIC_SANITY_PROJECT_TITLE || 'Nextjs + Sanity Starter'
+const title = 'Artist Merchants'
 
 export default defineConfig({
-  basePath: '/studio',
   projectId,
   dataset,
+  basePath: '/studio',
   title,
   schema: {
     types: [settings, homePage, project, projectCategory, materialCategory],

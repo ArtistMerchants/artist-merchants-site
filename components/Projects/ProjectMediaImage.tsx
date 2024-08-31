@@ -15,7 +15,7 @@ export const ProjectMediaImage = ({ image }) => {
       className="relative w-full transform-gpu overflow-hidden bg-gray will-change-auto"
       style={{ aspectRatio: image.aspectRatio }}
     >
-      <SiteImage image={image} sizes="800px" />
+      <SiteImage image={image} sizes="(max-width: 768px) 90vw, 50vw" />
     </motion.div>
   )
 }
