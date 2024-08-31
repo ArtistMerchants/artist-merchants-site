@@ -15,7 +15,7 @@ import materialCategory from './schemas/pages/materialCategory'
 
 const title = 'Artist Merchants'
 
-const MyCustomTool = (props) => {
+const ToolMenuOverride = (props) => {
   const { renderDefault } = props
   return (
     <Flex align="center" gap={2}>
@@ -45,7 +45,7 @@ export default defineConfig({
   icon: StudioIcon,
   studio: {
     components: {
-      toolMenu: MyCustomTool,
+      toolMenu: ToolMenuOverride,
     },
   },
   schema: {
