@@ -24,7 +24,7 @@ const MyCustomTool = (props) => {
         as="a"
         href="https://artist-merchants.vercel.app/"
         target="_blank"
-        text="View Live Site"
+        text="View Staging Site"
         iconRight={ArrowRightIcon}
         mode="bleed"
         selected={true}
