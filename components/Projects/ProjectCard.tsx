@@ -36,6 +36,7 @@ export const ProjectCard = ({
           <SiteImage
             image={firstMedia}
             sizes={view === 'multi' ? '(max-width: 768px) 33vw, 30vw' : '90vw'}
+            fit="contain"
           />
         ) : null}
         <span className="sr-only">

@@ -15,9 +15,11 @@ export const HeaderLocked = ({ information }) => {
         <Nav />
       </div>
 
-      <motion.div className="col-span-2" layout={true}>
+      <motion.div className="col-span-2">
         <AnimatePresence mode="wait" initial={false}>
-          {path === '/' ? <InfoHeader data={information} key="info" /> : null}
+          {path === '/info' ? (
+            <InfoHeader data={information} key="info" />
+          ) : null}
 
           {path?.includes('/archive') || path === '/login' ? (
             <HeaderTab key="archive">

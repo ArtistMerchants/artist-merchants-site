@@ -4,9 +4,14 @@ import { urlForImage } from 'lib/sanity.image'
 interface SiteImageProps {
   image: any
   sizes: string
+  fit?: 'cover' | 'contain'
 }
 
-export const SiteImage: React.FC<SiteImageProps> = ({ image, sizes }) => {
+export const SiteImage: React.FC<SiteImageProps> = ({
+  image,
+  sizes,
+  fit = 'cover',
+}) => {
   if (!image) return null
 
   const srcSet = `
@@ -26,8 +31,8 @@ export const SiteImage: React.FC<SiteImageProps> = ({ image, sizes }) => {
       srcSet={srcSet}
       alt={image.alt}
       sizes={sizes}
-      style={{ aspectRatio: image.aspectRatio, objectFit: 'cover' }}
-      className="absolute inset-0 h-full w-full transform-gpu object-contain mix-blend-darken will-change-auto"
+      style={{ objectFit: fit }}
+      className="absolute inset-0 h-full w-full transform-gpu mix-blend-darken will-change-auto"
     />
   )
 }

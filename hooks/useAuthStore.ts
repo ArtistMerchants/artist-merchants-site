@@ -5,7 +5,7 @@ export const useAuthStore = () => {
   const path = usePathname()
 
   const checkIfUnlocked = () => {
-    const lockedPaths = ['/login', '/']
+    const lockedPaths = ['/login', '/', '/info']
     if (!path) return false
 
     return !lockedPaths.includes(path)

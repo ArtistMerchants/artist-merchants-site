@@ -10,7 +10,8 @@ export const Nav = () => {
 
   const activeClass = useCallback(
     (path: string) => {
-      if (path === '/' && pathName === '/') return 'opacity-100'
+      if (pathName === '/')
+        return 'opacity-100 group-hover:opacity-50 group-hover:hover:opacity-100'
       if (path !== '/' && (path === pathName || pathName?.includes(path)))
         return 'opacity-100'
 
@@ -24,9 +25,9 @@ export const Nav = () => {
       {!unlocked ? (
         <li>
           <Link
-            href="/"
-            className={`ease inline-block py-1 transition-opacity duration-500 ${activeClass(
-              '/'
+            href="/info"
+            className={`ease duration-350 inline-block py-1 transition-opacity ${activeClass(
+              '/info'
             )}`}
           >
             Information
@@ -36,7 +37,7 @@ export const Nav = () => {
       <li>
         <Link
           href={unlocked ? '/archive' : '/login'}
-          className={`ease inline-block py-1 transition-opacity duration-500 ${activeClass(
+          className={`ease duration-350 inline-block py-1 transition-opacity ${activeClass(
             unlocked ? '/archive' : '/login'
           )}`}
         >
@@ -47,7 +48,7 @@ export const Nav = () => {
         <li>
           <Link
             href={`/client-tools`}
-            className={`ease inline-block py-1 transition-opacity duration-500 ${activeClass(
+            className={`ease duration-350 inline-block py-1 transition-opacity ${activeClass(
               '/client-tools'
             )}`}
           >

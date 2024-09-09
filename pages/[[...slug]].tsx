@@ -23,6 +23,11 @@ export async function getStaticPaths() {
     },
     {
       params: {
+        slug: ['info'],
+      },
+    },
+    {
+      params: {
         slug: ['login'],
       },
     },

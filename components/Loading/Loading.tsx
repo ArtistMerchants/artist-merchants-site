@@ -26,7 +26,7 @@ export const Loading = ({ images = [] }) => {
           className="fixed inset-0 z-[9999] flex h-full w-full items-center justify-center bg-black text-white"
         >
           <motion.div
-            className="absolute flex h-[80px] w-[50vh] items-center justify-center md:h-[200px]"
+            className="absolute flex h-[80px] w-[50vh] items-center justify-center md:h-[130px]"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 1 }}
