@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { useSiteStore } from 'hooks/useSiteStore'
 
 import { Wordmark } from 'components/Global/Wordmark'
@@ -10,10 +11,20 @@ export default function HomePage(props) {
 
   const path = usePathname()
 
+  useEffect(() => {
+    if (typeof window !== 'undefined' && window.innerWidth < 768) {
+      document.body.classList.add('overflow-hidden')
+
+      return () => {
+        document.body.classList.remove('overflow-hidden')
+      }
+    }
+  }, [])
+
   if (loading && !hasLoaded) return null
 
   return (
-    <div className="fixed inset-0 flex h-screen w-full flex-col justify-end gap-10 px-20 md:relative md:block md:px-0">
+    <div className="fixed inset-0 flex h-screen w-full flex-col justify-end gap-10 px-20 md:relative md:block md:h-full md:px-0">
       <div
         className={`
           ease-global ml-auto aspect-[2/2.5] h-auto w-full origin-bottom transition-[transform,opacity] duration-[450ms] md:aspect-[unset] md:h-full md:w-[90%]

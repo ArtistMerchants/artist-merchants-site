@@ -33,11 +33,15 @@ export const HomeGalleryMasked: FC<HomeGalleryMaskedProps> = ({
 
   return (
     <motion.div
-      className="absolute inset-0 z-[10] h-full w-full"
+      className="absolute inset-0 z-[10] h-full w-full select-none"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.65, ease: 'linear' }}
+      onMouseEnter={handlePointerEnter}
+      onMouseLeave={handlePointerLeave}
+      onTouchStart={handlePointerEnter}
+      onTouchEnd={handlePointerLeave}
     >
       <Canvas
         style={{
@@ -56,10 +60,7 @@ export const HomeGalleryMasked: FC<HomeGalleryMaskedProps> = ({
         dpr={2}
         gl={{ alpha: true }}
       >
-        <mesh
-          onPointerEnter={handlePointerEnter}
-          onPointerLeave={handlePointerLeave}
-        >
+        <mesh>
           {images?.map((image: any, index: number) => {
             const url = urlForImage(image)
               .width(600)

@@ -22,7 +22,7 @@ export const HomeGallery = ({ images = [] }) => {
   }, [images, activeIndex])
 
   return (
-    <div ref={ref} className="relative h-full w-full">
+    <div ref={ref} className="relative h-full w-full touch-none select-none">
       <AnimatePresence mode="wait">
         {unlocked ? (
           <HomeGalleryUnmasked
