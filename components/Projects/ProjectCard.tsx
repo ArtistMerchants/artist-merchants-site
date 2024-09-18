@@ -29,7 +29,7 @@ export const ProjectCard = ({
         duration: 0.65,
         ease: [0.42, 0.71, 0.02, 0.99],
       }}
-      className="relative aspect-[2/1.7] w-full overflow-hidden bg-gray will-change-auto"
+      className="relative aspect-[2/1.7] w-full overflow-hidden bg-light-gray will-change-auto"
     >
       <Link href={`/archive/${slug}`}>
         {firstMedia ? (

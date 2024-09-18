@@ -25,7 +25,7 @@ export const Nav = () => {
       {!unlocked ? (
         <li>
           <Link
-            href="/info"
+            href={pathName === '/info' ? '/' : '/info'}
             className={`ease duration-350 inline-block py-1 transition-opacity ${activeClass(
               '/info'
             )}`}
@@ -36,7 +36,7 @@ export const Nav = () => {
       ) : null}
       <li>
         <Link
-          href={unlocked ? '/archive' : '/login'}
+          href={unlocked ? '/archive' : pathName === '/login' ? '/' : '/login'}
           className={`ease duration-350 inline-block py-1 transition-opacity ${activeClass(
             unlocked ? '/archive' : '/login'
           )}`}

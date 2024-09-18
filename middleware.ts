@@ -8,7 +8,8 @@ export async function middleware(req: NextRequest) {
   const passwords = settings?.passwords
 
   const isValidPassword = passwords?.includes(unlockedCookie?.value)
-  const isHomePage = req.nextUrl.pathname === '/'
+  const homePaths = ['/', '/info']
+  const isHomePage = homePaths.includes(req.nextUrl.pathname)
 
   if (!isValidPassword || !unlockedCookie) {
     // Clear the cookie

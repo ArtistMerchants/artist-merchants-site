@@ -21,6 +21,7 @@ module.exports = {
         'off-white': '#F8F8F8',
         black: '#000000',
         gray: '#E6E6E7',
+        'light-gray': '#F7F7F8',
       },
       spacing: {
         panel: 'calc(calc(calc(100vw - 64px) / 9) + 32px)',
@@ -90,6 +91,9 @@ module.exports = {
       },
       animation: {
         shake: 'shake 0.82s cubic-bezier(.36,.07,.19,.97) both',
+      },
+      transitionTimingFunction: {
+        'ease-global': 'cubic-bezier(0.8, 0.01, 0.21, 0.98)',
       },
       keyframes: {
         shake: {
