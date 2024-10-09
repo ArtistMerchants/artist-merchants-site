@@ -84,7 +84,17 @@ export const WaveMaterial: any = shaderMaterial(
       vec2 mousePositions = uMouse * 0.5 + 0.5;
       float circleInfluence = circle(vUv, mousePositions, 0.5);
 
-      vec4 invertedColor = vec4(.8 - texColor.r, .8 - texColor.g, .8 - texColor.b, 0.0);
+      vec4 invertedColor = vec4(0.8 - texColor.r, 0.8 - texColor.g, 0.8 - texColor.b, 1.0);
+
+      // Define brightness and contrast adjustment values
+      float brightnessAdjustment = -0.3;
+      float contrastAdjustment = 1.35;
+
+      invertedColor.rgb += brightnessAdjustment;
+
+      invertedColor.rgb = (invertedColor.rgb - 0.5) * contrastAdjustment + 0.5;
+
+      invertedColor.rgb = clamp(invertedColor.rgb, 0.0, 1.0);
       
       vec4 darkenedColor = vec4(0.0, 0.0, 0.0, 1.0);
 

@@ -99,9 +99,7 @@ export function ImagePlane({
           ref={ref}
           key={WaveMaterial.key}
           map={texture}
-          toneMapped={true}
           transparent={true}
-          blending={NormalBlending}
           side={DoubleSide}
         ></waveMaterial>
       </mesh>

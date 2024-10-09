@@ -12,7 +12,6 @@ class AsciiEffect {
       alpha = false,
       block = false,
       invert = false,
-      strResolution = 'low',
     } = options
 
     let width, height, iWidth, iHeight
@@ -27,13 +26,13 @@ class AsciiEffect {
     const oCtx = oCanvas.getContext('2d')
 
     const strFont = 'var(--font-constellation)'
-    const fFontSize = 16
-    const fLineHeight = (0.678 / resolution) * scale
+    const fFontSize = 14
+    const fLineHeight = (0.67 / resolution) * scale
 
     const aCharList = (
       charSet || (color ? ' CGO08@' : ' .,:;i1tfLCG08@')
     ).split('')
-    const fLetterSpacing = calculateLetterSpacing(strResolution, scale)
+    const fLetterSpacing = getLetterSpacing()
 
     const asciiLookup = new Array(256)
     for (let i = 0; i < 256; i++) {
@@ -77,13 +76,8 @@ class AsciiEffect {
       oStyle.textDecoration = 'none'
     }
 
-    function calculateLetterSpacing(resolution, scale) {
-      const spacingMap = {
-        low: [3.15, -2.1, -2.1, -3.1, -4.15],
-        medium: [0, -1, -1.04, -2.1, -2.1],
-        high: [0, 0, -1, -1, -1],
-      }
-      return spacingMap[resolution][scale - 1] || 0
+    function getLetterSpacing() {
+      return 2.68
     }
 
     function asciifyImage() {
@@ -114,6 +108,7 @@ class AsciiEffect {
             iAlpha === 0
               ? 255
               : Math.floor(0.3 * iRed + 0.59 * iGreen + 0.11 * iBlue)
+
           const strThisChar = asciiLookup[fBrightness]
 
           if (color) {

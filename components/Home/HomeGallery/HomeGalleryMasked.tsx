@@ -63,9 +63,9 @@ export const HomeGalleryMasked: FC<HomeGalleryMaskedProps> = ({
         <mesh>
           {images?.map((image: any, index: number) => {
             const url = urlForImage(image)
-              .width(600)
-              .blur(20)
-              .quality(70)
+              .width(800)
+              .quality(80)
+              .blur(16)
               .auto('format')
               .url()
             return (
@@ -84,7 +84,7 @@ export const HomeGalleryMasked: FC<HomeGalleryMaskedProps> = ({
           <AsciiRenderer
             characters="ABCDEFGHI"
             bgColor="transparent"
-            resolution={0.07}
+            resolution={0.08}
           />
         </EffectComposer>
       </Canvas>
