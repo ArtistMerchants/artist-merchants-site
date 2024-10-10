@@ -17,7 +17,7 @@ export const useSiteStore = create<SiteStoreProps>()(
     (set) => ({
       loading: true,
       setLoading: (loading) => set({ loading }),
-      hasLoaded: false,
+      hasLoaded: true,
       setHasLoaded: (hasLoaded) => set({ hasLoaded }),
       homeData: {},
       setHomeData: (homeData) => set({ homeData }),

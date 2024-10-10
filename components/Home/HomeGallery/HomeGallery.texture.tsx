@@ -87,8 +87,8 @@ export const WaveMaterial: any = shaderMaterial(
       vec4 invertedColor = vec4(0.8 - texColor.r, 0.8 - texColor.g, 0.8 - texColor.b, 1.0);
 
       // Define brightness and contrast adjustment values
-      float brightnessAdjustment = -0.3;
-      float contrastAdjustment = 1.35;
+      float brightnessAdjustment = -0.0;
+      float contrastAdjustment = 1.0;
 
       invertedColor.rgb += brightnessAdjustment;
 

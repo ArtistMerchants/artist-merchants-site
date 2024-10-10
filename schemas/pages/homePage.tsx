@@ -85,15 +85,19 @@ export default defineType({
           name: 'image',
           title: 'Image',
           type: 'image',
-          fields: [{ name: 'alt', title: 'Alt', type: 'string' }],
+          fields: [
+            { name: 'alt', title: 'Alt', type: 'string' },
+            { name: 'hide', title: 'Hide Image', type: 'boolean' },
+          ],
           preview: {
             select: {
               alt: 'alt',
               asset: 'asset',
+              hide: 'hide',
             },
-            prepare: ({ alt, asset }) => ({
+            prepare: ({ alt, asset, hide }) => ({
               title: alt || 'Image',
-              subtitle: asset?.caption,
+              subtitle: `${hide ? 'HIDDEN' : ''} ${alt ? 'ALT: ' + alt : ''}`,
               media: asset,
             }),
           },

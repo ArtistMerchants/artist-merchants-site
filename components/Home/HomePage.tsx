@@ -35,7 +35,7 @@ export default function HomePage(props) {
           }
         `}
       >
-        <HomeGallery images={images} />
+        <HomeGallery images={images.filter((image) => !image.hide)} />
       </div>
       <div className="h-auto w-full py-20 md:hidden">
         <Wordmark className="h-auto w-full" />

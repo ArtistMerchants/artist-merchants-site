@@ -2,6 +2,8 @@ import { groq } from 'next-sanity'
 
 const imageFields = `
 ...,
+hide,
+alt,
 "lqip": asset->metadata.lqip,
 "width": asset->metadata.dimensions.width,
 "height": asset->metadata.dimensions.height,
@@ -43,6 +45,7 @@ export const settingsQuery = groq`*[_type == "settings"][0] {
   },
   "images": *[_type == "homePage"][0].images[] {
     _key,
+    hide,
     ${imageFields}
   },
   "categories": *[_type == "projectCategory"] | order(orderRank) {
