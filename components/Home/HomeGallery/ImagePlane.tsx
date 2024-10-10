@@ -2,12 +2,14 @@ import { useEffect, useRef } from 'react'
 import { useThree, useFrame } from '@react-three/fiber'
 import { useTexture } from '@react-three/drei'
 import { DoubleSide, MathUtils, NormalBlending } from 'three'
-import gsap from 'gsap'
 import { WaveMaterial } from './HomeGallery.texture'
+import * as THREE from 'three'
+import gsap from 'gsap'
 
 export function ImagePlane({
   url,
   aspectRatio,
+  imageSize,
   isActive = false,
   isHovering = false,
 }) {
@@ -93,7 +95,7 @@ export function ImagePlane({
         <meshBasicMaterial color="#000" />
       </mesh>
       <mesh>
-        <planeGeometry args={[planeWidth * 0.95, planeHeight * 0.95, 64, 64]} />
+        <planeGeometry args={[viewport.width, viewport.height, 64, 64]} />
         <waveMaterial
           attach="material"
           ref={ref}
@@ -101,6 +103,10 @@ export function ImagePlane({
           map={texture}
           transparent={true}
           side={DoubleSide}
+          uImageResolution={
+            new THREE.Vector2(imageSize.width, imageSize.height)
+          }
+          uResolution={new THREE.Vector2(viewport.width, viewport.height)}
         ></waveMaterial>
       </mesh>
     </group>

@@ -7,7 +7,6 @@ class AsciiEffect {
   constructor(renderer, charSet = ' .:-=+*#%@', options = {}) {
     const {
       resolution = 0.15,
-      scale = 1,
       color = false,
       alpha = false,
       block = false,
@@ -26,8 +25,8 @@ class AsciiEffect {
     const oCtx = oCanvas.getContext('2d')
 
     const strFont = 'var(--font-constellation)'
-    const fFontSize = 14
-    const fLineHeight = (0.67 / resolution) * scale
+    const fFontSize = 11
+    const fLineHeight = fFontSize * 0.7
 
     const aCharList = (
       charSet || (color ? ' CGO08@' : ' .,:;i1tfLCG08@')
@@ -77,7 +76,7 @@ class AsciiEffect {
     }
 
     function getLetterSpacing() {
-      return 2.68
+      return 3.5
     }
 
     function asciifyImage() {

@@ -65,7 +65,7 @@ export const HomeGalleryMasked: FC<HomeGalleryMaskedProps> = ({
             const url = urlForImage(image)
               .width(800)
               .quality(80)
-              .blur(16)
+              .blur(8)
               .auto('format')
               .url()
             return (
@@ -73,6 +73,10 @@ export const HomeGalleryMasked: FC<HomeGalleryMaskedProps> = ({
                 key={index}
                 url={url}
                 aspectRatio={image.aspectRatio}
+                imageSize={{
+                  width: image.width,
+                  height: image.height,
+                }}
                 isActive={index === activeIndex}
                 isHovering={isHovering}
               />
@@ -84,7 +88,7 @@ export const HomeGalleryMasked: FC<HomeGalleryMaskedProps> = ({
           <AsciiRenderer
             characters="ABCDEFGHI"
             bgColor="transparent"
-            resolution={0.08}
+            resolution={0.09}
           />
         </EffectComposer>
       </Canvas>

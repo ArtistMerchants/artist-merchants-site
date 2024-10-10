@@ -6,6 +6,8 @@ export const WaveMaterial: any = shaderMaterial(
     uMouse: [-0.5, -0.5],
     uAspect: 2 / 2.5,
     uIntensity: 0,
+    uResolution: [0, 0],
+    uImageResolution: [0, 0],
     uOpacity: 0.0,
   },
   // vertex shader
@@ -14,6 +16,8 @@ export const WaveMaterial: any = shaderMaterial(
     varying vec2 vUv;
     uniform float uAspect;
     uniform float uIntensity;
+    uniform vec2 uResolution;
+    uniform vec2 uImageResolution;
 
     float circle(vec2 uv, vec2 circlePosition, float radius) {
       vec2 adjustedUV = uv;
@@ -29,7 +33,24 @@ export const WaveMaterial: any = shaderMaterial(
     void main() {
       vUv = uv;
       vec3 newPosition = position;
-    
+
+      // calculate aspect ratios
+      float canvasAspect = uResolution.x / uResolution.y;
+      float imageAspect = uImageResolution.x / uImageResolution.y;
+
+      vec2 scale;
+      if (canvasAspect > imageAspect) {
+        scale = vec2(canvasAspect / imageAspect, 1.0);
+      } else {
+        scale = vec2(1.0, imageAspect / canvasAspect);
+      }
+
+      // Calculate offset
+      vec2 offset = (1.0 - scale) * 0.5;
+
+      // Apply scale and offset to UV
+      vUv = uv * scale + offset;
+
       // Elevation
       vec2 mousePositions = uMouse * 0.5 + 0.5;
       float circleShape = circle(uv, mousePositions, 0.8);
@@ -87,8 +108,8 @@ export const WaveMaterial: any = shaderMaterial(
       vec4 invertedColor = vec4(0.8 - texColor.r, 0.8 - texColor.g, 0.8 - texColor.b, 1.0);
 
       // Define brightness and contrast adjustment values
-      float brightnessAdjustment = 0.05;
-      float contrastAdjustment = 1.08;
+      float brightnessAdjustment = 0.0;
+      float contrastAdjustment = 0.95;
 
       invertedColor.rgb += brightnessAdjustment;
 
