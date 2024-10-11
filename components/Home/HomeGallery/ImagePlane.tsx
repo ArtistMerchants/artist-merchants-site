@@ -55,7 +55,7 @@ export function ImagePlane({
     gsap.to(ref.current.uniforms.uOpacity, {
       value: 1.0,
       duration: 4,
-      ease: 'power4.inOut',
+      ease: 'power3.inOut',
     })
   }
 
@@ -63,7 +63,7 @@ export function ImagePlane({
     gsap.to(ref.current.uniforms.uOpacity, {
       value: 0.0,
       duration: 4,
-      ease: 'power4.inOut',
+      ease: 'power3.inOut',
     })
   }
 

@@ -17,6 +17,7 @@ type AsciiRendererProps = {
   color?: boolean
   /** Level of detail, default: 0.15 */
   resolution?: number
+  isMobile?: boolean
 }
 
 export function AsciiRenderer({
@@ -27,6 +28,7 @@ export function AsciiRenderer({
   invert = true,
   color = false,
   resolution = 0.15,
+  isMobile = false,
 }: AsciiRendererProps) {
   // Reactive state
   const { size, gl, scene, camera } = useThree()
@@ -37,6 +39,7 @@ export function AsciiRenderer({
       invert,
       color,
       resolution,
+      isMobile,
     })
     effect.domElement.style.position = 'absolute'
     effect.domElement.style.top = '0px'

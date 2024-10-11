@@ -6,6 +6,7 @@ import { WaveMaterial } from './HomeGallery.texture'
 import { EffectComposer } from '@react-three/postprocessing'
 import { AsciiRenderer } from 'components/Three/AsciiRenderer'
 import { ImagePlane } from './ImagePlane'
+import { useIsMobile } from 'hooks/useIsMobile'
 
 extend({ WaveMaterial })
 
@@ -22,6 +23,7 @@ export const HomeGalleryMasked: FC<HomeGalleryMaskedProps> = ({
   eventSource,
 }) => {
   const [isHovering, setIsHovering] = useState(false)
+  const isMobile = useIsMobile()
 
   const handlePointerEnter = () => {
     setIsHovering(true)
@@ -34,10 +36,6 @@ export const HomeGalleryMasked: FC<HomeGalleryMaskedProps> = ({
   return (
     <motion.div
       className="absolute inset-0 z-[10] h-full w-full select-none"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.65, ease: 'linear' }}
       onMouseEnter={handlePointerEnter}
       onMouseLeave={handlePointerLeave}
       onTouchStart={handlePointerEnter}
@@ -63,7 +61,7 @@ export const HomeGalleryMasked: FC<HomeGalleryMaskedProps> = ({
         <mesh>
           {images?.map((image: any, index: number) => {
             const url = urlForImage(image)
-              .width(800)
+              .width(500)
               .quality(80)
               .blur(8)
               .auto('format')
@@ -88,7 +86,8 @@ export const HomeGalleryMasked: FC<HomeGalleryMaskedProps> = ({
           <AsciiRenderer
             characters="ABCDEFGHI"
             bgColor="transparent"
-            resolution={0.3}
+            resolution={isMobile ? 0.25 : 0.1}
+            isMobile={isMobile}
           />
         </EffectComposer>
       </Canvas>
