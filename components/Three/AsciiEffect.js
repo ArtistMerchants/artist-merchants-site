@@ -27,7 +27,7 @@ class AsciiEffect {
 
     const strFont = 'var(--font-constellation)'
     const fFontSize = isMobile ? 5 : 8
-    const lineHeightMultiplier = isMobile ? 0.7 : 0.84
+    const lineHeightMultiplier = isMobile ? 0.6 : 0.84
     const fLineHeight = fFontSize * lineHeightMultiplier
 
     function getLetterSpacing() {
