@@ -122,7 +122,7 @@ export default async function handler(
     image: {
       width: '100%',
       height: '100%',
-      objectFit: 'cover',
+      objectFit: 'contain',
       objectPosition: 'center',
     },
     pageNumber: {
@@ -214,6 +214,7 @@ export default async function handler(
                 </View>
                 <View style={styles.rightColumn}>
                   {project.media?.map((image, index) => {
+                    if (!image?.url) return
                     return (
                       <View
                         style={styles.imageContainer}

@@ -88,7 +88,7 @@ export const HomeGalleryMasked: FC<HomeGalleryMaskedProps> = ({
           <AsciiRenderer
             characters="ABCDEFGHI"
             bgColor="transparent"
-            resolution={0.09}
+            resolution={0.3}
           />
         </EffectComposer>
       </Canvas>

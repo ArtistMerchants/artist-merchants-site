@@ -25,8 +25,8 @@ class AsciiEffect {
     const oCtx = oCanvas.getContext('2d')
 
     const strFont = 'var(--font-constellation)'
-    const fFontSize = 11
-    const fLineHeight = fFontSize * 0.7
+    const fFontSize = 5
+    const fLineHeight = fFontSize * 0.45
 
     const aCharList = (
       charSet || (color ? ' CGO08@' : ' .,:;i1tfLCG08@')
@@ -76,7 +76,7 @@ class AsciiEffect {
     }
 
     function getLetterSpacing() {
-      return 3.5
+      return -0.2
     }
 
     function asciifyImage() {
