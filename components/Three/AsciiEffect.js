@@ -31,7 +31,7 @@ class AsciiEffect {
     const fLineHeight = fFontSize * lineHeightMultiplier
 
     function getLetterSpacing() {
-      return isMobile ? 0.465 : 4.825
+      return isMobile ? 0.455 : 4.325
     }
 
     const aCharList = (
