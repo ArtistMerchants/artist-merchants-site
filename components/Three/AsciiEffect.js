@@ -23,12 +23,15 @@ class AsciiEffect {
     domElement.appendChild(oAscii)
 
     const oCanvas = document.createElement('canvas')
-    const oCtx = oCanvas.getContext('2d')
+    const oCtx = oCanvas.getContext('2d', {
+      willReadFrequently: true,
+      desynchronized: true,
+    })
 
     const strFont = 'var(--font-constellation)'
     const fFontSize = isMobile ? 5 : 8
-    const lineHeightMultiplier = isMobile ? 0.53 : 0.84
-    const fLineHeight = fFontSize * lineHeightMultiplier
+    const baseLineHeight = isMobile ? 0.3 : 0.65
+    const fLineHeight = baseLineHeight
 
     function getLetterSpacing() {
       return isMobile ? 0.455 : 4.325
@@ -70,13 +73,18 @@ class AsciiEffect {
       oCanvas.height = iHeight
 
       const oStyle = oAscii.style
+      oStyle.width = width + 'px'
+      oStyle.height = height + 'px'
+      oStyle.borderCollapse = 'separate'
+      oStyle.borderSpacing = '0px 0px'
       oStyle.whiteSpace = 'pre'
       oStyle.margin = '0px'
       oStyle.padding = '0px'
+
       oStyle.letterSpacing = fLetterSpacing + 'px'
       oStyle.fontFamily = strFont
       oStyle.fontSize = fFontSize + 'px'
-      oStyle.lineHeight = fLineHeight + 'px'
+      oStyle.lineHeight = fLineHeight + 'em'
       oStyle.textAlign = 'left'
       oStyle.textDecoration = 'none'
     }
@@ -95,6 +103,9 @@ class AsciiEffect {
       const colorStyle = color ? new Array(safeWidth) : null
 
       for (let y = 0; y < safeHeight; y += 2) {
+        strChars += `<td style="display:block;width:${width}px;overflow:hidden;padding-bottom:${
+          isMobile ? 0 : 0.5
+        }px;">`
         if ((y / 2) % 2 === 1) {
           strChars += '<span class="opacity-0">|</span>'
         }
@@ -123,10 +134,10 @@ class AsciiEffect {
             strChars += strThisChar
           }
         }
-        strChars += '<br/>'
+        strChars += '</td>'
       }
 
-      oAscii.innerHTML = `<tr><td style="display:block;width:${width}px;height:${height}px;overflow:hidden">${strChars}</td></tr>`
+      oAscii.innerHTML = `<tr>${strChars}</tr>`
     }
   }
 }

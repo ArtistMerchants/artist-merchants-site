@@ -19,7 +19,7 @@ export const LayoutLocked: FC<LayoutLockedProps> = ({ children, settings }) => {
       <Loading images={settings?.images} />
       <div className="flex flex-col justify-between md:col-span-3 md:col-start-2">
         <HeaderLocked {...settings} />
-        <Wordmark className="hidden h-auto w-full md:block" />
+        <Wordmark className="mb-6 hidden h-auto w-full md:block" />
       </div>
       <motion.main
         id="main"
