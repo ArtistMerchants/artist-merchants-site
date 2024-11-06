@@ -16,7 +16,7 @@ import { SkipLink } from 'components/Global/SkipLink'
 
 import '../styles/globals.css'
 
-const constellation = localFont({
+export const constellation = localFont({
   src: [
     {
       path: '../fonts/Constellation-ASCII.woff2',

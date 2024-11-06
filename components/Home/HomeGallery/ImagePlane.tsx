@@ -54,7 +54,7 @@ export function ImagePlane({
   const showImage = () => {
     gsap.to(ref.current.uniforms.uOpacity, {
       value: 1.0,
-      duration: 4,
+      duration: 3,
       ease: 'power3.inOut',
     })
   }
@@ -62,7 +62,7 @@ export function ImagePlane({
   const hideImage = () => {
     gsap.to(ref.current.uniforms.uOpacity, {
       value: 0.0,
-      duration: 4,
+      duration: 3,
       ease: 'power3.inOut',
     })
   }

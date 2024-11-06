@@ -1,12 +1,14 @@
 import { FC, useState } from 'react'
 import { urlForImage } from 'lib/sanity.image'
 import { motion } from 'framer-motion'
-import { Canvas, extend } from '@react-three/fiber'
+import { Canvas, extend, useThree } from '@react-three/fiber'
 import { WaveMaterial } from './HomeGallery.texture'
 import { EffectComposer } from '@react-three/postprocessing'
+import { Stats } from '@react-three/drei'
 import { AsciiRenderer } from 'components/Three/AsciiRenderer'
 import { ImagePlane } from './ImagePlane'
 import { useIsMobile } from 'hooks/useIsMobile'
+import { AsciiEffect } from '../Ascii/AsciiEffect'
 
 extend({ WaveMaterial })
 
@@ -63,7 +65,6 @@ export const HomeGalleryMasked: FC<HomeGalleryMaskedProps> = ({
             const url = urlForImage(image)
               .width(500)
               .quality(80)
-              .blur(8)
               .auto('format')
               .url()
             return (
@@ -82,13 +83,21 @@ export const HomeGalleryMasked: FC<HomeGalleryMaskedProps> = ({
           })}
         </mesh>
 
+        <Stats />
+
         <EffectComposer>
-          <AsciiRenderer
+          <AsciiEffect
+            characters="ABCDEFGHI"
+            invert={false}
+            cellSize={isMobile ? 6 : 8}
+            fontSize={isMobile ? 24 : 32}
+          />
+          {/* <AsciiRenderer
             characters="ABCDEFGHI"
             bgColor="transparent"
             resolution={isMobile ? 0.25 : 0.1}
             isMobile={isMobile}
-          />
+          /> */}
         </EffectComposer>
       </Canvas>
     </motion.div>
