@@ -4,7 +4,6 @@ import { motion } from 'framer-motion'
 import { Canvas, extend, useThree } from '@react-three/fiber'
 import { WaveMaterial } from './HomeGallery.texture'
 import { EffectComposer } from '@react-three/postprocessing'
-import { Stats } from '@react-three/drei'
 import { AsciiRenderer } from 'components/Three/AsciiRenderer'
 import { ImagePlane } from './ImagePlane'
 import { useIsMobile } from 'hooks/useIsMobile'
@@ -83,8 +82,6 @@ export const HomeGalleryMasked: FC<HomeGalleryMaskedProps> = ({
             )
           })}
         </mesh>
-
-        <Stats />
 
         <EffectComposer>
           <AsciiEffect
