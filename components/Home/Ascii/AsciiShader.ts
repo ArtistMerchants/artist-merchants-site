@@ -58,38 +58,37 @@ export const ASCIIShader = {
           float right = texture2D(tex, uv + vec2(texelSize.x, 0)).r;
           
           // Adjust these coefficients to control sharpening intensity
-          float centerWeight = 12.0;    // Decreased from 5.0 for less sharpening
-          float edgeWeight = 2.0;      // Changed from 1.0 for softer edges
+          float centerWeight = 3.0;    // Decreased from 5.0 for less sharpening
+          float edgeWeight = 1.0;      // Changed from 1.0 for softer edges
           
           float sharpened = centerWeight * center - edgeWeight * (top + bottom + left + right);
           return clamp(sharpened, 0.0, 1.0);
       }
 
       void mainImage(const in vec4 inputColor, const in vec2 uv, out vec4 outputColor) {
-          vec2 cell = resolution / uCellSize;
-          vec2 grid = 1.0 / cell;
-          vec2 pixelizedUV = grid * (0.5 + floor(vUv / grid));
-          vec4 pixelized = texture2D(map, pixelizedUV);
-          float greyscaled = greyscale(pixelized.rgb);
+        vec2 cell = resolution / uCellSize;
+        vec2 grid = 1.0 / cell;
+        vec2 pixelizedUV = grid * (0.5 + floor(uv / grid));
+        vec4 pixelized = texture2D(map, pixelizedUV);
+        float greyscaled = greyscale(pixelized.rgb);
 
-          if (uInvert) {
-              greyscaled = 1.0 - greyscaled;
-          }
+        if (uInvert) {
+            greyscaled = 1.0 - greyscaled;
+        }
 
-          float characterIndex = floor((uCharactersCount - 1.0) * greyscaled);
-          vec2 characterPosition = vec2(mod(characterIndex, SIZE.x), floor(characterIndex / SIZE.y));
-          vec2 offset = vec2(characterPosition.x, -characterPosition.y) / SIZE;
-          vec2 charUV = mod(vUv * (cell / SIZE), 1.0 / SIZE) - vec2(0., 1.0 / SIZE) + offset;
+        float characterIndex = floor((uCharactersCount - 1.0) * greyscaled);
+        vec2 characterPosition = vec2(mod(characterIndex, SIZE.x), floor(characterIndex / SIZE.y));
+        vec2 offset = vec2(characterPosition.x, -characterPosition.y) / SIZE;
+        vec2 charUV = mod(vUv * (cell / SIZE), 1.0 / SIZE) - vec2(0., 1.0 / SIZE) + offset;
 
-          vec2 texelSize = 1.0 / (SIZE * uCharactersCount);
-          float charIntensity = sharpen(uCharacters, charUV, texelSize);
-          
-          charIntensity = smoothstep(0.4, 0.45, charIntensity);
-          
-          vec3 finalColor = uColor * charIntensity;
-          float finalAlpha = charIntensity * pixelized.a;
+        float charIntensity = texture2D(uCharacters, charUV).g;
+        
+        charIntensity = smoothstep(0.1, 0.8, charIntensity);
+        
+        vec3 finalColor = uColor * charIntensity;
+        float finalAlpha = charIntensity * pixelized.a;
 
-          outputColor = vec4(finalColor, finalAlpha);
+        outputColor = vec4(finalColor, finalAlpha);
       }
   `,
 }

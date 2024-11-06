@@ -84,18 +84,18 @@ export const HomeGalleryMasked: FC<HomeGalleryMaskedProps> = ({
         </mesh>
 
         <EffectComposer>
-          <AsciiEffect
+          {/* <AsciiEffect
             characters="ABCDEFGHI"
             invert={false}
             cellSize={isMobile ? 6 : 8}
             fontSize={isMobile ? 10 : 8}
-          />
-          {/* <AsciiRenderer
+          /> */}
+          <AsciiRenderer
             characters="ABCDEFGHI"
             bgColor="transparent"
             resolution={isMobile ? 0.25 : 0.1}
             isMobile={isMobile}
-          /> */}
+          />
         </EffectComposer>
       </Canvas>
     </motion.div>

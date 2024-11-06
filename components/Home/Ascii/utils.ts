@@ -25,7 +25,7 @@ export const createCharactersTexture = (
   const WIDTH = width
   const HEIGHT = height / aspect
   const MAX_PER_ROW = 16
-  const DPR = window.devicePixelRatio || 1
+  const DPR = 1
   const CELL = MAX_PER_ROW / DPR
 
   canvas.width = WIDTH * DPR
