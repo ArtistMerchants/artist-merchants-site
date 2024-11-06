@@ -37,6 +37,7 @@ export const HomeGalleryMasked: FC<HomeGalleryMaskedProps> = ({
 
   return (
     <motion.div
+      id="home-gallery-masked"
       className="absolute inset-0 z-[10] h-full w-full select-none"
       onMouseEnter={handlePointerEnter}
       onMouseLeave={handlePointerLeave}
@@ -90,7 +91,7 @@ export const HomeGalleryMasked: FC<HomeGalleryMaskedProps> = ({
             characters="ABCDEFGHI"
             invert={false}
             cellSize={isMobile ? 6 : 8}
-            fontSize={isMobile ? 24 : 32}
+            fontSize={isMobile ? 10 : 8}
           />
           {/* <AsciiRenderer
             characters="ABCDEFGHI"

@@ -13,13 +13,18 @@ class CustomAsciiEffect extends Effect {
     invert = true,
     color = '#ffffff',
     fontSize = 32,
-    aspectRatio = 1,
-  } = {}) {
+    viewport = {},
+  }: any = {}) {
+    const width = 256
+    const height = 256
+    const factor = 1
+
     const charactersTexture = createCharactersTexture(
-      512,
-      512,
+      width / factor,
+      height / factor,
       characters.split(''),
-      fontSize
+      fontSize,
+      viewport
     )
 
     super('CustomAsciiEffect', ASCIIShader.fragmentShader, {
@@ -67,7 +72,7 @@ export const AsciiEffect = forwardRef(
         invert,
         color,
         fontSize,
-        // aspectRatio: viewport.aspect
+        viewport,
       })
     }, [characters, cellSize, invert, color, fontSize])
 

@@ -58,8 +58,8 @@ export const ASCIIShader = {
           float right = texture2D(tex, uv + vec2(texelSize.x, 0)).r;
           
           // Adjust these coefficients to control sharpening intensity
-          float centerWeight = 3.0;    // Decreased from 5.0 for less sharpening
-          float edgeWeight = 0.5;      // Changed from 1.0 for softer edges
+          float centerWeight = 12.0;    // Decreased from 5.0 for less sharpening
+          float edgeWeight = 2.0;      // Changed from 1.0 for softer edges
           
           float sharpened = centerWeight * center - edgeWeight * (top + bottom + left + right);
           return clamp(sharpened, 0.0, 1.0);
@@ -82,7 +82,7 @@ export const ASCIIShader = {
           vec2 charUV = mod(vUv * (cell / SIZE), 1.0 / SIZE) - vec2(0., 1.0 / SIZE) + offset;
 
           vec2 texelSize = 1.0 / (SIZE * uCharactersCount);
-          float charIntensity = texture2D(uCharacters, charUV).r;
+          float charIntensity = sharpen(uCharacters, charUV, texelSize);
           
           charIntensity = smoothstep(0.4, 0.45, charIntensity);
           
