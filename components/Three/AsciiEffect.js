@@ -29,12 +29,12 @@ class AsciiEffect {
     })
 
     const strFont = 'var(--font-constellation)'
-    const fFontSize = isMobile ? 5 : 9
-    const baseLineHeight = isMobile ? 0.4 : 0.575
+    const fFontSize = isMobile ? 5 : 7
+    const baseLineHeight = isMobile ? 0.4 : 0.425
     const fLineHeight = baseLineHeight
 
     function getLetterSpacing() {
-      return isMobile ? 0.455 : 3.9
+      return isMobile ? 0.455 : 1.75
     }
 
     const aCharList = (

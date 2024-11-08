@@ -93,7 +93,7 @@ export const HomeGalleryMasked: FC<HomeGalleryMaskedProps> = ({
           <AsciiRenderer
             characters="ABCDEFGHI"
             bgColor="transparent"
-            resolution={isMobile ? 0.25 : 0.1}
+            resolution={isMobile ? 0.25 : 0.15}
             isMobile={isMobile}
           />
         </EffectComposer>
