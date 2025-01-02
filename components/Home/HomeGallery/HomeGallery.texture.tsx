@@ -9,6 +9,7 @@ export const WaveMaterial: any = shaderMaterial(
     uResolution: [0, 0],
     uImageResolution: [0, 0],
     uOpacity: 0.0,
+    uCover: false,
   },
   // vertex shader
   /*glsl*/ `
@@ -18,6 +19,7 @@ export const WaveMaterial: any = shaderMaterial(
     uniform float uIntensity;
     uniform vec2 uResolution;
     uniform vec2 uImageResolution;
+    uniform bool uCover;
 
     float circle(vec2 uv, vec2 circlePosition, float radius) {
       vec2 adjustedUV = uv;
@@ -39,10 +41,18 @@ export const WaveMaterial: any = shaderMaterial(
       float imageAspect = uImageResolution.x / uImageResolution.y;
 
       vec2 scale;
-      if (canvasAspect > imageAspect) {
-        scale = vec2(canvasAspect / imageAspect, 1.0);
+      if (uCover) {
+        if (canvasAspect > imageAspect) {
+          scale = vec2(1.0, imageAspect / canvasAspect);
+        } else {
+          scale = vec2(canvasAspect / imageAspect, 1.0);
+        }
       } else {
-        scale = vec2(1.0, imageAspect / canvasAspect);
+        if (canvasAspect > imageAspect) {
+          scale = vec2(canvasAspect / imageAspect, 1.0);
+        } else {
+          scale = vec2(1.0, imageAspect / canvasAspect);
+        }
       }
 
       // Calculate offset

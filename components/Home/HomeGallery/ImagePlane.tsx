@@ -1,6 +1,6 @@
-import { useEffect, useRef } from 'react'
+import { forwardRef, useEffect, useMemo, useRef, useState } from 'react'
 import { useThree, useFrame } from '@react-three/fiber'
-import { useTexture } from '@react-three/drei'
+import { useTexture, useVideoTexture } from '@react-three/drei'
 import { DoubleSide, MathUtils, NormalBlending } from 'three'
 import { WaveMaterial } from './HomeGallery.texture'
 import * as THREE from 'three'
@@ -8,13 +8,14 @@ import gsap from 'gsap'
 
 export function ImagePlane({
   url,
+  type = 'image',
   aspectRatio,
   imageSize,
   isActive = false,
   isHovering = false,
 }) {
   const ref = useRef<any>(null)
-  const texture: any = useTexture(url)
+  const [texture, setTexture] = useState<any>(null)
   const mouseLerped = useRef({ x: 0, y: 0 })
   const { viewport } = useThree()
 
@@ -83,32 +84,89 @@ export function ImagePlane({
     }
   }, [isHovering, isActive])
 
-  const aspect = aspectRatio
-
-  const planeWidth = viewport.width
-  const planeHeight = viewport.width / aspect
-
   return (
     <group>
       <mesh>
         <planeGeometry args={[viewport.width, viewport.height, 64, 64]} />
         <meshBasicMaterial color="#000" />
       </mesh>
-      <mesh>
-        <planeGeometry args={[viewport.width, viewport.height, 64, 64]} />
-        <waveMaterial
-          attach="material"
+      {type === 'image' && (
+        <Image
           ref={ref}
-          key={WaveMaterial.key}
-          map={texture}
-          transparent={true}
-          side={DoubleSide}
-          uImageResolution={
-            new THREE.Vector2(imageSize.width, imageSize.height)
-          }
-          uResolution={new THREE.Vector2(viewport.width, viewport.height)}
-        ></waveMaterial>
-      </mesh>
+          url={url}
+          imageSize={imageSize}
+          setTexture={setTexture}
+        />
+      )}
+      {type === 'video' && (
+        <Video
+          ref={ref}
+          url={url}
+          imageSize={imageSize}
+          setTexture={setTexture}
+        />
+      )}
     </group>
   )
 }
+
+const Video = forwardRef(({ url, imageSize, setTexture }: any, ref) => {
+  const texture = useVideoTexture(url)
+  const { viewport } = useThree()
+
+  useEffect(() => {
+    setTexture(texture)
+  }, [texture])
+
+  const resolution = useMemo(() => {
+    if (!texture) return { width: viewport.width, height: viewport.height }
+    return {
+      width: texture.source?.data?.videoWidth,
+      height: texture.source?.data?.videoHeight,
+    }
+  }, [texture, viewport])
+
+  return (
+    <mesh>
+      <planeGeometry args={[viewport.width, viewport.height, 64, 64]} />
+      <waveMaterial
+        attach="material"
+        ref={ref}
+        key={WaveMaterial.key}
+        map={texture}
+        transparent={true}
+        side={DoubleSide}
+        uCover={true}
+        uImageResolution={
+          new THREE.Vector2(resolution.width, resolution.height)
+        }
+        uResolution={new THREE.Vector2(viewport.width, viewport.height)}
+      ></waveMaterial>
+    </mesh>
+  )
+})
+
+const Image = forwardRef(({ url, imageSize, setTexture }: any, ref) => {
+  const texture = useTexture(url)
+  const { viewport } = useThree()
+
+  useEffect(() => {
+    setTexture(texture)
+  }, [texture])
+
+  return (
+    <mesh>
+      <planeGeometry args={[viewport.width, viewport.height, 64, 64]} />
+      <waveMaterial
+        attach="material"
+        ref={ref}
+        key={WaveMaterial.key}
+        map={texture}
+        transparent={true}
+        side={DoubleSide}
+        uImageResolution={new THREE.Vector2(imageSize.width, imageSize.height)}
+        uResolution={new THREE.Vector2(viewport.width, viewport.height)}
+      ></waveMaterial>
+    </mesh>
+  )
+})

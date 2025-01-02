@@ -77,10 +77,30 @@ export default defineType({
     }),
     defineField({
       name: 'images',
-      title: 'Masked Images',
+      title: 'Masked Media',
       description: 'Masked images should all have a white background',
       type: 'array',
       of: [
+        defineArrayMember({
+          name: 'video',
+          title: 'Video',
+          type: 'file',
+          fields: [
+            { name: 'alt', title: 'Alt', type: 'string' },
+            { name: 'hide', title: 'Hide Image', type: 'boolean' },
+          ],
+          preview: {
+            select: {
+              alt: 'alt',
+              hide: 'hide',
+              filename: 'asset.originalFilename',
+            },
+            prepare: ({ alt, hide, filename }) => ({
+              title: alt ?? filename ?? 'Video',
+              subtitle: `${hide ? 'HIDDEN' : ''} ${alt ? 'ALT: ' + alt : ''}`,
+            }),
+          },
+        }),
         {
           name: 'image',
           title: 'Image',

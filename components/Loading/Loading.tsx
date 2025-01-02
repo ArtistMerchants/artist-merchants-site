@@ -10,7 +10,9 @@ export const Loading = ({ images = [] }) => {
   const { unlocked } = useAuthStore()
   const { loading, hasLoaded } = useSiteStore()
 
-  const imageUrls = images.map((image) => urlForImage(image).url())
+  const imageUrls = images
+    .filter((image: any) => image._type == 'image')
+    .map((image) => urlForImage(image).url())
   const isLoaded = usePreloadImages(imageUrls)
 
   if (unlocked || hasLoaded) return null

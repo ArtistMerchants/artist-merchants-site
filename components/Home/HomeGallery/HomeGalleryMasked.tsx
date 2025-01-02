@@ -62,15 +62,23 @@ export const HomeGalleryMasked: FC<HomeGalleryMaskedProps> = ({
       >
         <mesh>
           {images?.map((image: any, index: number) => {
-            const url = urlForImage(image)
-              .width(500)
-              .quality(80)
-              .auto('format')
-              .url()
+            let url
+
+            if (image._type === 'image') {
+              url = urlForImage(image)
+                .width(500)
+                .quality(80)
+                .auto('format')
+                .url()
+            } else {
+              url = image.url
+            }
+
             return (
               <ImagePlane
                 key={index}
                 url={url}
+                type={image._type}
                 aspectRatio={image.aspectRatio}
                 imageSize={{
                   width: image.width,

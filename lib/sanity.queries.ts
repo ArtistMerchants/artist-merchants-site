@@ -95,7 +95,13 @@ export const homeQuery = groq`
     contact,
     images[] {
       _key,
-      ${imageFields}
+      _type,
+      _type == 'image' => {
+        ${imageFields}
+      },
+      _type == 'video' => {
+        "url": asset->url
+      }
     },
     "categories": *[_type == "projectCategory"] | order(orderRank) {
       _id,
