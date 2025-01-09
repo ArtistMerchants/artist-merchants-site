@@ -10,6 +10,8 @@ type SiteStoreProps = {
   setHomeData: (homeData: any) => void
   settings?: any
   setSettings: (settings: any) => void
+  menuOpen: boolean
+  setMenuOpen: (menuOpen: boolean) => void
 }
 
 export const useSiteStore = create<SiteStoreProps>()(
@@ -23,6 +25,8 @@ export const useSiteStore = create<SiteStoreProps>()(
       setHomeData: (homeData) => set({ homeData }),
       settings: {},
       setSettings: (settings) => set({ settings }),
+      menuOpen: false,
+      setMenuOpen: (menuOpen) => set({ menuOpen }),
     }),
     {
       name: 'site-store',

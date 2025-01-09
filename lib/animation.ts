@@ -1,0 +1,6 @@
+export const easeInCubic = [0.32, 0, 0.67, 0]
+export const easeOutExpo = [0.16, 1, 0.3, 1]
+export const easeInExpo = [0.7, 0, 0.84, 0]
+export const easeInOutExpo = [0.87, 0, 0.13, 1]
+export const easeInOutQuart = [0.76, 0, 0.24, 1]
+export const easeInOutCubic = [0.65, 0, 0.35, 1]

@@ -86,7 +86,7 @@ function MyApp({ Component, pageProps, router }) {
     >
       <VH />
       <SkipLink />
-      <HomeButton />
+      {/* <HomeButton /> */}
       <ReactLenis
         options={{ lerp: 0.25 }}
         className="scrollbar-hidden relative min-h-screen overflow-auto md:h-screen"
