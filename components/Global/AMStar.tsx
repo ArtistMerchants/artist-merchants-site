@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 export const AMStar = (props) => {
   return (
     <motion.div
-      className="relative h-12 w-12 transform-gpu will-change-transform"
+      className="relative h-9 w-9 transform-gpu will-change-transform"
       {...props}
     >
       <svg

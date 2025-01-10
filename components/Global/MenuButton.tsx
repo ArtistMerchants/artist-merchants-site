@@ -12,48 +12,50 @@ export const MenuButton = () => {
   const { menuOpen, setMenuOpen } = useSiteStore()
 
   return (
-    <button
-      className="relative flex flex-col gap-8"
-      onClick={() => setMenuOpen(!menuOpen)}
-    >
-      <span className="sr-only">Menu</span>
-      <div className="flex w-full items-center justify-between gap-8">
-        <AMStar />
-        <AMStar
-          initial={{ y: 0 }}
-          animate={{ y: menuOpen ? 12 : 0, x: menuOpen ? 9 : 0 }}
-          transition={Transition}
-        />
-        <AMStar />
-      </div>
-      <div className="flex w-full items-center justify-center gap-8">
-        <AMStar
-          initial={{ y: 0 }}
-          animate={{ y: menuOpen ? -9.5 : 0, x: menuOpen ? 1 : 0 }}
-          transition={Transition}
-        />
-        <AMStar
-          initial={{ y: 0 }}
-          animate={{ y: menuOpen ? 9.5 : 0, x: menuOpen ? -1 : 0 }}
-          transition={Transition}
-        />
-      </div>
-      <div className="flex w-full items-center justify-between gap-8">
-        <AMStar />
-        <AMStar
-          initial={{ y: 0 }}
-          animate={{ y: menuOpen ? -11 : 0, x: menuOpen ? -9 : 0 }}
-          transition={Transition}
-        />
-        <AMStar />
-      </div>
-      {/* <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 transform-gpu">
+    <div className="relative">
+      <button
+        className="ease relative flex origin-center scale-100 flex-col gap-6 transition-all duration-300 hover:scale-105 active:scale-95"
+        onClick={() => setMenuOpen(!menuOpen)}
+      >
+        <span className="sr-only">Menu</span>
+        <div className="flex w-full items-center justify-between gap-6">
+          <AMStar />
+          <AMStar
+            initial={{ y: 0 }}
+            animate={{ y: menuOpen ? 8 : 0, x: menuOpen ? 8 : 0 }}
+            transition={Transition}
+          />
+          <AMStar />
+        </div>
+        <div className="flex w-full items-center justify-center gap-6">
+          <AMStar
+            initial={{ y: 0 }}
+            animate={{ y: menuOpen ? -7 : 0, x: menuOpen ? 0 : 0 }}
+            transition={Transition}
+          />
+          <AMStar
+            initial={{ y: 0 }}
+            animate={{ y: menuOpen ? 7 : 0, x: menuOpen ? 0 : 0 }}
+            transition={Transition}
+          />
+        </div>
+        <div className="flex w-full items-center justify-between gap-6">
+          <AMStar />
+          <AMStar
+            initial={{ y: 0 }}
+            animate={{ y: menuOpen ? -8 : 0, x: menuOpen ? -8 : 0 }}
+            transition={Transition}
+          />
+          <AMStar />
+        </div>
+      </button>
+      <div className="pointer-events-none absolute left-1/2 top-1/2 h-9 w-9 -translate-x-1/2 -translate-y-1/2 transform-gpu will-change-auto">
         <AMStar
           initial={{ scale: 0 }}
           animate={{ scale: menuOpen ? 1 : 0 }}
           transition={Transition}
         />
-      </div> */}
-    </button>
+      </div>
+    </div>
   )
 }
