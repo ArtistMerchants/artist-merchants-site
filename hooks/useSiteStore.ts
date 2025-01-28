@@ -12,6 +12,8 @@ type SiteStoreProps = {
   setSettings: (settings: any) => void
   menuOpen: boolean
   setMenuOpen: (menuOpen: boolean) => void
+  setMenuActiveItem: (menuActiveItem: string | null) => void
+  menuActiveItem: string | null
 }
 
 export const useSiteStore = create<SiteStoreProps>()(
@@ -27,6 +29,8 @@ export const useSiteStore = create<SiteStoreProps>()(
       setSettings: (settings) => set({ settings }),
       menuOpen: false,
       setMenuOpen: (menuOpen) => set({ menuOpen }),
+      menuActiveItem: null,
+      setMenuActiveItem: (menuActiveItem) => set({ menuActiveItem }),
     }),
     {
       name: 'site-store',

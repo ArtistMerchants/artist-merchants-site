@@ -1,41 +1,158 @@
+import { useEffect, useState } from 'react'
 import { useSiteStore } from 'hooks/useSiteStore'
 
 import { AnimatePresence, motion } from 'framer-motion'
 import { easeInOutQuart } from 'lib/animation'
+import { PortableText } from '@portabletext/react'
+import { InfoHeader } from 'components/Header/InfoHeader'
+import { InformationContact } from 'components/Information/InformationContact'
+import { ArchiveForm } from 'components/Archive/ArchiveForm'
 
-export const HomeMenu = () => {
-  const { menuOpen } = useSiteStore()
+export const HomeMenu = ({ description, contact, information }) => {
+  const { menuOpen, setMenuActiveItem, menuActiveItem } = useSiteStore()
+
+  const handleItemClick = (item: string) => {
+    setMenuActiveItem(item)
+  }
+
+  useEffect(() => {
+    if (!menuOpen) {
+      setMenuActiveItem(null)
+    }
+  }, [menuOpen])
 
   return (
-    <AnimatePresence mode="wait">
-      {menuOpen ? (
-        <motion.nav className="z-100 fixed inset-0 flex h-full w-full flex-col items-center justify-center gap-[12vh] p-32 text-center font-serif text-[24px]">
-          <motion.button
-            initial={{ y: 10, opacity: 0, filter: 'blur(6px)' }}
-            animate={{ y: 0, opacity: 1, filter: 'blur(0px)' }}
-            exit={{ y: -8, opacity: 0, filter: 'blur(6px)' }}
-            transition={{ duration: 0.75, ease: easeInOutQuart, delay: 0 }}
+    <>
+      <AnimatePresence mode="wait">
+        {menuOpen ? (
+          <motion.nav
+            className="z-100 fixed inset-0 flex h-full w-full transform-gpu flex-col items-center justify-center gap-50 p-32 font-sans text-12 leading-[120%] will-change-transform md:text-14"
+            initial={{ opacity: 1, scale: 1 }}
+            animate={{
+              opacity: menuActiveItem === null ? 1 : 0,
+              scale: menuActiveItem === null ? 1 : 0.975,
+            }}
+            transition={{ duration: 0.65, ease: easeInOutQuart, delay: 0 }}
           >
-            Archive
-          </motion.button>
-          <motion.button
-            initial={{ y: 10, opacity: 0, filter: 'blur(6px)' }}
-            animate={{ y: 0, opacity: 1, filter: 'blur(0px)' }}
-            exit={{ y: -8, opacity: 0, filter: 'blur(6px)' }}
-            transition={{ duration: 0.75, ease: easeInOutQuart, delay: 0.05 }}
-          >
-            Information
-          </motion.button>
-          <motion.button
-            initial={{ y: 10, opacity: 0, filter: 'blur(6px)' }}
-            animate={{ y: 0, opacity: 1, filter: 'blur(0px)' }}
-            exit={{ y: -8, opacity: 0, filter: 'blur(6px)' }}
-            transition={{ duration: 0.75, ease: easeInOutQuart, delay: 0.1 }}
-          >
-            Contact
-          </motion.button>
-        </motion.nav>
-      ) : null}
-    </AnimatePresence>
+            <MenuButton onClick={() => handleItemClick('archive')}>
+              Archive
+            </MenuButton>
+            <MenuButton onClick={() => handleItemClick('information')}>
+              Information
+            </MenuButton>
+            <MenuButton onClick={() => handleItemClick('contact')}>
+              Contact
+            </MenuButton>
+          </motion.nav>
+        ) : null}
+      </AnimatePresence>
+      <AnimatePresence mode="wait">
+        {menuActiveItem === 'information' ? (
+          <MenuItemOverlay onClose={() => setMenuActiveItem(null)}>
+            <div className="flex w-full flex-col gap-14">
+              <h2 className="pb-6 text-caption uppercase">Information</h2>
+              <PortableText
+                value={description}
+                components={{
+                  block: {
+                    normal: ({ children }) => (
+                      <p className="text-left text-body-lg uppercase last-of-type:pb-0">
+                        {children}
+                      </p>
+                    ),
+                  },
+                  marks: {
+                    superscript: ({ children }) => (
+                      <sup className="relative -top-8 text-8">{children}</sup>
+                    ),
+                  },
+                }}
+              />
+            </div>
+          </MenuItemOverlay>
+        ) : null}
+        {menuActiveItem === 'contact' ? (
+          <MenuItemOverlay onClose={() => setMenuActiveItem(null)}>
+            <InformationContact title={contact?.title} items={contact?.items} />
+          </MenuItemOverlay>
+        ) : null}
+        {menuActiveItem === 'archive' ? (
+          <MenuItemOverlay onClose={() => setMenuActiveItem(null)}>
+            <div className="flex w-full min-w-[320px] flex-col gap-14">
+              <h2 className="pb-6 text-caption uppercase">Archive</h2>
+              <ArchiveForm />
+            </div>
+          </MenuItemOverlay>
+        ) : null}
+      </AnimatePresence>
+    </>
+  )
+}
+
+const MenuButton = ({
+  children,
+  onClick,
+}: {
+  children: React.ReactNode
+  onClick: () => void
+}) => {
+  return (
+    <motion.button
+      className="ease rounded-full border-1 border-[#444] bg-[rgba(0,0,0,0.2)] px-16 py-12 backdrop-blur-md transition-colors duration-300 will-change-auto hover:border-[#888888] active:border-[#888888]"
+      initial={{ y: 10, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      exit={{ y: -8, opacity: 0 }}
+      transition={{ duration: 0.65, ease: easeInOutQuart, delay: 0 }}
+      onClick={onClick}
+    >
+      {children}
+    </motion.button>
+  )
+}
+
+const MenuItemOverlay = ({
+  children,
+  onClose,
+}: {
+  children: React.ReactNode
+  onClose: () => void
+}) => {
+  return (
+    <motion.div
+      className="fixed left-1/2 top-1/2 z-[101] w-fit max-w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-[8px] border-1 border-[#444] bg-[rgba(0,0,0,0.2)] p-24 px-20 py-32 text-white backdrop-blur-md will-change-auto"
+      initial={{
+        scale: 0.975,
+        y: '-50%',
+        x: '-50%',
+        opacity: 0,
+        filter: 'blur(6px)',
+      }}
+      animate={{
+        scale: 1,
+        y: '-50%',
+        x: '-50%',
+        opacity: 1,
+        filter: 'blur(0px)',
+      }}
+      exit={{
+        scale: 0.975,
+        y: '-50%',
+        x: '-50%',
+        opacity: 0,
+        filter: 'blur(6px)',
+      }}
+      transition={{ duration: 0.65, ease: easeInOutQuart, delay: 0 }}
+    >
+      <button
+        className="group absolute left-1/2 top-full -translate-x-1/2 p-16 text-12 uppercase"
+        onClick={onClose}
+      >
+        <div className="relative block py-2">
+          <span>Close</span>
+          <div className="ease absolute bottom-0 left-0 h-1 w-full bg-[#444] transition-colors duration-200 group-hover:bg-white group-active:bg-white" />
+        </div>
+      </button>
+      {children}
+    </motion.div>
   )
 }

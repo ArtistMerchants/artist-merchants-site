@@ -50,6 +50,13 @@ module.exports = {
             acc[val] = `${val}px`
             return acc
           }, {}),
+        'body-lg': [
+          '16px',
+          {
+            lineHeight: '110%',
+            letterSpacing: '0.03em',
+          },
+        ],
         body: [
           '13px',
           {

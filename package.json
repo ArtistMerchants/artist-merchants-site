@@ -58,6 +58,7 @@
     "styled-components": "^6.1.8",
     "suspend-react": "^0.0.9",
     "three": "^0.164.1",
+    "three-stdlib": "^2.35.6",
     "typescript-cookie": "^1.0.6",
     "web-vitals": "^4.2.3",
     "zustand": "^4.5.4"

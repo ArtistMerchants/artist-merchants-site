@@ -67,7 +67,6 @@ html[data-theme='light'] {
 
 *:focus:not(:focus-visible) {
   outline: none;
-  border: none;
 }
 
 *:focus-visible {

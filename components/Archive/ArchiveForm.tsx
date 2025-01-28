@@ -36,7 +36,7 @@ export const ArchiveForm = () => {
 
   return (
     <motion.div
-      className="flex w-full flex-col gap-8 md:col-span-2"
+      className="flex w-full flex-col gap-8 text-body-lg md:col-span-2"
       key="archive-locked"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
@@ -47,21 +47,25 @@ export const ArchiveForm = () => {
         className={`flex w-full flex-col gap-6 ${error ? 'animate-shake' : ''}`}
         onSubmit={handleSubmit}
       >
-        <div className="flex w-full items-start items-center gap-6">
-          <label htmlFor="password">Password : </label>
+        <div className="relative flex w-full items-start gap-6">
+          <label className="sr-only" htmlFor="password">
+            Password :{' '}
+          </label>
           <input
             id="password"
             type="password"
-            className="w-full max-w-[240px] flex-1 appearance-none rounded-[0px] border-b-1 border-solid border-white bg-transparent focus:outline-none"
+            placeholder="Enter Password"
+            className="w-full flex-1 appearance-none rounded-[0px] border-b-1 border-solid border-white bg-transparent py-4 text-body-lg focus:outline-none"
             ref={passwordRef}
           />
+          <button
+            className="ease absolute -bottom-6 right-0 translate-x-8 p-12 text-left text-18 transition-transform duration-300 hover:translate-x-12"
+            type="submit"
+          >
+            <span className="sr-only">Submit</span>
+            &rarr;
+          </button>
         </div>
-        <button
-          className="pt-8 text-left underline underline-offset-4"
-          type="submit"
-        >
-          Submit
-        </button>
         {error ? (
           <p className="text-caption uppercase" aria-live="polite">
             {error}

@@ -1,21 +1,20 @@
 import { useEffect } from 'react'
 import { useSiteStore } from 'hooks/useSiteStore'
 
+import { easeOutExpo, easeInOutExpo } from 'lib/animation'
 import { motion } from 'framer-motion'
 
 import { Wordmark } from 'components/Global/Wordmark'
 import { usePathname } from 'next/navigation'
 import { MenuButton } from 'components/Global/MenuButton'
 import { HomeMenu } from './HomeMenu'
-import {
-  easeOutExpo,
-  easeInCubic,
-  easeInExpo,
-  easeInOutExpo,
-} from 'lib/animation'
+import { HomeModel } from './HomeModel'
 
 export default function HomePage(props) {
+  const { description, contact, settings } = props
   const { loading, hasLoaded, menuOpen } = useSiteStore()
+
+  console.log(props)
 
   const path = usePathname()
 
@@ -33,32 +32,56 @@ export default function HomePage(props) {
 
   return (
     <div className="flex min-h-screen w-full flex-col">
-      <header className="flex w-full items-center justify-between p-20">
-        <div>LA, CA</div>
-        <div>{new Date().getFullYear()}</div>
+      <header className="flex h-80 w-full items-center justify-center p-20">
+        <motion.div
+          initial={{
+            opacity: menuOpen ? 1 : 0,
+            y: menuOpen ? 0 : 2,
+          }}
+          animate={{
+            opacity: menuOpen ? 1 : 0,
+            y: menuOpen ? 0 : 2,
+          }}
+          transition={{
+            duration: 0.75,
+            delay: menuOpen ? 0.25 : 0,
+            ease: easeInOutExpo,
+          }}
+        >
+          <Wordmark className="h-24 w-full" />
+        </motion.div>
+        {/* <div>LA, CA</div>
+        <div>{new Date().getFullYear()}</div> */}
       </header>
-      <motion.div
-        className="flex w-full flex-1 transform-gpu items-center justify-center p-32 will-change-auto"
-        initial={{
-          opacity: menuOpen ? 0.25 : 1,
-          scale: menuOpen ? 0.975 : 1,
-          filter: menuOpen ? 'blur(14px)' : 'blur(0px)',
-        }}
-        animate={{
-          opacity: menuOpen ? 0.25 : 1,
-          scale: menuOpen ? 0.975 : 1,
-          filter: menuOpen ? 'blur(14px)' : 'blur(0px)',
-        }}
-        transition={{
-          duration: menuOpen ? 0.85 : 1.55,
-          ease: menuOpen ? easeInOutExpo : easeOutExpo,
-          delay: !menuOpen ? 0.35 : 0,
-        }}
-      >
-        <Wordmark className="h-auto w-full max-w-[900px]" />
+      <motion.div className="relative flex w-full flex-1 transform-gpu items-center justify-center p-32 will-change-auto">
+        <motion.div
+          className="pointer-events-none relative z-[2] h-auto w-full max-w-[900px]"
+          initial={{
+            opacity: menuOpen ? 0 : 1,
+            scale: menuOpen ? 0.975 : 1,
+            filter: menuOpen ? 'blur(14px)' : 'blur(0px)',
+          }}
+          animate={{
+            opacity: menuOpen ? 0 : 1,
+            scale: menuOpen ? 0.975 : 1,
+            filter: menuOpen ? 'blur(14px)' : 'blur(0px)',
+          }}
+          transition={{
+            duration: menuOpen ? 0.85 : 1.55,
+            ease: menuOpen ? easeInOutExpo : easeOutExpo,
+            delay: !menuOpen ? 0.35 : 0,
+          }}
+        >
+          <Wordmark className="h-auto w-full" />
+        </motion.div>
+        <HomeModel />
       </motion.div>
-      <div className="flex items-center justify-center p-20 pb-32">
-        <HomeMenu />
+      <div className="relative z-[3] flex h-80 items-center justify-center p-20 pb-32">
+        <HomeMenu
+          description={description}
+          contact={contact}
+          information={settings?.information}
+        />
         <MenuButton />
       </div>
       {/* <div
