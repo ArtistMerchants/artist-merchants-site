@@ -5,7 +5,6 @@ import { easeOutExpo, easeInOutExpo } from 'lib/animation'
 import { motion } from 'framer-motion'
 
 import { Wordmark } from 'components/Global/Wordmark'
-import { usePathname } from 'next/navigation'
 import { MenuButton } from 'components/Global/MenuButton'
 import { HomeMenu } from './HomeMenu'
 import { HomeModel } from './HomeModel'
@@ -13,10 +12,6 @@ import { HomeModel } from './HomeModel'
 export default function HomePage(props) {
   const { description, contact, settings } = props
   const { loading, hasLoaded, menuOpen } = useSiteStore()
-
-  console.log(props)
-
-  const path = usePathname()
 
   useEffect(() => {
     if (typeof window !== 'undefined' && window.innerWidth < 768) {
@@ -48,10 +43,8 @@ export default function HomePage(props) {
             ease: easeInOutExpo,
           }}
         >
-          <Wordmark className="h-24 w-full" />
+          <Wordmark className="h-18 w-full md:h-24" />
         </motion.div>
-        {/* <div>LA, CA</div>
-        <div>{new Date().getFullYear()}</div> */}
       </header>
       <motion.div className="relative flex w-full flex-1 transform-gpu items-center justify-center p-32 will-change-auto">
         <motion.div
@@ -72,7 +65,7 @@ export default function HomePage(props) {
             delay: !menuOpen ? 0.35 : 0,
           }}
         >
-          <Wordmark className="h-auto w-full" />
+          <Wordmark className="h-auto w-full px-32" />
         </motion.div>
         <HomeModel />
       </motion.div>
