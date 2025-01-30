@@ -56,7 +56,7 @@ export const HomeMenu = ({ description, contact, information }) => {
                 components={{
                   block: {
                     normal: ({ children }) => (
-                      <p className="text-left text-body-lg uppercase last-of-type:pb-0">
+                      <p className="text-left uppercase last-of-type:pb-0 md:text-body-lg">
                         {children}
                       </p>
                     ),
@@ -98,7 +98,7 @@ const MenuButton = ({
 }) => {
   return (
     <motion.button
-      className="ease rounded-full border-1 border-[#444] bg-[rgba(0,0,0,0.2)] px-16 py-12 backdrop-blur-md transition-colors duration-300 will-change-auto hover:border-[#888888] active:border-[#888888]"
+      className="ease rounded-full border-1 border-[#444] bg-[rgba(0,0,0,0.45)] px-16 py-12 transition-colors duration-300 will-change-auto hover:border-[#888888] active:border-[#888888]"
       initial={{ y: 10, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       exit={{ y: -8, opacity: 0 }}
@@ -119,7 +119,7 @@ const MenuItemOverlay = ({
 }) => {
   return (
     <motion.div
-      className="fixed left-1/2 top-1/2 z-[101] w-fit max-w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-[8px] border-1 border-[#444] bg-[rgba(0,0,0,0.2)] p-24 px-20 py-32 text-white backdrop-blur-md will-change-auto"
+      className="fixed left-1/2 top-1/2 z-[101] w-[calc(100%-40px)] max-w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-[8px] border-1 border-[#444] bg-[rgba(0,0,0,0.2)] p-24 px-20 py-32 text-white backdrop-blur-md will-change-auto md:w-fit"
       initial={{
         scale: 0.975,
         y: '-50%',

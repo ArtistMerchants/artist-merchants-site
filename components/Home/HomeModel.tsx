@@ -1,10 +1,9 @@
-import React, { useRef } from 'react'
+import React, { useMemo, useRef } from 'react'
 import {
   useGLTF,
   OrbitControls,
   Environment,
   useTexture,
-  Effects,
   Preload,
   StatsGl,
   Lightformer,
@@ -30,8 +29,8 @@ export const HomeModel = () => {
         camera={{ fov: 24, near: 0.1, far: 1000 }}
         gl={{ antialias: true, alpha: false }}
       >
+        {/* <StatsGl /> */}
         <color attach="background" args={['#000000']} />
-        {/* <Environment blur={1} backgroundBlurriness={1} files="https://dl.polyhaven.org/file/ph-assets/HDRIs/hdr/1k/studio_small_08_1k.hdr" resolution={256} environmentIntensity={1} environmentRotation={[0, 0, Math.PI / 2]} /> */}
         <AdaptiveDpr pixelated />
         <Environment
           environmentIntensity={0.35}
@@ -99,7 +98,6 @@ export const HomeModel = () => {
           maxPolarAngle={Math.PI / 2}
         />
         <Preload all />
-        {/* <StatsGl /> */}
 
         <EffectComposer>
           <SMAA />
@@ -138,10 +136,15 @@ const Model = (props: any) => {
     bumpMap: './metal/displacement.jpg',
   })
 
-  const { viewport } = useThree()
+  const { size } = useThree()
+
+  const scale = useMemo(() => {
+    if (size.width > 768) return 0.065
+    return 0.045
+  }, [size.width])
 
   return (
-    <group {...props} scale={0.065} position={[0, 0, 0]}>
+    <group {...props} scale={scale} position={[0, 0, 0]}>
       <mesh geometry={(nodes.Curve001 as any).geometry}>
         <meshPhysicalMaterial
           attach="material"

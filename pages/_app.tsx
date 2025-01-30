@@ -11,7 +11,6 @@ import { AnimatePresence } from 'framer-motion'
 import { VH } from 'components/Global/VH'
 import { LayoutUnlocked } from 'components/Layouts/LayoutUnlocked'
 import { LayoutLocked } from 'components/Layouts/LayoutLocked'
-import { HomeButton } from 'components/Global/HomeButton'
 import { SkipLink } from 'components/Global/SkipLink'
 
 import '../styles/globals.css'
@@ -86,7 +85,6 @@ function MyApp({ Component, pageProps, router }) {
     >
       <VH />
       <SkipLink />
-      {/* <HomeButton /> */}
       <ReactLenis
         options={{ lerp: 0.25 }}
         className="scrollbar-hidden relative min-h-screen overflow-auto md:h-screen"

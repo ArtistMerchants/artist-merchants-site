@@ -23,11 +23,9 @@ export default function HomePage(props) {
     }
   }, [])
 
-  if (loading && !hasLoaded) return null
-
   return (
     <div className="flex min-h-screen w-full flex-col">
-      <header className="flex h-80 w-full items-center justify-center p-20">
+      <header className="flex h-80 w-full items-start justify-center p-20">
         <motion.div
           initial={{
             opacity: menuOpen ? 1 : 0,
@@ -77,21 +75,6 @@ export default function HomePage(props) {
         />
         <MenuButton />
       </div>
-      {/* <div
-        className={`
-          ease-global ml-auto aspect-[2/2.5] h-auto w-full origin-bottom transition-[transform,opacity] duration-[450ms] md:aspect-[unset] md:h-full md:w-[90%]
-          ${
-            path === '/'
-              ? 'scale-100 opacity-100'
-              : 'scale-[0.98] opacity-0 md:scale-100 md:opacity-100'
-          }
-        `}
-      >
-        <HomeGallery images={images.filter((image) => !image.hide)} />
-      </div>
-      <div className="h-auto w-full py-20 md:hidden">
-        <Wordmark className="h-auto w-full" />
-      </div> */}
     </div>
   )
 }
