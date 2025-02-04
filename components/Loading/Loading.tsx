@@ -1,19 +1,26 @@
-import { usePreloadImages } from 'hooks/usePreloadImages'
+import { useState } from 'react'
 import { useAuthStore } from 'hooks/useAuthStore'
 import { useSiteStore } from 'hooks/useSiteStore'
-import { urlForImage } from 'lib/sanity.image'
 
 import { AnimatePresence, motion } from 'framer-motion'
 import { LoadingLogo } from './LoadingLogo'
+import { useEffect } from 'react'
 
 export const Loading = ({ images = [] }) => {
+  const [isLoaded, setIsLoaded] = useState(false)
   const { unlocked } = useAuthStore()
   const { loading, hasLoaded } = useSiteStore()
 
-  const imageUrls = images
-    .filter((image: any) => image._type == 'image')
-    .map((image) => urlForImage(image).url())
-  const isLoaded = usePreloadImages(imageUrls)
+  useEffect(() => {
+    if (hasLoaded) {
+      setIsLoaded(true)
+      return
+    }
+
+    setTimeout(() => {
+      setIsLoaded(true)
+    }, 2000)
+  }, [hasLoaded])
 
   if (unlocked || hasLoaded) return null
 

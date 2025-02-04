@@ -1,4 +1,4 @@
-import React, { useMemo, useRef } from 'react'
+import React, { useMemo } from 'react'
 import {
   useGLTF,
   OrbitControls,
@@ -31,10 +31,11 @@ export const HomeModel = () => {
       >
         {/* <StatsGl /> */}
         <color attach="background" args={['#000000']} />
+        <ambientLight intensity={5} />
         <AdaptiveDpr pixelated />
         <Environment
           environmentIntensity={0.35}
-          resolution={2048}
+          resolution={1024}
           backgroundBlurriness={0.1}
           background={false}
         >
@@ -105,16 +106,16 @@ export const HomeModel = () => {
             focusDistance={0.5}
             focalLength={0.9}
             bokehScale={20}
-            width={2048}
-            height={2048}
+            width={1024}
+            height={1024}
           />
           <Bloom
             luminanceThreshold={0.95}
             intensity={0.05}
             radius={0.45}
             mipmapBlur={true}
-            resolutionX={2048}
-            resolutionY={2048}
+            resolutionX={1024}
+            resolutionY={1024}
             levels={12}
           />
           <Noise opacity={0.65} blendFunction={BlendFunction.MULTIPLY} />
@@ -132,10 +133,6 @@ export const HomeModel = () => {
 
 const Model = (props: any) => {
   const { nodes } = useGLTF('/am-stars.glb')
-  const textures = useTexture({
-    bumpMap: './metal/displacement.jpg',
-  })
-
   const { size } = useThree()
 
   const scale = useMemo(() => {
@@ -159,11 +156,10 @@ const Model = (props: any) => {
           // displacementBias={0}
           // displacementScale={-.01}
           transparent={true}
-          {...textures}
         />
       </mesh>
     </group>
   )
 }
 
-useGLTF.preload('/am-stars.glb')
+// useGLTF.preload('/am-stars.glb')
