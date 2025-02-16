@@ -51,9 +51,9 @@ module.exports = {
             return acc
           }, {}),
         'body-lg': [
-          '16px',
+          '15px',
           {
-            lineHeight: '110%',
+            lineHeight: '120%',
             letterSpacing: '0.03em',
           },
         ],
@@ -62,6 +62,7 @@ module.exports = {
           {
             lineHeight: '16px',
             letterSpacing: '0.03em',
+            fontWeight: '400',
           },
         ],
         caption: [

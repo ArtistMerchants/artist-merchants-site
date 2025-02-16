@@ -49,14 +49,14 @@ export const HomeMenu = ({ description, contact, information }) => {
       <AnimatePresence mode="wait">
         {menuActiveItem === 'information' ? (
           <MenuItemOverlay onClose={() => setMenuActiveItem(null)}>
-            <div className="flex w-full flex-col gap-14">
+            <div className="flex w-full flex-col gap-14 md:max-w-[400px]">
               <h2 className="pb-6 text-caption uppercase">Information</h2>
               <PortableText
                 value={description}
                 components={{
                   block: {
                     normal: ({ children }) => (
-                      <p className="text-left uppercase last-of-type:pb-0 md:text-body-lg">
+                      <p className="text-left last-of-type:pb-0 md:text-body-lg">
                         {children}
                       </p>
                     ),
@@ -98,7 +98,7 @@ const MenuButton = ({
 }) => {
   return (
     <motion.button
-      className="ease rounded-full border-1 border-[#444] bg-[rgba(0,0,0,0.45)] px-16 py-12 transition-colors duration-300 will-change-auto hover:border-[#888888] active:border-[#888888]"
+      className="ease rounded-full border-1 border-[#444] bg-[rgba(0,0,0,0.45)] px-16 py-12 text-12 uppercase transition-colors duration-300 will-change-auto hover:border-[#888888] active:border-[#888888]"
       initial={{ y: 10, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       exit={{ y: -8, opacity: 0 }}

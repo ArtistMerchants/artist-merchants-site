@@ -23,13 +23,12 @@ import { BlendFunction } from 'postprocessing'
 
 export const HomeModel = () => {
   return (
-    <div className="absolute inset-0 h-full w-full">
+    <div className="absolute inset-0 h-full w-full transform-gpu will-change-auto">
       <Canvas
         shadows={false}
-        camera={{ fov: 24, near: 0.1, far: 1000 }}
+        camera={{ fov: 33, near: 0.1, far: 1000 }}
         gl={{ antialias: true, alpha: false }}
       >
-        {/* <StatsGl /> */}
         <color attach="background" args={['#000000']} />
         <ambientLight intensity={5} />
         <AdaptiveDpr pixelated />
@@ -88,16 +87,6 @@ export const HomeModel = () => {
           </mesh>
         </Environment>
         <Model />
-        <OrbitControls
-          autoRotate
-          autoRotateSpeed={1.5}
-          enableZoom={false}
-          enableDamping={true}
-          dampingFactor={0.05}
-          enablePan={false}
-          minPolarAngle={Math.PI / 2}
-          maxPolarAngle={Math.PI / 2}
-        />
         <Preload all />
 
         <EffectComposer>
@@ -141,24 +130,36 @@ const Model = (props: any) => {
   }, [size.width])
 
   return (
-    <group {...props} scale={scale} position={[0, 0, 0]}>
-      <mesh geometry={(nodes.Curve001 as any).geometry}>
-        <meshPhysicalMaterial
-          attach="material"
-          color={'#eeeeee'}
-          metalness={0.65}
-          roughness={0.05}
-          anisotropy={0.175}
-          anisotropyRotation={Math.PI / 1.75}
-          bumpScale={1}
-          clearcoat={0.2}
-          clearcoatRoughness={0.8}
-          // displacementBias={0}
-          // displacementScale={-.01}
-          transparent={true}
-        />
-      </mesh>
-    </group>
+    <>
+      <OrbitControls
+        autoRotate
+        autoRotateSpeed={size.width < 768 ? 4 : 5}
+        enableZoom={false}
+        enableDamping={true}
+        dampingFactor={0.05}
+        enablePan={false}
+        minPolarAngle={Math.PI / 2}
+        maxPolarAngle={Math.PI / 2}
+      />
+      <group {...props} scale={scale} position={[0, 0, 0]}>
+        <mesh geometry={(nodes.Curve001 as any).geometry}>
+          <meshPhysicalMaterial
+            attach="material"
+            color={'#eeeeee'}
+            metalness={0.65}
+            roughness={0.05}
+            anisotropy={0.175}
+            anisotropyRotation={Math.PI / 1.75}
+            bumpScale={1}
+            clearcoat={0.2}
+            clearcoatRoughness={0.8}
+            // displacementBias={0}
+            // displacementScale={-.01}
+            transparent={true}
+          />
+        </mesh>
+      </group>
+    </>
   )
 }
 

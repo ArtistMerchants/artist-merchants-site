@@ -11,7 +11,7 @@ import { HomeModel } from './HomeModel'
 
 export default function HomePage(props) {
   const { description, contact, settings } = props
-  const { loading, hasLoaded, menuOpen } = useSiteStore()
+  const { menuOpen } = useSiteStore()
 
   useEffect(() => {
     if (typeof window !== 'undefined' && window.innerWidth < 768) {
@@ -46,7 +46,7 @@ export default function HomePage(props) {
       </header>
       <motion.div className="relative flex w-full flex-1 transform-gpu items-center justify-center p-32 will-change-auto">
         <motion.div
-          className="pointer-events-none relative z-[2] h-auto w-full max-w-[900px]"
+          className="pointer-events-none relative z-[2] h-auto w-full max-w-[600px]"
           initial={{
             opacity: menuOpen ? 0 : 1,
             scale: menuOpen ? 0.975 : 1,
