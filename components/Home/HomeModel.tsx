@@ -124,10 +124,10 @@ const Model = (props: any) => {
   const { nodes } = useGLTF('/am-stars.glb')
   const { size } = useThree()
 
-  const scale = useMemo(() => {
-    if (size.width > 768) return 0.065
-    return 0.045
-  }, [size.width])
+  // const scale = useMemo(() => {
+  //   if (size.width > 768) return 0.065
+  //   return 0.065
+  // }, [size.width])
 
   return (
     <>
@@ -141,7 +141,7 @@ const Model = (props: any) => {
         minPolarAngle={Math.PI / 2}
         maxPolarAngle={Math.PI / 2}
       />
-      <group {...props} scale={scale} position={[0, 0, 0]}>
+      <group {...props} scale={0.065} position={[0, 0, 0]}>
         <mesh geometry={(nodes.Curve001 as any).geometry}>
           <meshPhysicalMaterial
             attach="material"
