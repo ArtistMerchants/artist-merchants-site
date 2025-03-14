@@ -11,7 +11,7 @@ import { HomeModel } from './HomeModel'
 
 export default function HomePage(props) {
   const { description, contact, settings } = props
-  const { menuOpen } = useSiteStore()
+  const { menuOpen, hasLoaded } = useSiteStore()
 
   useEffect(() => {
     if (typeof window !== 'undefined' && window.innerWidth < 768) {
@@ -65,7 +65,7 @@ export default function HomePage(props) {
         >
           <Wordmark className="h-auto w-full px-32" />
         </motion.div>
-        <HomeModel />
+        {hasLoaded ? <HomeModel /> : null}
       </motion.div>
       <div className="relative z-[3] flex h-80 items-center justify-center p-20 pb-32">
         <HomeMenu

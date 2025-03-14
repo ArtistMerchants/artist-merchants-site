@@ -6,7 +6,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { LoadingLogo } from './LoadingLogo'
 import { useEffect } from 'react'
 
-export const Loading = ({ images = [] }) => {
+export const Loading = () => {
   const [isLoaded, setIsLoaded] = useState(false)
   const { unlocked } = useAuthStore()
   const { loading, hasLoaded } = useSiteStore()
@@ -22,12 +22,17 @@ export const Loading = ({ images = [] }) => {
     }, 2000)
   }, [hasLoaded])
 
+  useEffect(() => {
+    console.log('loading', loading)
+  }, [loading])
+
   if (unlocked || hasLoaded) return null
 
   return (
     <AnimatePresence initial={true}>
       {loading && (
         <motion.div
+          key={loading ? 'loading' : 'loaded'}
           initial={{ opacity: loading ? 1 : 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}

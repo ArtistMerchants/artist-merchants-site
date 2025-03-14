@@ -14,7 +14,7 @@ export const LayoutLocked: FC<LayoutLockedProps> = ({ children, settings }) => {
   return (
     <div className="min-h-screen w-full text-body">
       <SiteMeta {...settings} />
-      <Loading images={settings?.images} />
+      <Loading />
       <motion.main
         id="main"
         className="h-screen w-full overflow-hidden"

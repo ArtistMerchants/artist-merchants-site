@@ -28,7 +28,7 @@ export const LayoutUnlocked: FC<LayoutUnlockedProps> = ({
         <HeaderUnlocked {...settings} />
       </div>
       <SiteMeta {...settings} />
-      <Loading images={settings?.images} />
+      <Loading />
       <motion.main
         id="main"
         initial={{ opacity: 0 }}

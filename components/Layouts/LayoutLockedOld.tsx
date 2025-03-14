@@ -16,7 +16,7 @@ export const LayoutLocked: FC<LayoutLockedProps> = ({ children, settings }) => {
   return (
     <div className="site-grid min-h-screen gap-y-60 text-body md:gap-y-0">
       <SiteMeta {...settings} />
-      <Loading images={settings?.images} />
+      <Loading />
       <div className="flex flex-col justify-between md:col-span-3 md:col-start-2">
         <HeaderLocked {...settings} />
         <Wordmark className="mb-6 hidden h-auto w-full md:block" />
