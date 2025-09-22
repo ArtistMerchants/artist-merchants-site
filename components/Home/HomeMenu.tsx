@@ -34,11 +34,11 @@ export const HomeMenu = ({ description, contact, information }) => {
             }}
             transition={{ duration: 0.65, ease: easeInOutQuart, delay: 0 }}
           >
-            <MenuButton onClick={() => handleItemClick('archive')}>
-              Archive
-            </MenuButton>
             <MenuButton onClick={() => handleItemClick('information')}>
               Information
+            </MenuButton>
+            <MenuButton onClick={() => handleItemClick('archive')}>
+              Archive
             </MenuButton>
             <MenuButton onClick={() => handleItemClick('contact')}>
               Contact
@@ -50,13 +50,12 @@ export const HomeMenu = ({ description, contact, information }) => {
         {menuActiveItem === 'information' ? (
           <MenuItemOverlay onClose={() => setMenuActiveItem(null)}>
             <div className="flex w-full flex-col gap-14 md:max-w-[400px]">
-              <h2 className="pb-6 text-caption uppercase">Information</h2>
               <PortableText
                 value={description}
                 components={{
                   block: {
                     normal: ({ children }) => (
-                      <p className="text-left last-of-type:pb-0 md:text-body-lg">
+                      <p className="text-left font-serif text-18 leading-[130%] last-of-type:pb-0 md:text-20">
                         {children}
                       </p>
                     ),
@@ -98,7 +97,7 @@ const MenuButton = ({
 }) => {
   return (
     <motion.button
-      className="ease rounded-full border-1 border-[#444] bg-[rgba(0,0,0,0.45)] px-16 py-12 text-12 uppercase transition-colors duration-300 will-change-auto hover:border-[#888888] active:border-[#888888]"
+      className="ease text-20 uppercase transition-colors duration-300 will-change-auto hover:border-[#888888] active:border-[#888888]"
       initial={{ y: 10, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       exit={{ y: -8, opacity: 0 }}
@@ -119,7 +118,7 @@ const MenuItemOverlay = ({
 }) => {
   return (
     <motion.div
-      className="fixed left-1/2 top-1/2 z-[101] w-[calc(100%-40px)] max-w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-[8px] border-1 border-[#444] bg-[rgba(0,0,0,0.2)] p-24 px-20 py-32 text-white backdrop-blur-md will-change-auto md:w-fit"
+      className="fixed left-1/2 top-1/2 z-[101] w-[calc(100%-40px)] max-w-[500px] -translate-x-1/2 -translate-y-1/2 p-24 px-20 py-32 text-white md:w-fit"
       initial={{
         scale: 0.975,
         y: '-50%',
@@ -143,15 +142,6 @@ const MenuItemOverlay = ({
       }}
       transition={{ duration: 0.65, ease: easeInOutQuart, delay: 0 }}
     >
-      <button
-        className="group absolute left-1/2 top-full -translate-x-1/2 p-16 text-12 uppercase"
-        onClick={onClose}
-      >
-        <div className="relative block py-2">
-          <span>Close</span>
-          <div className="ease absolute bottom-0 left-0 h-1 w-full bg-[#444] transition-colors duration-200 group-hover:bg-white group-active:bg-white" />
-        </div>
-      </button>
       {children}
     </motion.div>
   )

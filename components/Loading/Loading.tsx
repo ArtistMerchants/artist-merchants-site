@@ -22,10 +22,6 @@ export const Loading = () => {
     }, 2000)
   }, [hasLoaded])
 
-  useEffect(() => {
-    console.log('loading', loading)
-  }, [loading])
-
   if (unlocked || hasLoaded) return null
 
   return (

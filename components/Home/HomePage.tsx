@@ -7,7 +7,6 @@ import { motion } from 'framer-motion'
 import { Wordmark } from 'components/Global/Wordmark'
 import { MenuButton } from 'components/Global/MenuButton'
 import { HomeMenu } from './HomeMenu'
-import { HomeModel } from './HomeModel'
 
 export default function HomePage(props) {
   const { description, contact, settings } = props
@@ -65,9 +64,8 @@ export default function HomePage(props) {
         >
           <Wordmark className="h-auto w-full px-32" />
         </motion.div>
-        {hasLoaded ? <HomeModel /> : null}
       </motion.div>
-      <div className="relative z-[3] flex h-80 items-center justify-center p-20 pb-32">
+      <div className="relative z-[3] flex h-80 items-center justify-center p-20 pb-50">
         <HomeMenu
           description={description}
           contact={contact}
