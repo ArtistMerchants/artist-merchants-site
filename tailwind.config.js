@@ -86,7 +86,7 @@ module.exports = {
       },
       fontFamily: {
         constellation: ['var(--font-constellation)'],
-        serif: ['var(--font-self-modern)'],
+        serif: ['var(--font-affairs)'],
         sans: ['var(--font-gerstner)'],
       },
       boxShadow: {

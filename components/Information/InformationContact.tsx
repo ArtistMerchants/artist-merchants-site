@@ -3,7 +3,7 @@ export const InformationContact = ({ title, items }) => {
   return (
     <div className="flex flex-col gap-14 text-body-lg">
       <h2 className="sr-only">Email</h2>
-      <ul className="flex flex-col items-start">
+      <ul className="flex flex-col items-center">
         {items?.map((item) => (
           <li key={item._key}>
             <a

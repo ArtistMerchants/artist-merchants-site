@@ -54,6 +54,19 @@ export const gerstner = localFont({
   variable: '--font-gerstner',
 })
 
+export const affairs = localFont({
+  src: [
+    {
+      path: '../fonts/Affairs-Regular.woff',
+      weight: '400',
+      style: 'normal',
+    },
+  ],
+  preload: true,
+  display: 'swap',
+  variable: '--font-affairs',
+})
+
 function MyApp({ Component, pageProps, router }) {
   const { unlocked } = useAuthStore()
   const { setSettings } = useSiteStore()
@@ -81,7 +94,7 @@ function MyApp({ Component, pageProps, router }) {
 
   return (
     <div
-      className={`${constellation.variable} ${selfModern.variable} ${gerstner.variable} ${gerstner.variable} font-sans`}
+      className={`${constellation.variable} ${selfModern.variable} ${gerstner.variable} ${affairs.variable} font-sans`}
     >
       <VH />
       <SkipLink />
