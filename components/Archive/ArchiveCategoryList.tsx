@@ -30,7 +30,7 @@ export const ArchiveCategoryList = ({
         const isActive = activeCategory === category.slug
         const activeClass =
           isActive ||
-          activeCategories.find((c: any) => c.slug === category.slug)
+          activeCategories?.find((c: any) => c.slug === category.slug)
             ? 'opacity-100'
             : 'opacity-60 hover:opacity-100'
         return (

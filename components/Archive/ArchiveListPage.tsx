@@ -11,7 +11,7 @@ export const ArchiveListPage = ({ projects }) => {
       return projects
     }
     return projects.filter((project) =>
-      project.categories.find((category) => category.slug === activeCategory)
+      project?.categories?.find((category) => category.slug === activeCategory)
     )
   }, [projects, activeCategory])
 

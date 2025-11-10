@@ -22,7 +22,7 @@ export const ClientToolsListPage = ({ projects }) => {
     }
 
     const filtered = projects.filter((project) => {
-      return project.materials.find(
+      return project?.materials?.find(
         (material) => material.slug === activeMaterial
       )
     })
