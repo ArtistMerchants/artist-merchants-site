@@ -17,20 +17,25 @@ export const MaterialsSelect = (props) => {
   )
 
   const handleChange = (selected, label) => {
-    const newValue = value ? [...value] : []
+    const itemsArray = selected
+      ? selected.map((item) => (typeof item === 'string' ? item : item.value))
+      : []
 
+    const newValue = value ? [...value] : []
     const existingItemIndex = newValue.findIndex((item) => item.label === label)
 
     if (existingItemIndex !== -1) {
+      // Update existing entry
       newValue[existingItemIndex] = {
         ...newValue[existingItemIndex],
-        items: selected?.map((item) => item.value),
+        items: itemsArray,
       }
     } else {
+      // Add new entry with uuid
       newValue.push({
         _key: uuid(),
         label: label,
-        items: selected?.map((item) => item.value),
+        items: itemsArray,
       })
     }
 
@@ -38,10 +43,21 @@ export const MaterialsSelect = (props) => {
   }
 
   useEffect(() => {
-    if (
-      materialsRefs &&
-      !compareArrays(materialsRefs, lastMaterialsRefs.current)
-    ) {
+    // Check if materialsRefs has changed
+    const hasChanged = !compareArrays(materialsRefs, lastMaterialsRefs.current)
+
+    if (hasChanged) {
+      // If materialsRefs is empty or null, remove all entries
+      if (!materialsRefs || materialsRefs.length === 0) {
+        setMaterials([])
+        if (value && Array.isArray(value) && value.length > 0) {
+          onChange(set([]))
+        }
+        lastMaterialsRefs.current = materialsRefs
+        return
+      }
+
+      // Fetch materials and clean up orphaned entries
       client
         .fetch(materialsFromRefsQuery, { ids: materialsRefs })
         .then((data) => {
@@ -55,11 +71,25 @@ export const MaterialsSelect = (props) => {
             }),
           }))
           setMaterials(materialsObj)
+
+          // Remove any entries from value that no longer exist in materialsRefs
+          // Use the fetched data directly to get valid material titles
+          if (value && Array.isArray(value) && value.length > 0 && data) {
+            const validLabels = new Set(data.map((material) => material.title))
+            const filteredValue = value.filter((item) =>
+              validLabels.has(item.label)
+            )
+
+            // Only update if we actually removed something
+            if (filteredValue.length !== value.length) {
+              onChange(set(filteredValue))
+            }
+          }
         })
 
       lastMaterialsRefs.current = materialsRefs
     }
-  }, [materialsRefs])
+  }, [materialsRefs, value, onChange])
 
   if (!materials?.length) return null
 

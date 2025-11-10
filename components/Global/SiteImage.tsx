@@ -12,7 +12,7 @@ export const SiteImage: React.FC<SiteImageProps> = ({
   sizes,
   fit = 'cover',
 }) => {
-  if (!image) return null
+  if (!image?.asset) return null
 
   const srcSet = `
     ${urlForImage(image).width(320).auto('format').quality(95).url()} 320w,

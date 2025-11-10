@@ -36,8 +36,8 @@ export default function HomePage(props) {
           }}
           transition={{
             duration: 0.75,
-            delay: menuOpen ? 0.25 : 0,
-            ease: easeInOutExpo,
+            delay: menuOpen ? 0.25 : 0.2,
+            ease: easeOutExpo,
           }}
         >
           <Wordmark className="h-18 w-full md:h-24" />
