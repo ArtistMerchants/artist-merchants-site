@@ -35,7 +35,7 @@ export const ProjectCard = ({
         {firstMedia ? (
           <SiteImage
             image={firstMedia}
-            sizes={view === 'multi' ? '(max-width: 768px) 33vw, 30vw' : '90vw'}
+            sizes={view === 'multi' ? '(max-width: 768px) 33vw, 25vw' : '90vw'}
             fit="contain"
           />
         ) : null}

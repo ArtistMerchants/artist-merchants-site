@@ -15,7 +15,7 @@ export const DownloadLink = ({ className = '' }) => {
       return {
         ...project,
         media: project.media.map((media, index) => {
-          if (index > 2) return null
+          if (index > 2 || !media?.asset) return null
           return {
             url: urlForImage(media)
               .width(1200)
