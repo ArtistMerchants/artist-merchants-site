@@ -11,7 +11,7 @@ const Transition = {
 }
 
 export const MenuButton = () => {
-  const { menuOpen, setMenuOpen, menuActiveItem, setMenuActiveItem } =
+  const { menuOpen, setMenuOpen, menuActiveItem, setMenuActiveItem, hasLoaded } =
     useSiteStore()
 
   const handleButtonClick = useCallback(() => {
@@ -24,9 +24,9 @@ export const MenuButton = () => {
 
   return (
     <div className="relative">
-      <button
+      <motion.button
         className={`
-          ease relative flex h-55 w-55 origin-center flex-col gap-6 rounded-full border-[1px] border-solid p-4 transition-all duration-300
+          ease relative flex h-55 w-55 origin-center flex-col gap-6 rounded-full border-[1px] border-solid p-4 transition-[border-color] duration-300
           ${
             menuOpen
               ? 'border-[#888888]'
@@ -34,6 +34,20 @@ export const MenuButton = () => {
           }
         `}
         onClick={handleButtonClick}
+        initial={{
+          scale: 0,
+          boxShadow: 'inset 0 0 0 30px hsla(0, 0%, 100%, 0.25)',
+        }}
+        animate={{
+          scale: hasLoaded ? 1 : 0,
+          boxShadow: hasLoaded
+            ? 'inset 0 0 0 0px hsla(0, 0%, 100%, 0.0)'
+            : 'inset 0 0 0 30px hsla(0, 0%, 100%, 0.25)',
+        }}
+        transition={{
+          duration: 1.333,
+          ease: [0.075, 0.82, 0.165, 1],
+        }}
       >
         <span className="sr-only">
           {menuOpen && menuActiveItem === null
@@ -42,16 +56,29 @@ export const MenuButton = () => {
             ? 'Back'
             : 'Menu'}
         </span>
-        <MenuIcon
-          icon={
-            menuOpen && menuActiveItem === null
-              ? 'close'
-              : menuOpen && menuActiveItem !== null
-              ? 'back'
-              : 'logo'
-          }
-        />
-      </button>
+        <motion.div
+          className="h-full w-full"
+          initial={{ scale: 0, opacity: 0.33 }}
+          animate={{
+            scale: hasLoaded ? 1 : 0,
+            opacity: hasLoaded ? 1 : 0.33,
+          }}
+          transition={{
+            duration: 1,
+            ease: [0.075, 0.82, 0.165, 1],
+          }}
+        >
+          <MenuIcon
+            icon={
+              menuOpen && menuActiveItem === null
+                ? 'close'
+                : menuOpen && menuActiveItem !== null
+                ? 'back'
+                : 'logo'
+            }
+          />
+        </motion.div>
+      </motion.button>
     </div>
   )
 }
