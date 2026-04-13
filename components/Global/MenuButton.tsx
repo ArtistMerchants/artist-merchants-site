@@ -23,7 +23,7 @@ export const MenuButton = () => {
   }, [menuOpen, menuActiveItem, setMenuActiveItem, setMenuOpen])
 
   return (
-    <div className="relative">
+    <div className="relative" style={{ pointerEvents: hasLoaded ? 'auto' : 'none' }}>
       <motion.button
         className={`
           ease relative flex h-55 w-55 origin-center flex-col gap-6 rounded-full border-[1px] border-solid p-4 transition-[border-color] duration-300
@@ -37,12 +37,14 @@ export const MenuButton = () => {
         initial={{
           scale: 0,
           boxShadow: 'inset 0 0 0 30px hsla(0, 0%, 100%, 0.25)',
+          pointerEvents: 'none',
         }}
         animate={{
           scale: hasLoaded ? 1 : 0,
           boxShadow: hasLoaded
             ? 'inset 0 0 0 0px hsla(0, 0%, 100%, 0.0)'
             : 'inset 0 0 0 30px hsla(0, 0%, 100%, 0.25)',
+          pointerEvents: hasLoaded ? 'auto' : 'none',
         }}
         transition={{
           duration: 1.333,
