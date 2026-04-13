@@ -8,14 +8,25 @@ export default defineType({
   icon: CogIcon,
   preview: { select: { title: 'title', subtitle: 'description' } },
   groups: [
+    { name: 'branding', title: 'Branding' },
     { name: 'seo', title: 'SEO' },
     { name: 'download', title: 'PDF Download' },
     { name: 'passwords', title: 'Passwords' },
   ],
   fields: [
     defineField({
+      name: 'logo',
+      title: 'Text Logo (SVG)',
+      description: 'Upload an SVG file to use as the site wordmark. This replaces the default "Artist Merchants®" text logo.',
+      type: 'file',
+      options: {
+        accept: 'image/svg+xml',
+      },
+      group: 'branding',
+    }),
+    defineField({
       name: 'title',
-      description: 'SEO Title',
+      description: 'Used for browser tab title and SEO — not the visual logo.',
       title: 'Title',
       type: 'string',
       validation: (rule) => rule.required(),
