@@ -61,10 +61,34 @@ export default defineType({
     }),
     defineField({
       name: 'passwords',
-      title: 'Passwords',
+      title: 'Client Passwords',
       group: 'passwords',
       type: 'array',
-      of: [{ type: 'string' }],
+      of: [
+        {
+          type: 'object',
+          name: 'clientPassword',
+          title: 'Client',
+          preview: {
+            select: { title: 'clientName', subtitle: 'password' },
+          },
+          fields: [
+            defineField({
+              name: 'clientName',
+              title: 'Client Name',
+              type: 'string',
+              description: 'e.g. Ronde, Academy, Supperworks',
+              validation: (rule) => rule.required(),
+            }),
+            defineField({
+              name: 'password',
+              title: 'Password',
+              type: 'string',
+              validation: (rule) => rule.required(),
+            }),
+          ],
+        },
+      ],
     }),
   ],
 })

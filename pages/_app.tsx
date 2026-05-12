@@ -1,6 +1,15 @@
 import { useEffect, useRef } from 'react'
 import { useAuthStore } from 'hooks/useAuthStore'
 import { useSiteStore } from 'hooks/useSiteStore'
+import { initPostHog, posthog } from 'lib/posthog'
+import { useRouter } from 'next/router'
+
+function getClientNameFromCookie(): string | null {
+  if (typeof document === 'undefined') return null
+  const match = document.cookie.match(/(?:^|;\s*)client_name=([^;]*)/)
+  return match ? decodeURIComponent(match[1]) : null
+}
+
 import { createClientToolsStore } from 'hooks/createClientToolsStore'
 import { useThemeSwitcher } from 'hooks/useThemeSwitcher'
 import { ClientToolsContext } from 'components/ClientTools/ClientTools.context'
@@ -70,6 +79,7 @@ export const affairs = localFont({
 function MyApp({ Component, pageProps, router }) {
   const { unlocked } = useAuthStore()
   const { setSettings } = useSiteStore()
+  const nextRouter = useRouter()
   const store = useRef(
     createClientToolsStore({
       activeMaterial: pageProps?.settings?.materials?.[0]?.slug,
@@ -77,6 +87,25 @@ function MyApp({ Component, pageProps, router }) {
   ).current
 
   useThemeSwitcher()
+
+  // Initialize PostHog once on mount
+  useEffect(() => {
+    initPostHog()
+  }, [])
+
+  // Track page views with clientName on every route change
+  useEffect(() => {
+    const handleRouteChange = (url: string) => {
+      if (!unlocked) return
+      const clientName = getClientNameFromCookie()
+      posthog.capture('$pageview', {
+        $current_url: url,
+        client: clientName ?? 'unknown',
+      })
+    }
+    nextRouter.events.on('routeChangeComplete', handleRouteChange)
+    return () => nextRouter.events.off('routeChangeComplete', handleRouteChange)
+  }, [nextRouter.events, unlocked])
 
   useEffect(() => {
     if (unlocked) {
