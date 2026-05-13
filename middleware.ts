@@ -1,17 +1,25 @@
 import { NextResponse } from 'next/server'
 import type { NextRequest } from 'next/server'
-import { createHmac } from 'crypto'
 
 const SECRET = process.env.AUTH_SECRET ?? 'change-me-in-env'
 
-function verifyToken(token: string): { clientName: string; password: string } | null {
+async function verifyToken(token: string): Promise<{ clientName: string; password: string } | null> {
   try {
-    const decoded = JSON.parse(Buffer.from(token, 'base64').toString('utf8'))
+    const decoded = JSON.parse(atob(token))
     const { clientName, password, sig } = decoded
-    const expectedSig = createHmac('sha256', SECRET)
-      .update(JSON.stringify({ clientName, password }))
-      .digest('hex')
-    if (sig !== expectedSig) return null
+    // Verify HMAC using Web Crypto API (Edge-compatible)
+    const encoder = new TextEncoder()
+    const key = await crypto.subtle.importKey(
+      'raw',
+      encoder.encode(SECRET),
+      { name: 'HMAC', hash: 'SHA-256' },
+      false,
+      ['verify']
+    )
+    const payload = encoder.encode(JSON.stringify({ clientName, password }))
+    const sigBytes = Uint8Array.from(sig.match(/.{1,2}/g).map((b: string) => parseInt(b, 16)))
+    const valid = await crypto.subtle.verify('HMAC', key, sigBytes, payload)
+    if (!valid) return null
     return { clientName, password }
   } catch {
     return null
@@ -20,7 +28,7 @@ function verifyToken(token: string): { clientName: string; password: string } | 
 
 export async function middleware(req: NextRequest) {
   const unlockedCookie = req.cookies.get('unlocked')
-  const verified = unlockedCookie ? verifyToken(unlockedCookie.value) : null
+  const verified = unlockedCookie ? await verifyToken(unlockedCookie.value) : null
 
   const homePaths = ['/', '/info']
   const isHomePage = homePaths.includes(req.nextUrl.pathname)

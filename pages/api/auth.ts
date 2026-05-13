@@ -1,13 +1,21 @@
 import { client } from 'lib/sanity.client'
 import { serialize } from 'cookie'
-import { createHmac } from 'crypto'
 
 const SECRET = process.env.AUTH_SECRET ?? 'change-me-in-env'
 
-export function signToken(clientName: string, password: string): string {
+async function signToken(clientName: string, password: string): Promise<string> {
+  const encoder = new TextEncoder()
+  const key = await crypto.subtle.importKey(
+    'raw',
+    encoder.encode(SECRET),
+    { name: 'HMAC', hash: 'SHA-256' },
+    false,
+    ['sign']
+  )
   const payload = JSON.stringify({ clientName, password })
-  const sig = createHmac('sha256', SECRET).update(payload).digest('hex')
-  return Buffer.from(JSON.stringify({ clientName, password, sig })).toString('base64')
+  const sigBuffer = await crypto.subtle.sign('HMAC', key, encoder.encode(payload))
+  const sig = Array.from(new Uint8Array(sigBuffer)).map(b => b.toString(16).padStart(2, '0')).join('')
+  return btoa(JSON.stringify({ clientName, password, sig }))
 }
 
 export default async function handler(req, res) {
@@ -30,7 +38,7 @@ export default async function handler(req, res) {
   const match = passwords.find((p) => p.password === password)
 
   if (match) {
-    const token = signToken(match.clientName, match.password)
+    const token = await signToken(match.clientName, match.password)
     // Secure httpOnly cookie for auth verification in middleware
     const authCookie = serialize('unlocked', token, {
       path: '/',
