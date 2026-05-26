@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { useAuthStore } from 'hooks/useAuthStore'
 import { useSiteStore } from 'hooks/useSiteStore'
-import { initPostHog, posthog } from 'lib/posthog'
+import { initMixpanel, mixpanel } from 'lib/mixpanel'
 import { useRouter } from 'next/router'
 
 function getClientNameFromCookie(): string | null {
@@ -88,9 +88,9 @@ function MyApp({ Component, pageProps, router }) {
 
   useThemeSwitcher()
 
-  // Initialize PostHog once on mount
+  // Initialize Mixpanel once on mount
   useEffect(() => {
-    initPostHog()
+    initMixpanel()
   }, [])
 
   // Track page views with clientName on every route change
@@ -98,8 +98,8 @@ function MyApp({ Component, pageProps, router }) {
     const handleRouteChange = (url: string) => {
       if (!unlocked) return
       const clientName = getClientNameFromCookie()
-      posthog.capture('$pageview', {
-        $current_url: url,
+      mixpanel.track('Page View', {
+        url,
         client: clientName ?? 'unknown',
       })
     }

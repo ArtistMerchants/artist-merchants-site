@@ -2,7 +2,7 @@ import { useState, useRef } from 'react'
 import { useRouter } from 'next/navigation'
 
 import { motion } from 'framer-motion'
-import { posthog } from 'lib/posthog'
+import { mixpanel } from 'lib/mixpanel'
 
 export const ArchiveForm = () => {
   const [error, setError] = useState<string | null>(null)
@@ -34,9 +34,11 @@ export const ArchiveForm = () => {
       const data = await res.json()
 
       // Track the unlock event with client identifier
-      posthog.capture('archive_unlocked', {
+      mixpanel.track('Archive Unlocked', {
         client: data.clientName ?? 'unknown',
       })
+      mixpanel.identify(data.clientName ?? 'unknown')
+      mixpanel.people.increment('Archive Unlocks')
 
       router.push('/archive')
     } catch (error) {
