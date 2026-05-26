@@ -1,5 +1,15 @@
-import { client } from 'lib/sanity.client'
+import { createClient } from 'next-sanity'
+import { apiVersion, dataset, projectId } from 'lib/sanity.api'
 import { serialize } from 'cookie'
+
+// Use a server-side authenticated client to read passwords — never exposed to the browser
+const serverClient = createClient({
+  projectId,
+  dataset,
+  apiVersion,
+  useCdn: false,
+  token: process.env.SANITY_API_TOKEN,
+})
 
 const SECRET = process.env.AUTH_SECRET ?? 'change-me-in-env'
 
@@ -28,7 +38,7 @@ export default async function handler(req, res) {
     return res.status(400).json({ message: 'Password is required' })
   }
 
-  const settings = await client.fetch(`*[_type == "settings"][0]{ passwords }`)
+  const settings = await serverClient.fetch(`*[_type == "settings"][0]{ passwords }`)
   const passwords: { clientName: string; password: string }[] = settings?.passwords ?? []
 
   if (!passwords.length) {
