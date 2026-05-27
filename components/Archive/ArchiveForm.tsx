@@ -33,12 +33,16 @@ export const ArchiveForm = () => {
 
       const data = await res.json()
 
-      // Track the unlock event with client identifier
-      mixpanel.track('Archive Unlocked', {
-        client: data.clientName ?? 'unknown',
-      })
-      mixpanel.identify(data.clientName ?? 'unknown')
-      mixpanel.people.increment('Archive Unlocks')
+      // Track the unlock event with client identifier (wrapped safely)
+      try {
+        mixpanel.track('Archive Unlocked', {
+          client: data.clientName ?? 'unknown',
+        })
+        mixpanel.identify(data.clientName ?? 'unknown')
+        if (mixpanel.people) {
+          mixpanel.people.increment('Archive Unlocks')
+        }
+      } catch (_) {}
 
       router.push('/archive')
     } catch (error) {
